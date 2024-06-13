@@ -8,7 +8,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cardsDeckView.heightAnchor.constraint(equalToConstant: 580).isActive = true
         setupLayout()
         setupDummyCards()
     }
@@ -22,6 +21,7 @@ class ViewController: UIViewController {
     
     //  MARK: - Fileprivate
     fileprivate func setupLayout() {
+        cardsDeckView.heightAnchor.constraint(equalToConstant: 580).isActive = true
         let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, buttonsBottomStackView])
         overallStackView.axis = .vertical
         view.addSubview(overallStackView)
@@ -33,6 +33,7 @@ class ViewController: UIViewController {
         )
         overallStackView.isLayoutMarginsRelativeArrangement = true
         overallStackView.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
+        overallStackView.bringSubviewToFront(cardsDeckView)
     }
 }
 

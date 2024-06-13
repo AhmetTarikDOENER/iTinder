@@ -28,8 +28,8 @@ class CardView: UIView {
         UIView.animate(
             withDuration: 0.75,
             delay: 0,
-            usingSpringWithDamping: 1,
-            initialSpringVelocity: 1,
+            usingSpringWithDamping: 1.3,
+            initialSpringVelocity: 0.1,
             options: .curveEaseInOut) {
                 self.transform = .identity
             }
