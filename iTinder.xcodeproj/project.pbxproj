@@ -16,6 +16,7 @@
 		45D0EE612C1B225F0031D0FF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE602C1B225E0031D0FF /* UIView+Extension.swift */; };
 		45D0EE642C1B373C0031D0FF /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */; };
 		45D0EE662C1B3FD50031D0FF /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */; };
+		45D0EE682C1B56AC0031D0FF /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE672C1B56AC0031D0FF /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		45D0EE602C1B225E0031D0FF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
 		45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
+		45D0EE672C1B56AC0031D0FF /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,15 +64,15 @@
 		459CBA082C1B12DA00854A31 /* iTinder */ = {
 			isa = PBXGroup;
 			children = (
-				45D0EE622C1B370F0031D0FF /* Views */,
-				45D0EE5F2C1B22260031D0FF /* Extensions */,
 				459CBA092C1B12DA00854A31 /* AppDelegate.swift */,
+				459CBA122C1B12DB00854A31 /* Assets.xcassets */,
+				45D0EE5F2C1B22260031D0FF /* Extensions */,
+				459CBA172C1B12DB00854A31 /* Info.plist */,
+				459CBA142C1B12DB00854A31 /* LaunchScreen.storyboard */,
+				459CBA0F2C1B12DA00854A31 /* Main.storyboard */,
 				459CBA0B2C1B12DA00854A31 /* SceneDelegate.swift */,
 				459CBA0D2C1B12DA00854A31 /* ViewController.swift */,
-				459CBA0F2C1B12DA00854A31 /* Main.storyboard */,
-				459CBA122C1B12DB00854A31 /* Assets.xcassets */,
-				459CBA142C1B12DB00854A31 /* LaunchScreen.storyboard */,
-				459CBA172C1B12DB00854A31 /* Info.plist */,
+				45D0EE622C1B370F0031D0FF /* Views */,
 			);
 			path = iTinder;
 			sourceTree = "<group>";
@@ -86,6 +88,7 @@
 		45D0EE622C1B370F0031D0FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				45D0EE672C1B56AC0031D0FF /* CardView.swift */,
 				45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */,
 				45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */,
 			);
@@ -163,6 +166,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45D0EE682C1B56AC0031D0FF /* CardView.swift in Sources */,
 				45D0EE662C1B3FD50031D0FF /* TopNavigationStackView.swift in Sources */,
 				459CBA0E2C1B12DA00854A31 /* ViewController.swift in Sources */,
 				459CBA0A2C1B12DA00854A31 /* AppDelegate.swift in Sources */,
