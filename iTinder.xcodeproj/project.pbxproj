@@ -64,14 +64,10 @@
 		459CBA082C1B12DA00854A31 /* iTinder */ = {
 			isa = PBXGroup;
 			children = (
-				459CBA092C1B12DA00854A31 /* AppDelegate.swift */,
-				459CBA122C1B12DB00854A31 /* Assets.xcassets */,
+				45D0EE6A2C1B627F0031D0FF /* Controllers */,
 				45D0EE5F2C1B22260031D0FF /* Extensions */,
 				459CBA172C1B12DB00854A31 /* Info.plist */,
-				459CBA142C1B12DB00854A31 /* LaunchScreen.storyboard */,
-				459CBA0F2C1B12DA00854A31 /* Main.storyboard */,
-				459CBA0B2C1B12DA00854A31 /* SceneDelegate.swift */,
-				459CBA0D2C1B12DA00854A31 /* ViewController.swift */,
+				45D0EE692C1B624D0031D0FF /* Resources */,
 				45D0EE622C1B370F0031D0FF /* Views */,
 			);
 			path = iTinder;
@@ -93,6 +89,26 @@
 				45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		45D0EE692C1B624D0031D0FF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				459CBA092C1B12DA00854A31 /* AppDelegate.swift */,
+				459CBA122C1B12DB00854A31 /* Assets.xcassets */,
+				459CBA142C1B12DB00854A31 /* LaunchScreen.storyboard */,
+				459CBA0F2C1B12DA00854A31 /* Main.storyboard */,
+				459CBA0B2C1B12DA00854A31 /* SceneDelegate.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		45D0EE6A2C1B627F0031D0FF /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				459CBA0D2C1B12DA00854A31 /* ViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

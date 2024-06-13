@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     }
     
     func setupDummyCards() {
-        print("Dummy Cards")
         let cardView = CardView(frame: .zero)
         cardsDeckView.addSubview(cardView)
         cardView.fillSuperView()
