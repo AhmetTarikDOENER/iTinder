@@ -2,7 +2,7 @@ import UIKit
 
 class CardView: UIView {
     
-    let imageView = UIImageView(image: UIImage(named: "lady5c"))
+    fileprivate let imageView = UIImageView(image: UIImage(named: "lady5c"))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -10,9 +10,39 @@ class CardView: UIView {
         layer.cornerRadius = 10
         addSubview(imageView)
         imageView.fillSuperView()
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        addGestureRecognizer(panGesture)
     }
     
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    fileprivate func handleChangedState(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: nil)
+        transform = CGAffineTransform(translationX: translation.x, y: translation.y)
+    }
+    
+    fileprivate func handleEndedState() {
+        UIView.animate(
+            withDuration: 0.75,
+            delay: 0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+            options: .curveEaseInOut) {
+                self.transform = .identity
+            }
+    }
+    
+    @objc private func handlePan(gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .changed:
+            handleChangedState(gesture)
+        case .ended:
+            handleEndedState()
+        default:
+            ()
+        }
     }
 }
