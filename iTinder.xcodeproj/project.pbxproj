@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4593FFD22C233726003114EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593FFD12C233726003114EE /* User.swift */; };
+		4593FFD62C23561B003114EE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593FFD52C23561B003114EE /* CardViewModel.swift */; };
 		459CBA0A2C1B12DA00854A31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBA092C1B12DA00854A31 /* AppDelegate.swift */; };
 		459CBA0C2C1B12DA00854A31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBA0B2C1B12DA00854A31 /* SceneDelegate.swift */; };
 		459CBA0E2C1B12DA00854A31 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		4593FFD12C233726003114EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4593FFD52C23561B003114EE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		459CBA062C1B12DA00854A31 /* iTinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		459CBA092C1B12DA00854A31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		459CBA0B2C1B12DA00854A31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +57,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		4593FFD42C23560A003114EE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4593FFD52C23561B003114EE /* CardViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		459CB9FD2C1B12DA00854A31 = {
 			isa = PBXGroup;
 			children = (
@@ -74,10 +84,11 @@
 		459CBA082C1B12DA00854A31 /* iTinder */ = {
 			isa = PBXGroup;
 			children = (
-				4593FFD02C233719003114EE /* Model */,
+				4593FFD42C23560A003114EE /* ViewModels */,
 				45D0EE6A2C1B627F0031D0FF /* Controllers */,
 				45D0EE5F2C1B22260031D0FF /* Extensions */,
 				459CBA172C1B12DB00854A31 /* Info.plist */,
+				4593FFD02C233719003114EE /* Model */,
 				45D0EE692C1B624D0031D0FF /* Resources */,
 				45D0EE622C1B370F0031D0FF /* Views */,
 			);
@@ -201,6 +212,7 @@
 				45D0EE642C1B373C0031D0FF /* HomeBottomControlsStackView.swift in Sources */,
 				45D0EE612C1B225F0031D0FF /* UIView+Extension.swift in Sources */,
 				459CBA0C2C1B12DA00854A31 /* SceneDelegate.swift in Sources */,
+				4593FFD62C23561B003114EE /* CardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
