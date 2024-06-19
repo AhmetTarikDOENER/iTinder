@@ -29,21 +29,23 @@ class CardView: UIView {
     }
     
     fileprivate func handleEndedState(_ gesture: UIPanGestureRecognizer) {
-        let shouldDismissCard = gesture.translation(in: nil).x > threshold
+        let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
+        let shouldDismissCard = abs(gesture.translation(in: nil).x) > threshold
         UIView.animate(
-            withDuration: 0.75,
+            withDuration: 1,
             delay: 0,
-            usingSpringWithDamping: 1.3,
+            usingSpringWithDamping: 0.6,
             initialSpringVelocity: 0.1,
             options: .curveEaseInOut) {
                 if shouldDismissCard {
-                    self.frame = CGRect(x: 1000, y: 0, width: self.frame.width, height: self.frame.height)
+                    self.frame = CGRect(x: 600 * translationDirection, y: 0, width: self.frame.width, height: self.frame.height)
                 } else {
                     self.transform = .identity
                 }
             } completion: {  _ in
                 self.transform = .identity
-                self.frame = CGRect(x: 0, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
+                self.removeFromSuperview()
+//                self.frame = CGRect(x: 0, y: 0, width: self.superview!.frame.width, height: self.superview!.frame.height)
             }
     }
     

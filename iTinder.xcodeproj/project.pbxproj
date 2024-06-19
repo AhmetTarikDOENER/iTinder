@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4593FFD22C233726003114EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593FFD12C233726003114EE /* User.swift */; };
 		459CBA0A2C1B12DA00854A31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBA092C1B12DA00854A31 /* AppDelegate.swift */; };
 		459CBA0C2C1B12DA00854A31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBA0B2C1B12DA00854A31 /* SceneDelegate.swift */; };
-		459CBA0E2C1B12DA00854A31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBA0D2C1B12DA00854A31 /* ViewController.swift */; };
+		459CBA0E2C1B12DA00854A31 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */; };
 		459CBA112C1B12DA00854A31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 459CBA0F2C1B12DA00854A31 /* Main.storyboard */; };
 		459CBA132C1B12DB00854A31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 459CBA122C1B12DB00854A31 /* Assets.xcassets */; };
 		459CBA162C1B12DB00854A31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 459CBA142C1B12DB00854A31 /* LaunchScreen.storyboard */; };
@@ -20,10 +21,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4593FFD12C233726003114EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		459CBA062C1B12DA00854A31 /* iTinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		459CBA092C1B12DA00854A31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		459CBA0B2C1B12DA00854A31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		459CBA0D2C1B12DA00854A31 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		459CBA102C1B12DA00854A31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		459CBA122C1B12DB00854A31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		459CBA152C1B12DB00854A31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4593FFD02C233719003114EE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4593FFD12C233726003114EE /* User.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		459CB9FD2C1B12DA00854A31 = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +74,7 @@
 		459CBA082C1B12DA00854A31 /* iTinder */ = {
 			isa = PBXGroup;
 			children = (
+				4593FFD02C233719003114EE /* Model */,
 				45D0EE6A2C1B627F0031D0FF /* Controllers */,
 				45D0EE5F2C1B22260031D0FF /* Extensions */,
 				459CBA172C1B12DB00854A31 /* Info.plist */,
@@ -106,7 +117,7 @@
 		45D0EE6A2C1B627F0031D0FF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				459CBA0D2C1B12DA00854A31 /* ViewController.swift */,
+				459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -184,8 +195,9 @@
 			files = (
 				45D0EE682C1B56AC0031D0FF /* CardView.swift in Sources */,
 				45D0EE662C1B3FD50031D0FF /* TopNavigationStackView.swift in Sources */,
-				459CBA0E2C1B12DA00854A31 /* ViewController.swift in Sources */,
+				459CBA0E2C1B12DA00854A31 /* HomeViewController.swift in Sources */,
 				459CBA0A2C1B12DA00854A31 /* AppDelegate.swift in Sources */,
+				4593FFD22C233726003114EE /* User.swift in Sources */,
 				45D0EE642C1B373C0031D0FF /* HomeBottomControlsStackView.swift in Sources */,
 				45D0EE612C1B225F0031D0FF /* UIView+Extension.swift in Sources */,
 				459CBA0C2C1B12DA00854A31 /* SceneDelegate.swift in Sources */,

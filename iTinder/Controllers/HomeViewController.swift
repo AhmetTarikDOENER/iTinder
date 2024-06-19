@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
@@ -13,9 +13,11 @@ class ViewController: UIViewController {
     }
     
     func setupDummyCards() {
-        let cardView = CardView(frame: .zero)
-        cardsDeckView.addSubview(cardView)
-        cardView.fillSuperView()
+        (0..<10).forEach { _ in
+            let cardView = CardView(frame: .zero)
+            cardsDeckView.addSubview(cardView)
+            cardView.fillSuperView()
+        }
     }
     
     //  MARK: - Fileprivate
