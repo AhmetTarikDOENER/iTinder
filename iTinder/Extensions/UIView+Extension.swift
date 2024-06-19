@@ -10,8 +10,8 @@ extension UIView {
     func anchor(
         top: NSLayoutYAxisAnchor?,
         leading: NSLayoutXAxisAnchor?,
-        trailing: NSLayoutXAxisAnchor?,
         bottom: NSLayoutYAxisAnchor?,
+        trailing: NSLayoutXAxisAnchor?,
         padding: UIEdgeInsets = .zero,
         size: CGSize = .zero
     ) -> AnchoredConstraints {
