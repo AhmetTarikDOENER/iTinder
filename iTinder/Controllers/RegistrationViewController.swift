@@ -36,11 +36,24 @@ class RegistrationViewController: UIViewController {
         
         return textField
     }()
+    
+    let registrationButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Register", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        button.backgroundColor = UIColor(white: 0, alpha: 0.25)
+        button.layer.cornerRadius = 22.5
+        button.titleLabel?.textAlignment = .center
+        button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGradientLayer()
-        let stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField, passwordTextField])
+        let stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField, passwordTextField, registrationButton])
         view.addSubview(stackView)
         stackView.axis = .vertical
         stackView.spacing = 8
