@@ -9,6 +9,7 @@ class HomeViewController: UIViewController {
     let cardViewModels = [
         User(name: "Kelly", age: 23, profession: "Music DJ", imageName: "lady5c").toCardViewModel(),
         User(name: "Jane", age: 18, profession: "Teacher", imageName: "lady4c").toCardViewModel(),
+        Advertiser(title: "Advertiser Card Menu", brandName: "Advertiser owned by person", photoName: "advertiser").tocardViewModel(),
     ]
     
     override func viewDidLoad() {
