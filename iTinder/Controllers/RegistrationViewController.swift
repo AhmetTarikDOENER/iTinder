@@ -57,9 +57,25 @@ class RegistrationViewController: UIViewController {
         setupGradientLayer()
         setupLayout()
         setupNotificationObservers()
+        setupTapGesture()
     }
     
     //  MARK: - Private
+    fileprivate func setupTapGesture() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
+    }
+    
+    @objc fileprivate func handleTapDismiss() {
+        self.view.endEditing(true)
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1) {
+                self.view.transform = .identity
+            }
+    }
+    
     fileprivate func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
@@ -69,7 +85,7 @@ class RegistrationViewController: UIViewController {
         let keyboardFrame = value.cgRectValue
         let bottomSpace = view.frame.height - stackView.frame.origin.y - stackView.frame.height
         let difference = keyboardFrame.height - bottomSpace
-        self.view.transform = CGAffineTransform(translationX: 0, y: -difference)
+        self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 8)
     }
     
     fileprivate lazy var  stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField, passwordTextField, registerButton])
