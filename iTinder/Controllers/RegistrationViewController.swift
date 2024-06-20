@@ -60,6 +60,11 @@ class RegistrationViewController: UIViewController {
         setupTapGesture()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self) /// If you don't do this you'll have retain cycle.
+    }
+    
     //  MARK: - Private
     fileprivate func setupTapGesture() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
@@ -71,13 +76,14 @@ class RegistrationViewController: UIViewController {
             withDuration: 0.5,
             delay: 0,
             usingSpringWithDamping: 1,
-            initialSpringVelocity: 1) {
+            initialSpringVelocity: 1, options: .curveEaseOut) {
                 self.view.transform = .identity
             }
     }
     
     fileprivate func setupNotificationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc fileprivate func handleKeyboardShow(notification: Notification) {
@@ -86,6 +92,16 @@ class RegistrationViewController: UIViewController {
         let bottomSpace = view.frame.height - stackView.frame.origin.y - stackView.frame.height
         let difference = keyboardFrame.height - bottomSpace
         self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 8)
+    }
+    
+    @objc fileprivate func handleKeyboardHide(notification: Notification) {
+        UIView.animate(
+            withDuration: 0.5,
+            delay: 0,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1, options: .curveEaseOut) {
+                self.view.transform = .identity
+            }
     }
     
     fileprivate lazy var  stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField, passwordTextField, registerButton])
