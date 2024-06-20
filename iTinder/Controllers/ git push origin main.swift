@@ -18,7 +18,6 @@ class RegistrationViewController: UIViewController {
     let fullNameTextField: CustomTextField = {
         let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter full name"
-        
         return textField
     }()
     
@@ -26,7 +25,6 @@ class RegistrationViewController: UIViewController {
         let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter email"
         textField.keyboardType = .emailAddress
-        
         return textField
     }()
     
@@ -34,7 +32,6 @@ class RegistrationViewController: UIViewController {
         let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter password"
         textField.isSecureTextEntry = true
-        
         return textField
     }()
     
@@ -47,7 +44,6 @@ class RegistrationViewController: UIViewController {
         button.layer.cornerRadius = 22.5
         button.titleLabel?.textAlignment = .center
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        
         return button
     }()
     
@@ -89,7 +85,7 @@ class RegistrationViewController: UIViewController {
     @objc fileprivate func handleKeyboardShow(notification: Notification) {
         guard let value = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
         let keyboardFrame = value.cgRectValue
-        let bottomSpace = view.frame.height - stackView.frame.origin.y - stackView.frame.height
+        let bottomSpace = view.frame.height - overallStackView.frame.origin.y - overallStackView.frame.height
         let difference = keyboardFrame.height - bottomSpace
         self.view.transform = CGAffineTransform(translationX: 0, y: -difference - 8)
     }
@@ -104,24 +100,48 @@ class RegistrationViewController: UIViewController {
             }
     }
     
-    fileprivate lazy var  stackView = UIStackView(arrangedSubviews: [selectPhotoButton, fullNameTextField, emailTextField, passwordTextField, registerButton])
+    fileprivate lazy var verticalStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [fullNameTextField, emailTextField, passwordTextField, registerButton])
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.spacing = 8
+        
+        return stackView
+    }()
+    
+    fileprivate lazy var  overallStackView = UIStackView(arrangedSubviews: [selectPhotoButton, verticalStackView])
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        if self.traitCollection.verticalSizeClass == .compact {
+            overallStackView.axis = .horizontal
+            selectPhotoButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        } else {
+            overallStackView.axis = .vertical
+        }
+    }
     
     fileprivate func setupLayout() {
-        view.addSubview(stackView)
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.anchor(
+        view.addSubview(overallStackView)
+        overallStackView.axis = .vertical
+        overallStackView.spacing = 8
+        overallStackView.anchor(
             top: nil,
             leading: view.leadingAnchor,
             bottom: nil,
             trailing: view.trailingAnchor,
             padding: .init(top: 0, left: 50, bottom: 0, right: -50)
         )
-        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    let gradientLayer = CAGradientLayer()
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        gradientLayer.frame = view.bounds
     }
     
     fileprivate func setupGradientLayer() {
-        let gradientLayer = CAGradientLayer()
         let topColor = #colorLiteral(red: 0.9891560674, green: 0.1765951514, blue: 0.4769871831, alpha: 1)
         let bottomColor = #colorLiteral(red: 1, green: 0.3912853599, blue: 0.3719379306, alpha: 1)
         gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
