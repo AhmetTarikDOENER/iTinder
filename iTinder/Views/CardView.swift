@@ -5,6 +5,7 @@ class CardView: UIView {
     fileprivate let imageView = UIImageView(image: UIImage(named: "lady5c"))
     fileprivate let informationLabel = UILabel()
     fileprivate let threshold: CGFloat = 100
+    fileprivate let gradientLayer = CAGradientLayer()
     
     var cardViewModel: CardViewModel! {
         didSet {
@@ -16,19 +17,7 @@ class CardView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        clipsToBounds = true
-        layer.cornerRadius = 10
-        addSubview(imageView)
-        imageView.contentMode = .scaleAspectFill
-        imageView.fillSuperView()
-        
-        addSubview(informationLabel)
-        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: -16))
-        informationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
-        informationLabel.textColor = .white
-        informationLabel.numberOfLines = 0
-        informationLabel.font = UIFont.systemFont(ofSize: 29, weight: .heavy)
-        
+        setupLayout()
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
         addGestureRecognizer(panGesture)
     }
@@ -37,9 +26,37 @@ class CardView: UIView {
         fatalError()
     }
     
+    override func layoutSubviews() { /// in here we know what CardView frame will be
+        super.layoutSubviews()
+        gradientLayer.frame = self.frame
+    }
+    
+    fileprivate func setupLayout() {
+        clipsToBounds = true
+        layer.cornerRadius = 10
+        
+        addSubview(imageView)
+        imageView.contentMode = .scaleAspectFill
+        imageView.fillSuperView()
+        
+        setupGradientLayer()
+        
+        addSubview(informationLabel)
+        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: -16))
+        informationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
+        informationLabel.textColor = .white
+        informationLabel.numberOfLines = 0
+    }
+    
+    fileprivate func setupGradientLayer() {
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.5, 1.2]
+        layer.addSublayer(gradientLayer)
+    }
+    
     fileprivate func handleChangedState(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: nil)
-        let degrees: CGFloat = translation.x / 15
+        let degrees: CGFloat = translation.x / 20
         let angle = degrees * .pi / 180
         let rotationalTransformation = CGAffineTransform(rotationAngle: angle)
         transform = rotationalTransformation.translatedBy(x: translation.x, y: translation.y)
@@ -56,6 +73,7 @@ class CardView: UIView {
             options: .curveEaseInOut) {
                 if shouldDismissCard {
                     self.frame = CGRect(x: 600 * translationDirection, y: 0, width: self.frame.width, height: self.frame.height)
+                    self.removeFromSuperview()
                 } else {
                     self.transform = .identity
                 }
@@ -69,6 +87,10 @@ class CardView: UIView {
     
     @objc private func handlePan(gesture: UIPanGestureRecognizer) {
         switch gesture.state {
+        case .began:
+            superview?.subviews.forEach({ subview in
+                subview.layer.removeAllAnimations()
+            })
         case .changed:
             handleChangedState(gesture)
         case .ended:
