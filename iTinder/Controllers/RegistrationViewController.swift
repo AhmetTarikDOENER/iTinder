@@ -15,36 +15,27 @@ class RegistrationViewController: UIViewController {
     }()
     
     let fullNameTextField: CustomTextField = {
-        let textField = CustomTextField()
+        let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter full name"
-        textField.backgroundColor = .white
         
         return textField
     }()
     
     let emailTextField: CustomTextField = {
-        let textField = CustomTextField()
+        let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter email"
         textField.keyboardType = .emailAddress
-        textField.backgroundColor = .white
         
         return textField
     }()
     
     let passwordTextField: CustomTextField = {
-        let textField = CustomTextField()
+        let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter password"
         textField.isSecureTextEntry = true
-        textField.backgroundColor = .white
         
         return textField
     }()
-    
-    class CustomTextField: UITextField {
-        override var intrinsicContentSize: CGSize {
-            return CGSize(width: 0, height: 45)
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
