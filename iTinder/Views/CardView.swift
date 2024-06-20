@@ -2,10 +2,17 @@ import UIKit
 
 class CardView: UIView {
     
-    let imageView = UIImageView(image: UIImage(named: "lady5c"))
-    let informationLabel = UILabel()
-    
+    fileprivate let imageView = UIImageView(image: UIImage(named: "lady5c"))
+    fileprivate let informationLabel = UILabel()
     fileprivate let threshold: CGFloat = 100
+    
+    var cardViewModel: CardViewModel! {
+        didSet {
+            imageView.image = UIImage(named: cardViewModel.imageName)
+            informationLabel.attributedText = cardViewModel.attributedString
+            informationLabel.textAlignment = cardViewModel.textAlignment
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -16,9 +23,8 @@ class CardView: UIView {
         imageView.fillSuperView()
         
         addSubview(informationLabel)
-        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: 16))
+        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: -16))
         informationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
-        informationLabel.text = "Test Name Test Age"
         informationLabel.textColor = .white
         informationLabel.numberOfLines = 0
         informationLabel.font = UIFont.systemFont(ofSize: 29, weight: .heavy)

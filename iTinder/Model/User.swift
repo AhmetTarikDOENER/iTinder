@@ -1,6 +1,6 @@
 import UIKit
 
-struct User {
+struct User: CardViewModelProduceable {
     let name: String
     let age: Int
     let profession: String
