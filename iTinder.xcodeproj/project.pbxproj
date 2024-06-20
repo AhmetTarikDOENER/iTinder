@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		45318FFC2C241D9600CC869B /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFB2C241D9600CC869B /* Advertiser.swift */; };
+		45318FFE2C24970000CC869B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFD2C24970000CC869B /* RegistrationViewController.swift */; };
 		4593FFD22C233726003114EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593FFD12C233726003114EE /* User.swift */; };
 		4593FFD62C23561B003114EE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593FFD52C23561B003114EE /* CardViewModel.swift */; };
 		459CBA0A2C1B12DA00854A31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBA092C1B12DA00854A31 /* AppDelegate.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		45318FFB2C241D9600CC869B /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
+		45318FFD2C24970000CC869B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		4593FFD12C233726003114EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4593FFD52C23561B003114EE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		459CBA062C1B12DA00854A31 /* iTinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */,
+				45318FFD2C24970000CC869B /* RegistrationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 				45318FFC2C241D9600CC869B /* Advertiser.swift in Sources */,
 				45D0EE682C1B56AC0031D0FF /* CardView.swift in Sources */,
 				45D0EE662C1B3FD50031D0FF /* TopNavigationStackView.swift in Sources */,
+				45318FFE2C24970000CC869B /* RegistrationViewController.swift in Sources */,
 				459CBA0E2C1B12DA00854A31 /* HomeViewController.swift in Sources */,
 				459CBA0A2C1B12DA00854A31 /* AppDelegate.swift in Sources */,
 				4593FFD22C233726003114EE /* User.swift in Sources */,

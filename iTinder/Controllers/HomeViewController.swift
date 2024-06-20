@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         setupLayout()
         setupDummyCards()
     }
@@ -34,6 +35,13 @@ class HomeViewController: UIViewController {
     }
     
     //  MARK: - Fileprivate
+    @objc fileprivate func handleSettings() {
+        print("Tapped.")
+        let registrationController = RegistrationViewController()
+        registrationController.modalPresentationStyle = .fullScreen
+        present(registrationController, animated: true)
+    }
+    
     fileprivate func setupLayout() {
         cardsDeckView.heightAnchor.constraint(equalToConstant: 580).isActive = true
         let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, buttonsBottomStackView])
