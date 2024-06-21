@@ -1,6 +1,8 @@
 import UIKit
 
-class RegistrationViewController: UIViewController {
+final class RegistrationViewController: UIViewController {
+    
+    let registrationViewModel = RegistrationViewModel()
     
     //  MARK: - Components
     let selectPhotoButton: UIButton = {
@@ -18,6 +20,8 @@ class RegistrationViewController: UIViewController {
     let fullNameTextField: CustomTextField = {
         let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter full name"
+        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
+        
         return textField
     }()
     
@@ -25,6 +29,7 @@ class RegistrationViewController: UIViewController {
         let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter email"
         textField.keyboardType = .emailAddress
+        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textField
     }()
     
@@ -32,6 +37,7 @@ class RegistrationViewController: UIViewController {
         let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter password"
         textField.isSecureTextEntry = true
+        textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         return textField
     }()
     
@@ -40,10 +46,12 @@ class RegistrationViewController: UIViewController {
         button.setTitle("Register", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-        button.backgroundColor = UIColor(white: 0, alpha: 0.25)
+        button.backgroundColor = .darkGray
         button.layer.cornerRadius = 22.5
         button.titleLabel?.textAlignment = .center
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        button.isEnabled = false
+        
         return button
     }()
     
@@ -54,6 +62,7 @@ class RegistrationViewController: UIViewController {
         setupLayout()
         setupNotificationObservers()
         setupTapGesture()
+        setupRegistrationViewModelObserver()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -62,6 +71,27 @@ class RegistrationViewController: UIViewController {
     }
     
     //  MARK: - Private
+    fileprivate func setupRegistrationViewModelObserver() {
+        registrationViewModel.isFormValidObserver = { [unowned self] isFormValid in
+            self.registerButton.isEnabled = isFormValid
+            if isFormValid {
+                self.registerButton.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            } else {
+                self.registerButton.backgroundColor = .darkGray
+            }
+        }
+    }
+    
+    @objc fileprivate func handleTextChange(textField: UITextField) {
+        if textField == fullNameTextField {
+            registrationViewModel.fullName = textField.text
+        } else if textField == emailTextField {
+            registrationViewModel.email = textField.text
+        } else {
+            registrationViewModel.password = textField.text
+        }
+    }
+    
     fileprivate func setupTapGesture() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTapDismiss)))
     }
