@@ -28,6 +28,7 @@
 		45CB50BF2C25B783003E94F6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 45CB50BE2C25B783003E94F6 /* FirebaseFirestore */; };
 		45CB50C12C25B783003E94F6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 45CB50C02C25B783003E94F6 /* FirebaseStorage */; };
 		45CB50C32C25B919003E94F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45CB50C22C25B919003E94F6 /* GoogleService-Info.plist */; };
+		45CB50C62C25D81E003E94F6 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CB50C52C25D81E003E94F6 /* Bindable.swift */; };
 		45D0EE612C1B225F0031D0FF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE602C1B225E0031D0FF /* UIView+Extension.swift */; };
 		45D0EE642C1B373C0031D0FF /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */; };
 		45D0EE662C1B3FD50031D0FF /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */; };
@@ -50,6 +51,7 @@
 		459CBA172C1B12DB00854A31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45CB50AD2C25AA50003E94F6 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		45CB50C22C25B919003E94F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		45CB50C52C25D81E003E94F6 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		45D0EE602C1B225E0031D0FF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
 		45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */,
 				45318FFD2C24970000CC869B /* RegistrationViewController.swift */,
+				45CB50C52C25D81E003E94F6 /* Bindable.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				459CBA0A2C1B12DA00854A31 /* AppDelegate.swift in Sources */,
 				4593FFD22C233726003114EE /* User.swift in Sources */,
 				45D0EE642C1B373C0031D0FF /* HomeBottomControlsStackView.swift in Sources */,
+				45CB50C62C25D81E003E94F6 /* Bindable.swift in Sources */,
 				453190002C249E8200CC869B /* CustomTextField.swift in Sources */,
 				45CB50AE2C25AA50003E94F6 /* RegistrationViewModel.swift in Sources */,
 				45D0EE612C1B225F0031D0FF /* UIView+Extension.swift in Sources */,

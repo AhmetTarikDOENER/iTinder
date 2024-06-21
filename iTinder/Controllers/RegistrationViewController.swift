@@ -106,13 +106,18 @@ final class RegistrationViewController: UIViewController {
     }
     
     fileprivate func setupRegistrationViewModelObserver() {
-        registrationViewModel.isFormValidObserver = { [unowned self] isFormValid in
+        registrationViewModel.bindableIsFormValid.bind { [unowned self] isFormValid in
+            guard let isFormValid else { return }
             self.registerButton.isEnabled = isFormValid
             if isFormValid {
                 self.registerButton.backgroundColor = UIColor(white: 0, alpha: 0.5)
             } else {
                 self.registerButton.backgroundColor = .darkGray
             }
+        }
+        
+        registrationViewModel.bindableImage.bind { [unowned self] image in
+            self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
     }
     
@@ -218,8 +223,7 @@ final class RegistrationViewController: UIViewController {
 extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
-        registrationViewModel.image = image
-        self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        registrationViewModel.bindableImage.value = image
         dismiss(animated: true)
     }
     
