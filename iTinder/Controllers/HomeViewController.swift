@@ -36,7 +36,6 @@ class HomeViewController: UIViewController {
     
     //  MARK: - Fileprivate
     @objc fileprivate func handleSettings() {
-        print("Tapped.")
         let registrationController = RegistrationViewController()
         registrationController.modalPresentationStyle = .fullScreen
         present(registrationController, animated: true)

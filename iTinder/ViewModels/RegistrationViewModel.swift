@@ -24,22 +24,27 @@ class RegistrationViewModel {
                 completion(error)
                 return
             }
-            let fileName = UUID().uuidString
-            let storageReference = Storage.storage().reference(withPath: "/images/\(fileName)/")
-            let imageData = self.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
-            
-            storageReference.putData(imageData, metadata: nil) { _, error in
+            self.saveImageToFirebase(completion: completion)
+        }
+    }
+    
+    fileprivate func saveImageToFirebase(completion: @escaping (Error?) -> Void) {
+        let fileName = UUID().uuidString
+        let storageReference = Storage.storage().reference(withPath: "/images/\(fileName)/")
+        let imageData = self.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
+        
+        storageReference.putData(imageData, metadata: nil) { _, error in
+            if let error = error {
+                completion(error)
+                return
+            }
+            storageReference.downloadURL { url, error in
                 if let error = error {
                     completion(error)
                     return
                 }
-                storageReference.downloadURL { url, error in
-                    if let error = error {
-                        completion(error)
-                        return
-                    }
-                    self.bindableIsRegistering.value = false
-                }
+                self.bindableIsRegistering.value = false
+                completion(nil)
             }
         }
     }
