@@ -2,6 +2,7 @@ import UIKit
 import Firebase
 import FirebaseStorage
 
+
 class RegistrationViewModel {
     var fullName: String? { didSet {checkRegistrationValidity()} }
     var email: String? { didSet {checkRegistrationValidity()} }
@@ -44,8 +45,24 @@ class RegistrationViewModel {
                     return
                 }
                 self.bindableIsRegistering.value = false
+                let imageURL = url?.absoluteString ?? ""
+                self.saveInfoToFirestore(imageURL: imageURL, completion: completion)
                 completion(nil)
             }
         }
     }
+    
+    fileprivate func saveInfoToFirestore(imageURL: String, completion: @escaping (Error?) -> Void) {
+        let uid = Auth.auth().currentUser?.uid ?? ""
+        let databaseReference = Database.database().reference()
+        let docData = ["fullName": fullName ?? "", "uid": uid, "imageURL1": imageURL]
+        databaseReference.child("users").child(uid).setValue(docData) { error, reference in
+            if let error = error {
+                completion(error)
+                return
+            }
+            completion(nil)
+        }
+    }
+    
 }
