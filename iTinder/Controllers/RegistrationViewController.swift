@@ -90,26 +90,10 @@ final class RegistrationViewController: UIViewController {
     
     @objc fileprivate func handleRegister() {
         self.handleTapDismiss()
-        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
-        registeringHUD.textLabel.text = "Register"
-        registeringHUD.show(in: view)
-        
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+        registrationViewModel.performRegistration { [weak self] error in
             if let error = error {
-                self.showHUDWithError(error: error)
+                self?.showHUDWithError(error: error)
                 return
-            }
-            let fileName = UUID().uuidString
-            let storageReference = Storage.storage().reference(withPath: "/images/\(fileName)/")
-            let imageData = self.registrationViewModel.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
-            
-            storageReference.putData(imageData, metadata: nil) { [weak self] _, error in
-                if let error = error {
-                    self?.showHUDWithError(error: error)
-                    return
-                }
-                print("Uploaded photo successfully.")
-                self?.registeringHUD.dismiss()
             }
         }
     }
@@ -136,6 +120,16 @@ final class RegistrationViewController: UIViewController {
         
         registrationViewModel.bindableImage.bind { [unowned self] image in
             self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        
+        registrationViewModel.bindableIsRegistering.bind { [unowned self] isRegistering in
+            guard let isRegistering else { return }
+            if isRegistering {
+                self.registeringHUD.textLabel.text = "Register"
+                self.registeringHUD.show(in: view)
+            } else {
+                self.registeringHUD.dismiss()
+            }
         }
     }
     
