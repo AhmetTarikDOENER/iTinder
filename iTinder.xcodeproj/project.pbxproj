@@ -114,6 +114,7 @@
 		459CBA082C1B12DA00854A31 /* iTinder */ = {
 			isa = PBXGroup;
 			children = (
+				45CB50C52C25D81E003E94F6 /* Bindable.swift */,
 				45D0EE6A2C1B627F0031D0FF /* Controllers */,
 				45D0EE5F2C1B22260031D0FF /* Extensions */,
 				459CBA172C1B12DB00854A31 /* Info.plist */,
@@ -162,7 +163,6 @@
 			children = (
 				459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */,
 				45318FFD2C24970000CC869B /* RegistrationViewController.swift */,
-				45CB50C52C25D81E003E94F6 /* Bindable.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

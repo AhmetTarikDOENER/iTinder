@@ -1,6 +1,7 @@
 import UIKit
 import Firebase
 import JGProgressHUD
+import FirebaseStorage
 
 final class RegistrationViewController: UIViewController {
     
@@ -75,7 +76,7 @@ final class RegistrationViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self) /// If you don't do this you'll have retain cycle.
+//        NotificationCenter.default.removeObserver(self) /// If you don't do this you'll have retain cycle.
     }
     
     //  MARK: - Private
@@ -85,24 +86,41 @@ final class RegistrationViewController: UIViewController {
         present(imagePickerController, animated: true)
     }
     
+    fileprivate let registeringHUD = JGProgressHUD(style: .dark)
+    
     @objc fileprivate func handleRegister() {
         self.handleTapDismiss()
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        registeringHUD.textLabel.text = "Register"
+        registeringHUD.show(in: view)
+        
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
                 self.showHUDWithError(error: error)
                 return
             }
-            print("User successfully registered:", result?.user.uid ?? "")
+            let fileName = UUID().uuidString
+            let storageReference = Storage.storage().reference(withPath: "/images/\(fileName)/")
+            let imageData = self.registrationViewModel.bindableImage.value?.jpegData(compressionQuality: 0.75) ?? Data()
+            
+            storageReference.putData(imageData, metadata: nil) { [weak self] _, error in
+                if let error = error {
+                    self?.showHUDWithError(error: error)
+                    return
+                }
+                print("Uploaded photo successfully.")
+                self?.registeringHUD.dismiss()
+            }
         }
     }
     
     fileprivate func showHUDWithError(error: Error) {
+        registeringHUD.dismiss()
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Failed Registration"
         hud.detailTextLabel.text = error.localizedDescription
         hud.show(in: self.view)
-        hud.dismiss(afterDelay: 3.5)
+        hud.dismiss(afterDelay: 1.5)
     }
     
     fileprivate func setupRegistrationViewModelObserver() {
