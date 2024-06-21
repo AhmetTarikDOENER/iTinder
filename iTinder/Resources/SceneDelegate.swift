@@ -1,11 +1,5 @@
-//
-//  SceneDelegate.swift
-//  iTinder
-//
-//  Created by Ahmet Tarik DÖNER on 13.06.2024.
-//
-
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -17,6 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = RegistrationViewController()
         window.makeKeyAndVisible()
         self.window = window
+        FirebaseApp.configure()
     }
 }
 

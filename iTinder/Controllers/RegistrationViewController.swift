@@ -1,4 +1,6 @@
 import UIKit
+import Firebase
+import JGProgressHUD
 
 final class RegistrationViewController: UIViewController {
     
@@ -17,7 +19,7 @@ final class RegistrationViewController: UIViewController {
         return button
     }()
     
-    let fullNameTextField: CustomTextField = {
+    private lazy var fullNameTextField: CustomTextField = {
         let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter full name"
         textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
@@ -25,23 +27,25 @@ final class RegistrationViewController: UIViewController {
         return textField
     }()
     
-    let emailTextField: CustomTextField = {
+    private lazy var emailTextField: CustomTextField = {
         let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter email"
         textField.keyboardType = .emailAddress
         textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
+        
         return textField
     }()
     
-    let passwordTextField: CustomTextField = {
+    private lazy var passwordTextField: CustomTextField = {
         let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter password"
         textField.isSecureTextEntry = true
         textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
+        
         return textField
     }()
     
-    let registerButton: UIButton = {
+    private lazy var registerButton: UIButton = {
         let button = UIButton()
         button.setTitle("Register", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -51,6 +55,7 @@ final class RegistrationViewController: UIViewController {
         button.titleLabel?.textAlignment = .center
         button.heightAnchor.constraint(equalToConstant: 45).isActive = true
         button.isEnabled = false
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
         
         return button
     }()
@@ -71,6 +76,26 @@ final class RegistrationViewController: UIViewController {
     }
     
     //  MARK: - Private
+    @objc fileprivate func handleRegister() {
+        self.handleTapDismiss()
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+            if let error = error {
+                self.showHUDWithError(error: error)
+                return
+            }
+            print("User successfully registered:", result?.user.uid ?? "")
+        }
+    }
+    
+    fileprivate func showHUDWithError(error: Error) {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Failed Registration"
+        hud.detailTextLabel.text = error.localizedDescription
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 3.5)
+    }
+    
     fileprivate func setupRegistrationViewModelObserver() {
         registrationViewModel.isFormValidObserver = { [unowned self] isFormValid in
             self.registerButton.isEnabled = isFormValid
