@@ -7,14 +7,17 @@ final class RegistrationViewController: UIViewController {
     let registrationViewModel = RegistrationViewModel()
     
     //  MARK: - Components
-    let selectPhotoButton: UIButton = {
+    private lazy var selectPhotoButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Select Photo", for: .normal)
+        button.setTitle("Add Photo", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
         button.backgroundColor = .white
         button.setTitleColor(.black, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 275).isActive = true
         button.layer.cornerRadius = 18
+        button.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFill
+        button.clipsToBounds = true
         
         return button
     }()
@@ -76,6 +79,12 @@ final class RegistrationViewController: UIViewController {
     }
     
     //  MARK: - Private
+    @objc fileprivate func handleSelectPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true)
+    }
+    
     @objc fileprivate func handleRegister() {
         self.handleTapDismiss()
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
@@ -203,5 +212,18 @@ final class RegistrationViewController: UIViewController {
         gradientLayer.locations = [0, 1]
         view.layer.addSublayer(gradientLayer)
         gradientLayer.frame = view.bounds
+    }
+}
+//  MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
+extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        registrationViewModel.image = image
+        self.selectPhotoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
     }
 }
