@@ -1,4 +1,5 @@
 import UIKit
+import Firebase
 
 class HomeViewController: UIViewController {
     
@@ -33,8 +34,7 @@ class HomeViewController: UIViewController {
             cardView.fillSuperView()
         }
     }
-    
-    //  MARK: - Fileprivate
+ 
     @objc fileprivate func handleSettings() {
         let registrationController = RegistrationViewController()
         registrationController.modalPresentationStyle = .fullScreen
@@ -42,6 +42,7 @@ class HomeViewController: UIViewController {
     }
     
     fileprivate func setupLayout() {
+        view.backgroundColor = .white
         cardsDeckView.heightAnchor.constraint(equalToConstant: 580).isActive = true
         let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, buttonsBottomStackView])
         overallStackView.axis = .vertical

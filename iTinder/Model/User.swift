@@ -5,7 +5,7 @@ struct User: CardViewModelProduceable {
     let age: Int
     let profession: String
     let imageNames: [String]
-    
+
     func toCardViewModel() -> CardViewModel {
         let attributedText = NSMutableAttributedString(string: "\(name)", attributes: [.font: UIFont.systemFont(ofSize: 32, weight: .heavy)])
         attributedText.append(NSAttributedString(string: "  \(age)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))

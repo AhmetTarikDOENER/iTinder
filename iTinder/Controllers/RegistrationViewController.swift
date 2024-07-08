@@ -26,6 +26,7 @@ final class RegistrationViewController: UIViewController {
     private lazy var fullNameTextField: CustomTextField = {
         let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter full name"
+        textField.autocorrectionType = .no
         textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         
         return textField
@@ -35,6 +36,7 @@ final class RegistrationViewController: UIViewController {
         let textField = CustomTextField(padding: 20)
         textField.placeholder = "Enter email"
         textField.keyboardType = .emailAddress
+        textField.autocorrectionType = .no
         textField.addTarget(self, action: #selector(handleTextChange), for: .editingChanged)
         
         return textField
@@ -76,7 +78,6 @@ final class RegistrationViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        NotificationCenter.default.removeObserver(self) /// If you don't do this you'll have retain cycle.
     }
     
     //  MARK: - Private
@@ -95,6 +96,7 @@ final class RegistrationViewController: UIViewController {
                 self?.showHUDWithError(error: error)
                 return
             }
+            print("Registration handled successfully.")
         }
     }
     
