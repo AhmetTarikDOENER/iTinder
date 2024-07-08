@@ -1,5 +1,5 @@
 import UIKit
-import Firebase
+import FirebaseFirestore
 
 class HomeViewController: UIViewController {
     
@@ -7,23 +7,26 @@ class HomeViewController: UIViewController {
     let cardsDeckView = UIView()
     let buttonsBottomStackView = HomeBottomControlsStackView()
 
-    let cardViewModels: [CardViewModel] = {
-        let producers = [
-            User(name: "Kelly", age: 23, profession: "Music DJ", imageNames: ["kelly1", "kelly2", "kelly3"]),
-            User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["lady4c"]),
-            Advertiser(title: "Advertiser Card Menu", brandName: "Advertiser owned by person", photoName: "advertiser"),
-            User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"])
-        ] as [CardViewModelProduceable]
-        let viewModels = producers.map { $0.toCardViewModel() }
-        
-        return viewModels
-    }()
+//    let cardViewModels: [CardViewModel] = {
+//        let producers = [
+//            User(name: "Kelly", age: 23, profession: "Music DJ", imageNames: ["kelly1", "kelly2", "kelly3"]),
+//            User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["lady4c"]),
+//            Advertiser(title: "Advertiser Card Menu", brandName: "Advertiser owned by person", photoName: "advertiser"),
+//            User(name: "Jane", age: 18, profession: "Teacher", imageNames: ["jane1", "jane2", "jane3"])
+//        ] as [CardViewModelProduceable]
+//        let viewModels = producers.map { $0.toCardViewModel() }
+//        
+//        return viewModels
+//    }()
+    
+    var cardViewModels = [CardViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         setupLayout()
         setupDummyCards()
+        fetchUserFromFirestore()
     }
     
     func setupDummyCards() {
@@ -56,6 +59,19 @@ class HomeViewController: UIViewController {
         overallStackView.isLayoutMarginsRelativeArrangement = true
         overallStackView.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
         overallStackView.bringSubviewToFront(cardsDeckView)
+    }
+    
+    fileprivate func fetchUserFromFirestore() {
+        Firestore.firestore().collection("users").getDocuments { snapshot, error in
+            if let error = error { return }
+            
+            snapshot?.documents.forEach({ documentSnapshot in
+                let userDictionary = documentSnapshot.data()
+                let user = User(dictionary: userDictionary)
+                self.cardViewModels.append(user.toCardViewModel())
+            })
+            self.setupDummyCards()
+        }
     }
 }
 

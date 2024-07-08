@@ -96,7 +96,6 @@ final class RegistrationViewController: UIViewController {
                 self?.showHUDWithError(error: error)
                 return
             }
-            print("Registration handled successfully.")
         }
     }
     

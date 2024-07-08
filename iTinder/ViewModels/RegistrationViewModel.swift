@@ -1,6 +1,7 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import FirebaseFirestore
 
 class RegistrationViewModel {
     
@@ -26,8 +27,6 @@ class RegistrationViewModel {
                 completion(err)
                 return
             }
-            
-            print("Successfully registered user:", res?.user.uid ?? "") /// OK 1
             self.saveImageToFirebase(completion: completion)
         }
     }
@@ -39,31 +38,24 @@ class RegistrationViewModel {
         ref.putData(imageData, metadata: nil, completion: { (_, err) in
             
             if let err = err {
-                print("Error uploading image: \(err.localizedDescription)")
                 completion(err)
                 return // bail
             }
             
-            print("Finished uploading image to storage") /// OK 2
             ref.downloadURL(completion: { (url, err) in
                 if let err = err {
-                    print("Error getting download URL")
                     completion(err)
                     return
                 }
                 
                 self.bindableIsRegistering.value = false
-                print("Download url of our image is:", url?.absoluteString ?? "") /// OK 3
-                
                 let imageUrl = url?.absoluteString ?? ""
                 
                 self.saveInfoToFirestore(imageURL: imageUrl) { error in
                     if let error = error {
-                        print("imageUrl is not downloading")
                         completion(error)
                         return
                     }
-                    print("ImageURl successfully downlaoded")
                     completion(nil)
                 }
             })
@@ -72,7 +64,7 @@ class RegistrationViewModel {
     }
     
     fileprivate func saveInfoToFirestore(imageURL: String, completion: @escaping (Error?) -> Void) {
-        let uid = UUID().uuidString
+        let uid = Auth.auth().currentUser?.uid ?? ""
         let docData: [String: String] = [
             "fullname": fullName ?? "",
             "uid": uid,
@@ -80,11 +72,9 @@ class RegistrationViewModel {
         ]
         Firestore.firestore().collection("users").document(uid).setData(docData) { error in
             if let error = error {
-                print("An error occured while creating firestore path", error.localizedDescription)
                 completion(error)
                 return
             }
-            print("Successfully created firestore path.")
             completion(nil)
         }
     }
