@@ -22,7 +22,6 @@ class SettingsViewController: UITableViewController {
         button.addTarget(self, action: selector, for: .touchUpInside)
         button.imageView?.contentMode = .scaleAspectFill
         button.layer.cornerRadius = 10
-        button.clipsToBounds = true
         return button
     }
 
@@ -79,7 +78,15 @@ class SettingsViewController: UITableViewController {
             guard error == nil else { return }
             guard let dictionary = snapshot?.data() else { return }
             self.user = User(dictionary: dictionary)
+            self.loadUserPhotos()
             self.tableView.reloadData()
+        }
+    }
+    
+    fileprivate func loadUserPhotos() {
+        guard let imageURL = user?.imageURL1, let url = URL(string: imageURL) else { return }
+        SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { image, _, _, _, _, _ in
+            self.image1Button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
     }
     
