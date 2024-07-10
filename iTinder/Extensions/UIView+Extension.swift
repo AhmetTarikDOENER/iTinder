@@ -15,6 +15,7 @@ extension UIView {
         padding: UIEdgeInsets = .zero,
         size: CGSize = .zero
     ) -> AnchoredConstraints {
+        clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
         var anchoredConstraints = AnchoredConstraints()
         
@@ -27,11 +28,11 @@ extension UIView {
         }
         
         if let trailing = trailing {
-            anchoredConstraints.trailing = trailingAnchor.constraint(equalTo: trailing, constant: padding.right)
+            anchoredConstraints.trailing = trailingAnchor.constraint(equalTo: trailing, constant: -padding.right)
         }
         
         if let bottom = bottom {
-            anchoredConstraints.bottom = bottom.constraint(equalTo: bottom, constant: padding.bottom)
+            anchoredConstraints.bottom = bottom.constraint(equalTo: bottom, constant: -padding.bottom)
         }
         
         if size.width != 0 {
@@ -63,7 +64,7 @@ extension UIView {
         }
         
         if let superviewTrailingAnchor = superview?.trailingAnchor {
-            trailingAnchor.constraint(equalTo: superviewTrailingAnchor, constant: -padding.bottom).isActive = true
+            trailingAnchor.constraint(equalTo: superviewTrailingAnchor, constant: -padding.right).isActive = true
         }
 
     }

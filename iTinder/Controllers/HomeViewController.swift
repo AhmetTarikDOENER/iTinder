@@ -29,9 +29,10 @@ class HomeViewController: UIViewController {
     }
  
     @objc fileprivate func handleSettings() {
-        let registrationController = RegistrationViewController()
-        registrationController.modalPresentationStyle = .fullScreen
-        present(registrationController, animated: true)
+        let settingsController = SettingsViewController()
+        let navVC = UINavigationController(rootViewController: settingsController)
+        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: true)
     }
     
     @objc fileprivate func didTapRefresh() {
