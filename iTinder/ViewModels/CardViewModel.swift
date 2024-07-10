@@ -18,7 +18,6 @@ class CardViewModel {
     fileprivate var imageIndex = 0 {
         didSet {
             let imageURL = imageNames[imageIndex]
-//            let image = UIImage(named: imageName)
             imageIndexObserver?(imageIndex, imageURL)
         }
     }
