@@ -102,7 +102,21 @@ class SettingsViewController: UITableViewController {
     }
     
     @objc fileprivate func didTapSave() {
-        dismiss(animated: true)
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let docData: [String: Any] = [
+            "uid": uid,
+            "fullname": user?.name ?? "",
+            "imageURL1": user?.imageURL1 ?? "",
+            "age": user?.age ?? -1,
+            "profession": user?.profession ?? ""
+        ]
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Saving Profile"
+        hud.show(in: view)
+        Firestore.firestore().collection("users").document(uid).setData(docData) { error in
+            guard error == nil else { return }
+            hud.dismiss(animated: true)   
+        }
     }
     
     @objc fileprivate func didTapLogout() {
@@ -137,17 +151,32 @@ extension SettingsViewController {
         case 1: 
             cell.textField.placeholder = "Enter Name"
             cell.textField.text = user?.name
+            cell.textField.addTarget(self, action: #selector(didChangeName), for: .editingChanged)
         case 2:
             cell.textField.placeholder = "Enter Profession"
             cell.textField.text = user?.profession
+            cell.textField.addTarget(self, action: #selector(didChangeProfession), for: .editingChanged)
         case 3:
             cell.textField.placeholder = "Enter Age"
             if let age = user?.age {
                 cell.textField.text = String(age)
             }
+            cell.textField.addTarget(self, action: #selector(didChangeAge), for: .editingChanged)
         default: cell.textField.placeholder = "Enter Bio"
         }
         return cell
+    }
+    
+    @objc fileprivate func didChangeName(textField: UITextField) {
+        self.user?.name = textField.text
+    }
+    
+    @objc fileprivate func didChangeProfession(textField: UITextField) {
+        self.user?.profession = textField.text
+    }
+    
+    @objc fileprivate func didChangeAge(textField: UITextField) {
+        self.user?.age = Int(textField.text ?? "")
     }
     
     class HeaderLabel: UILabel {
