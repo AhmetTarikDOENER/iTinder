@@ -1,5 +1,6 @@
 import UIKit
 import FirebaseFirestore
+import JGProgressHUD
 
 class HomeViewController: UIViewController {
     
@@ -57,9 +58,13 @@ class HomeViewController: UIViewController {
     var lastFetchedUser: User?
     
     fileprivate func fetchUserFromFirestore() {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Finding Users"
+        hud.show(in: view)
         /// paginate 2 users at a time
         let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchedUser?.uid ?? ""]).limit(to: 2)
         query.getDocuments { snapshot, error in
+            hud.dismiss()
             if let _ = error { return }
             snapshot?.documents.forEach({ documentSnapshot in
                 let userDictionary = documentSnapshot.data()
