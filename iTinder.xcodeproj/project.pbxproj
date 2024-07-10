@@ -34,6 +34,7 @@
 		45D0EE662C1B3FD50031D0FF /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */; };
 		45D0EE682C1B56AC0031D0FF /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE672C1B56AC0031D0FF /* CardView.swift */; };
 		45D1E22C2C3EC9C900CC5729 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D1E22B2C3EC9C900CC5729 /* SettingsViewController.swift */; };
+		45D1E22E2C3EFD7C00CC5729 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D1E22D2C3EFD7C00CC5729 /* SettingsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 		45D0EE672C1B56AC0031D0FF /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		45D1E22B2C3EC9C900CC5729 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		45D1E22D2C3EFD7C00CC5729 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				45318FFF2C249E8200CC869B /* CustomTextField.swift */,
 				45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */,
 				45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */,
+				45D1E22D2C3EFD7C00CC5729 /* SettingsTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				45D0EE642C1B373C0031D0FF /* HomeBottomControlsStackView.swift in Sources */,
 				45D1E22C2C3EC9C900CC5729 /* SettingsViewController.swift in Sources */,
 				45CB50C62C25D81E003E94F6 /* Bindable.swift in Sources */,
+				45D1E22E2C3EFD7C00CC5729 /* SettingsTableViewCell.swift in Sources */,
 				453190002C249E8200CC869B /* CustomTextField.swift in Sources */,
 				45CB50AE2C25AA50003E94F6 /* RegistrationViewModel.swift in Sources */,
 				45D0EE612C1B225F0031D0FF /* UIView+Extension.swift in Sources */,

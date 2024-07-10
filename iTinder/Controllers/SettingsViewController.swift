@@ -26,6 +26,7 @@ class SettingsViewController: UITableViewController {
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         tableView.tableFooterView = UIView()
         setupNavigationItems()
+        tableView.keyboardDismissMode = .interactive
     }
     
     fileprivate func setupNavigationItems() {
@@ -38,16 +39,9 @@ class SettingsViewController: UITableViewController {
         ]
     }
     
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 300
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    lazy var header: UIView = {
         let header = UIView()
         header.clipsToBounds = true
-        header.backgroundColor = .blue
         header.addSubview(image1Button)
         
         let padding: CGFloat = 16
@@ -69,7 +63,7 @@ class SettingsViewController: UITableViewController {
         )
         stackView.heightAnchor.constraint(equalTo: header.heightAnchor, multiplier: 1, constant: -2*padding).isActive = true
         return header
-    }
+    }()
     
     @objc fileprivate func didTapSelectPhoto(button: UIButton) {
         let pickerController = CustomImagePickerController()
@@ -91,11 +85,62 @@ class SettingsViewController: UITableViewController {
     }
 }
 
+//  MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let selectedImage = info[.originalImage] as? UIImage
         let imageButton = (picker as? CustomImagePickerController)?.imageButton
         imageButton?.setImage(selectedImage?.withRenderingMode(.alwaysOriginal), for: .normal)
         dismiss(animated: true)
+    }
+}
+
+//  MARK: - UITableViewDelegate, UITableViewDatasource
+extension SettingsViewController {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        5
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? 0 : 1
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = SettingsTableViewCell(style: .default, reuseIdentifier: nil)
+        switch indexPath.section {
+        case 1: cell.textField.placeholder = "Enter Name"
+        case 2: cell.textField.placeholder = "Enter Profession"
+        case 3: cell.textField.placeholder = "Enter Age"
+        default: cell.textField.placeholder = "Enter Bio"
+        }
+        return cell
+    }
+    
+    class HeaderLabel: UILabel {
+        override func drawText(in rect: CGRect) {
+            super.drawText(in: rect.insetBy(dx: 18, dy: 0))
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            return header
+        }
+        let headerLabel = HeaderLabel()
+        switch section {
+        case 1: headerLabel.text = "Name"
+        case 2: headerLabel.text = "Profession"
+        case 3: headerLabel.text = "Age"
+        default: headerLabel.text = "Bio"
+        }
+        return headerLabel
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 300
+        }
+        return 40
     }
 }
