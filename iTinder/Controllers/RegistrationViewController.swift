@@ -211,7 +211,7 @@ final class RegistrationViewController: UIViewController {
             leading: view.leadingAnchor,
             bottom: nil,
             trailing: view.trailingAnchor,
-            padding: .init(top: 0, left: 50, bottom: 0, right: -50)
+            padding: .init(top: 0, left: 50, bottom: 0, right: 50)
         )
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }

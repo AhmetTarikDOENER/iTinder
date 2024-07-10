@@ -1,4 +1,9 @@
 import UIKit
+import Firebase
+import FirebaseFirestore
+import FirebaseAuth
+import JGProgressHUD
+import SDWebImage
 
 class CustomImagePickerController: UIImagePickerController {
     var imageButton: UIButton?
@@ -27,6 +32,7 @@ class SettingsViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         setupNavigationItems()
         tableView.keyboardDismissMode = .interactive
+        fetchCurrentUser()
     }
     
     fileprivate func setupNavigationItems() {
@@ -64,6 +70,18 @@ class SettingsViewController: UITableViewController {
         stackView.heightAnchor.constraint(equalTo: header.heightAnchor, multiplier: 1, constant: -2*padding).isActive = true
         return header
     }()
+    
+    var user: User?
+    
+    fileprivate func fetchCurrentUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).getDocument { snapshot, error in
+            guard error == nil else { return }
+            guard let dictionary = snapshot?.data() else { return }
+            self.user = User(dictionary: dictionary)
+            self.tableView.reloadData()
+        }
+    }
     
     @objc fileprivate func didTapSelectPhoto(button: UIButton) {
         let pickerController = CustomImagePickerController()
@@ -109,9 +127,17 @@ extension SettingsViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SettingsTableViewCell(style: .default, reuseIdentifier: nil)
         switch indexPath.section {
-        case 1: cell.textField.placeholder = "Enter Name"
-        case 2: cell.textField.placeholder = "Enter Profession"
-        case 3: cell.textField.placeholder = "Enter Age"
+        case 1: 
+            cell.textField.placeholder = "Enter Name"
+            cell.textField.text = user?.name
+        case 2:
+            cell.textField.placeholder = "Enter Profession"
+            cell.textField.text = user?.profession
+        case 3:
+            cell.textField.placeholder = "Enter Age"
+            if let age = user?.age {
+                cell.textField.text = String(age)
+            }
         default: cell.textField.placeholder = "Enter Bio"
         }
         return cell
