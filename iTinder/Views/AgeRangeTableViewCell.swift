@@ -18,16 +18,16 @@ class AgeRangeTableViewCell: UITableViewCell {
         return slider
     }()
     
-    let minLabel: UILabel = {
+    let minLabel: AgeRangeLabel = {
         let label = AgeRangeLabel()
-        label.text = "Min: 88"
+        label.text = "Min: 18"
         
         return label
     }()
     
-    let maxLabel: UILabel = {
+    let maxLabel: AgeRangeLabel = {
         let label = AgeRangeLabel()
-        label.text = "Max: 100"
+        label.text = "Max: 19"
         
         return label
     }()
