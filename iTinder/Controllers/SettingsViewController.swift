@@ -219,15 +219,33 @@ extension SettingsViewController {
     @objc fileprivate func didTapMinSlider(slider: UISlider) {
         let indexPath = IndexPath(row: 0, section: 5)
         let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeTableViewCell
-        ageRangeCell.minLabel.text = "Min: " + String(format: "%.0f", slider.value)
-        self.user?.minSeekingAge = Int(slider.value)
+        let maxSlider = ageRangeCell.maxSlider
+        let minValue = slider.value
+        var maxValue = maxSlider.value
+        if minValue >= maxValue {
+            maxValue = minValue
+            maxSlider.value = maxValue
+        }
+        ageRangeCell.maxLabel.text = "Max: " + String(format: "%.0f", maxValue)
+        self.user?.maxSeekingAge = Int(maxValue)
+        ageRangeCell.minLabel.text = "Min: " + String(format: "%.0f", minValue)
+        self.user?.minSeekingAge = Int(minValue)
     }
     
     @objc fileprivate func didTapMaxSlider(slider: UISlider) {
         let indexPath = IndexPath(row: 0, section: 5)
         let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeTableViewCell
-        ageRangeCell.maxLabel.text = "Max: " + String(format: "%.0f", slider.value)
-        self.user?.maxSeekingAge = Int(slider.value)
+        let minSlider = ageRangeCell.minSlider
+        let maxValue = slider.value
+        var minValue = minSlider.value
+        if maxValue < minValue {
+            minValue = maxValue
+            minSlider.value = minValue
+            ageRangeCell.minLabel.text = "Min: " + String(format: "%.0f", minValue)
+            self.user?.minSeekingAge = Int(minValue)
+        }
+        ageRangeCell.maxLabel.text = "Max: " + String(format: "%.0f", maxValue)
+        self.user?.maxSeekingAge = Int(maxValue)
     }
     
     @objc fileprivate func didChangeName(textField: UITextField) {
