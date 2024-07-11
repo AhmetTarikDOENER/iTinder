@@ -5,13 +5,17 @@ struct User: CardViewModelProduceable {
     var age: Int?
     var profession: String?
     var imageURL1: String?
+    var imageURL2: String?
+    var imageURL3: String?
     var uid: String?
     
     init(dictionary: [String: Any]) {
         self.name = dictionary["fullname"] as? String ?? ""
         self.age = dictionary["age"] as? Int
         self.profession = dictionary["profession"] as? String
-        self.imageURL1 = dictionary["imageURL"] as? String ?? ""
+        self.imageURL1 = dictionary["imageURL1"] as? String
+        self.imageURL2 = dictionary["imageURL2"] as? String
+        self.imageURL3 = dictionary["imageURL3"] as? String
         self.uid = dictionary["uid"] as? String ?? ""
     }
 
@@ -22,7 +26,12 @@ struct User: CardViewModelProduceable {
         attributedText.append(NSAttributedString(string: "  \(ageString)", attributes: [.font: UIFont.systemFont(ofSize: 24, weight: .regular)]))
         attributedText.append(NSAttributedString(string: "\n\(professionString)", attributes: [.font: UIFont.systemFont(ofSize: 20, weight: .regular)]))
         
-        return CardViewModel(imageNames: [imageURL1 ?? ""], attributedString: attributedText, textAlignment: .left)
+        var imageURLs = [String]()
+        if let url = imageURL1 { imageURLs.append(url) }
+        if let url = imageURL2 { imageURLs.append(url) }
+        if let url = imageURL3 { imageURLs.append(url) }
+        
+        return CardViewModel(imageNames: imageURLs, attributedString: attributedText, textAlignment: .left)
     }
 }
 
