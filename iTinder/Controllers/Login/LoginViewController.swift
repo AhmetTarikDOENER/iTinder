@@ -1,7 +1,13 @@
 import UIKit
 import JGProgressHUD
 
+protocol LoginControllerDelegate: AnyObject {
+    func didFinishLoggingIn()
+}
+
 class LoginViewController: UIViewController {
+    
+    weak var delegate: LoginControllerDelegate?
 
     fileprivate lazy var emailTextField: CustomTextField = {
         let textField = CustomTextField(padding: 24, height: 50)
@@ -147,7 +153,9 @@ class LoginViewController: UIViewController {
                 self.showHUDWithError(error: error)
                 return
             }
-            print("Successfully Logged in.")
+            self.dismiss(animated: true) {
+                self.delegate?.didFinishLoggingIn()
+            }
         }
     }
 }

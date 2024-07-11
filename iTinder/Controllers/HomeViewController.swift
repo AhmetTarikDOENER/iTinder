@@ -38,8 +38,9 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if Auth.auth().currentUser == nil {
-            let registrationController = RegistrationViewController()
-            let navVC = UINavigationController(rootViewController: registrationController)
+            let loginController = LoginViewController()
+            loginController.delegate = self
+            let navVC = UINavigationController(rootViewController: loginController)
             navVC.modalPresentationStyle = .fullScreen
             present(navVC, animated: true)
         }
@@ -76,6 +77,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     }
     
     fileprivate func setupLayout() {
+        navigationController?.isNavigationBarHidden = true
         view.backgroundColor = .white
         cardsDeckView.heightAnchor.constraint(equalToConstant: 580).isActive = true
         let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, bottomControls])
@@ -125,6 +127,12 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
 //  MARK: - SettingsControllerDelegate
 extension HomeViewController: SettingsControllerDelegate {
     func didTapSave() {
+        fetchCurrentUser()
+    }
+}
+
+extension HomeViewController: LoginControllerDelegate {
+    func didFinishLoggingIn() {
         fetchCurrentUser()
     }
 }

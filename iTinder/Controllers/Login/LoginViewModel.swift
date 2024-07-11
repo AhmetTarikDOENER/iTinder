@@ -21,5 +21,4 @@ final class LoginViewModel {
             completion(error)
         }
     }
-    
 }
