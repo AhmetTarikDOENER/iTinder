@@ -125,7 +125,9 @@ class SettingsViewController: UITableViewController {
             "imageURL2": user?.imageURL2 ?? "",
             "imageURL3": user?.imageURL3 ?? "",
             "age": user?.age ?? -1,
-            "profession": user?.profession ?? ""
+            "profession": user?.profession ?? "",
+            "minSeekingAge": user?.minSeekingAge ?? -1,
+            "maxSeekingAge": user?.maxSeekingAge ?? -1
         ]
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Saving Profile"
@@ -189,6 +191,8 @@ extension SettingsViewController {
             let ageRangeCell = AgeRangeTableViewCell(style: .default, reuseIdentifier: nil)
             ageRangeCell.minSlider.addTarget(self, action: #selector(didTapMinSlider), for: .valueChanged)
             ageRangeCell.maxSlider.addTarget(self, action: #selector(didTapMaxSlider), for: .valueChanged)
+            ageRangeCell.minLabel.text = "Min: \(user?.minSeekingAge ?? -1)"
+            ageRangeCell.minLabel.text = "Max: \(user?.maxSeekingAge ?? -1)"
             return ageRangeCell
         }
         let cell = SettingsTableViewCell(style: .default, reuseIdentifier: nil)
@@ -213,11 +217,17 @@ extension SettingsViewController {
     }
     
     @objc fileprivate func didTapMinSlider(slider: UISlider) {
-        print(slider.value)
+        let indexPath = IndexPath(row: 0, section: 5)
+        let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeTableViewCell
+        ageRangeCell.minLabel.text = "Min: " + String(format: "%.0f", slider.value)
+        self.user?.minSeekingAge = Int(slider.value)
     }
     
     @objc fileprivate func didTapMaxSlider(slider: UISlider) {
-        print(slider.value)
+        let indexPath = IndexPath(row: 0, section: 5)
+        let ageRangeCell = tableView.cellForRow(at: indexPath) as! AgeRangeTableViewCell
+        ageRangeCell.maxLabel.text = "Max: " + String(format: "%.0f", slider.value)
+        self.user?.maxSeekingAge = Int(slider.value)
     }
     
     @objc fileprivate func didChangeName(textField: UITextField) {
