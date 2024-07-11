@@ -5,11 +5,17 @@ import FirebaseStorage
 import JGProgressHUD
 import SDWebImage
 
+protocol SettingsControllerDelegate: AnyObject {
+    func didTapSave()
+}
+
 class CustomImagePickerController: UIImagePickerController {
     var imageButton: UIButton?
 }
 
 class SettingsViewController: UITableViewController {
+    
+    weak var delegate: SettingsControllerDelegate?
     
     lazy var image1Button = createButton(selector: #selector(didTapSelectPhoto))
     lazy var image2Button = createButton(selector: #selector(didTapSelectPhoto))
@@ -129,13 +135,15 @@ class SettingsViewController: UITableViewController {
             "minSeekingAge": user?.minSeekingAge ?? -1,
             "maxSeekingAge": user?.maxSeekingAge ?? -1
         ]
-        print(docData)
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Saving Profile"
         hud.show(in: view)
         Firestore.firestore().collection("users").document(uid).setData(docData) { error in
             guard error == nil else { return }
-            hud.dismiss(animated: true)   
+            hud.dismiss(animated: true)
+            self.dismiss(animated: true) {
+                self.delegate?.didTapSave()
+            }
         }
     }
 }

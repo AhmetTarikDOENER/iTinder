@@ -1,9 +1,26 @@
 import UIKit
 import FirebaseFirestore
+import FirebaseAuth
 import JGProgressHUD
 
-class HomeViewController: UIViewController {
-    
+protocol CurrentUserFetchable: AnyObject {
+    func fetchCurrentUser(completion: @escaping (User) -> Void)
+}
+
+extension CurrentUserFetchable {
+    func fetchCurrentUser(completion: @escaping (User) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).getDocument { snapshot, error in
+            guard error == nil else { return }
+            guard let dictionary = snapshot?.data() else { return }
+            let user = User(dictionary: dictionary)
+            completion(user)
+        }
+    }
+}
+
+class HomeViewController: UIViewController, CurrentUserFetchable {
+
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomControls = HomeBottomControlsStackView()
@@ -15,8 +32,7 @@ class HomeViewController: UIViewController {
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         bottomControls.refreshButton.addTarget(self, action: #selector(didTapRefresh), for: .touchUpInside)
         setupLayout()
-        setupFirestoreUserCards()
-        fetchUserFromFirestore()
+        fetchCurrentUser()
     }
     
     func setupFirestoreUserCards() {
@@ -27,9 +43,19 @@ class HomeViewController: UIViewController {
             cardView.fillSuperView()
         }
     }
+    
+    fileprivate var user: User?
+    
+    fileprivate func fetchCurrentUser() {
+        fetchCurrentUser { user in
+            self.user = user
+            self.fetchUserFromFirestore()
+        }
+    }
  
     @objc fileprivate func handleSettings() {
         let settingsController = SettingsViewController()
+        settingsController.delegate = self
         let navVC = UINavigationController(rootViewController: settingsController)
         navVC.modalPresentationStyle = .fullScreen
         present(navVC, animated: true)
@@ -59,11 +85,12 @@ class HomeViewController: UIViewController {
     var lastFetchedUser: User?
     
     fileprivate func fetchUserFromFirestore() {
+        guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else { return }
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Finding Users"
         hud.show(in: view)
         /// paginate 2 users at a time
-        let query = Firestore.firestore().collection("users").order(by: "uid").start(after: [lastFetchedUser?.uid ?? ""]).limit(to: 2)
+        let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
         query.getDocuments { snapshot, error in
             hud.dismiss()
             if let _ = error { return }
@@ -86,3 +113,9 @@ class HomeViewController: UIViewController {
     }
 }
 
+//  MARK: - SettingsControllerDelegate
+extension HomeViewController: SettingsControllerDelegate {
+    func didTapSave() {
+        fetchCurrentUser()
+    }
+}
