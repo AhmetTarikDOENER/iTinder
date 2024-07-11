@@ -112,6 +112,10 @@ class SettingsViewController: UITableViewController {
         dismiss(animated: true)
     }
     
+    @objc fileprivate func didTapLogout() {
+        dismiss(animated: true)
+    }
+    
     @objc fileprivate func didTapSave() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let docData: [String: Any] = [
@@ -130,10 +134,6 @@ class SettingsViewController: UITableViewController {
             guard error == nil else { return }
             hud.dismiss(animated: true)   
         }
-    }
-    
-    @objc fileprivate func didTapLogout() {
-        dismiss(animated: true)
     }
 }
 
@@ -177,7 +177,7 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
 extension SettingsViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        5
+        6
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -185,6 +185,12 @@ extension SettingsViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 5 {
+            let ageRangeCell = AgeRangeTableViewCell(style: .default, reuseIdentifier: nil)
+            ageRangeCell.minSlider.addTarget(self, action: #selector(didTapMinSlider), for: .valueChanged)
+            ageRangeCell.maxSlider.addTarget(self, action: #selector(didTapMaxSlider), for: .valueChanged)
+            return ageRangeCell
+        }
         let cell = SettingsTableViewCell(style: .default, reuseIdentifier: nil)
         switch indexPath.section {
         case 1: 
@@ -204,6 +210,14 @@ extension SettingsViewController {
         default: cell.textField.placeholder = "Enter Bio"
         }
         return cell
+    }
+    
+    @objc fileprivate func didTapMinSlider(slider: UISlider) {
+        print(slider.value)
+    }
+    
+    @objc fileprivate func didTapMaxSlider(slider: UISlider) {
+        print(slider.value)
     }
     
     @objc fileprivate func didChangeName(textField: UITextField) {
@@ -233,8 +247,10 @@ extension SettingsViewController {
         case 1: headerLabel.text = "Name"
         case 2: headerLabel.text = "Profession"
         case 3: headerLabel.text = "Age"
-        default: headerLabel.text = "Bio"
+        case 4: headerLabel.text = "Bio"
+        default: headerLabel.text = "Seeking Age Range"
         }
+        headerLabel.font = .boldSystemFont(ofSize: 16)
         return headerLabel
     }
     
