@@ -66,6 +66,19 @@ final class RegistrationViewController: UIViewController {
         return button
     }()
     
+    
+    fileprivate lazy var goToLoginButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Go to Login", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        button.addTarget(self, action: #selector(didTapGoToLogin), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    
     //  MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,6 +195,11 @@ final class RegistrationViewController: UIViewController {
             }
     }
     
+    @objc fileprivate func didTapGoToLogin() {
+        let loginController = LoginViewController()
+        navigationController?.pushViewController(loginController, animated: true)
+    }
+    
     fileprivate lazy var verticalStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [fullNameTextField, emailTextField, passwordTextField, registerButton])
         stackView.axis = .vertical
@@ -201,8 +219,9 @@ final class RegistrationViewController: UIViewController {
             overallStackView.axis = .vertical
         }
     }
-    
+
     fileprivate func setupLayout() {
+        navigationController?.isNavigationBarHidden = true
         view.addSubview(overallStackView)
         overallStackView.axis = .vertical
         overallStackView.spacing = 8
@@ -214,6 +233,13 @@ final class RegistrationViewController: UIViewController {
             padding: .init(top: 0, left: 50, bottom: 0, right: 50)
         )
         overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        view.addSubview(goToLoginButton)
+        NSLayoutConstraint.activate([
+            goToLoginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            goToLoginButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            goToLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            goToLoginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
     let gradientLayer = CAGradientLayer()

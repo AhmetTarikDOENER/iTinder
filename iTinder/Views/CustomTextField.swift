@@ -3,9 +3,11 @@ import UIKit
 class CustomTextField: UITextField {
         
     let padding: CGFloat
+    let height: CGFloat?
     
-    init(padding: CGFloat) {
+    init(padding: CGFloat, height: CGFloat? = nil) {
         self.padding = padding
+        self.height = height
         super.init(frame: .zero)
         layer.cornerRadius = 22.5
         backgroundColor = .white

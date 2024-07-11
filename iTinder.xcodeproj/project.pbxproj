@@ -20,6 +20,8 @@
 		459CBA132C1B12DB00854A31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 459CBA122C1B12DB00854A31 /* Assets.xcassets */; };
 		459CBA162C1B12DB00854A31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 459CBA142C1B12DB00854A31 /* LaunchScreen.storyboard */; };
 		45A36D2A2C401F3D006F8169 /* AgeRangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A36D292C401F3D006F8169 /* AgeRangeTableViewCell.swift */; };
+		45A36D2D2C4077FE006F8169 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A36D2C2C4077FE006F8169 /* LoginViewController.swift */; };
+		45A36D2F2C407807006F8169 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A36D2E2C407807006F8169 /* LoginViewModel.swift */; };
 		45CB50AE2C25AA50003E94F6 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CB50AD2C25AA50003E94F6 /* RegistrationViewModel.swift */; };
 		45CB50B12C25B623003E94F6 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 45CB50B02C25B623003E94F6 /* JGProgressHUD */; };
 		45CB50B42C25B6A0003E94F6 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 45CB50B32C25B6A0003E94F6 /* SDWebImage */; };
@@ -53,6 +55,8 @@
 		459CBA152C1B12DB00854A31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		459CBA172C1B12DB00854A31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45A36D292C401F3D006F8169 /* AgeRangeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeTableViewCell.swift; sourceTree = "<group>"; };
+		45A36D2C2C4077FE006F8169 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		45A36D2E2C407807006F8169 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		45CB50AD2C25AA50003E94F6 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		45CB50C22C25B919003E94F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45CB50C52C25D81E003E94F6 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
@@ -140,6 +144,15 @@
 			path = iTinder;
 			sourceTree = "<group>";
 		};
+		45A36D2B2C4077E1006F8169 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				45A36D2C2C4077FE006F8169 /* LoginViewController.swift */,
+				45A36D2E2C407807006F8169 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		45D0EE5F2C1B22260031D0FF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,12 +164,12 @@
 		45D0EE622C1B370F0031D0FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				45A36D292C401F3D006F8169 /* AgeRangeTableViewCell.swift */,
 				45D0EE672C1B56AC0031D0FF /* CardView.swift */,
 				45318FFF2C249E8200CC869B /* CustomTextField.swift */,
 				45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */,
-				45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */,
 				45D1E22D2C3EFD7C00CC5729 /* SettingsTableViewCell.swift */,
-				45A36D292C401F3D006F8169 /* AgeRangeTableViewCell.swift */,
+				45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -177,6 +190,7 @@
 		45D0EE6A2C1B627F0031D0FF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				45A36D2B2C4077E1006F8169 /* Login */,
 				459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */,
 				45318FFD2C24970000CC869B /* RegistrationViewController.swift */,
 				45D1E22B2C3EC9C900CC5729 /* SettingsViewController.swift */,
@@ -271,6 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45A36D2D2C4077FE006F8169 /* LoginViewController.swift in Sources */,
 				45318FFC2C241D9600CC869B /* Advertiser.swift in Sources */,
 				45D0EE682C1B56AC0031D0FF /* CardView.swift in Sources */,
 				45D0EE662C1B3FD50031D0FF /* TopNavigationStackView.swift in Sources */,
@@ -287,6 +302,7 @@
 				45CB50AE2C25AA50003E94F6 /* RegistrationViewModel.swift in Sources */,
 				45D0EE612C1B225F0031D0FF /* UIView+Extension.swift in Sources */,
 				459CBA0C2C1B12DA00854A31 /* SceneDelegate.swift in Sources */,
+				45A36D2F2C407807006F8169 /* LoginViewModel.swift in Sources */,
 				4593FFD62C23561B003114EE /* CardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

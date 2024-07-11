@@ -35,6 +35,16 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
         fetchCurrentUser()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if Auth.auth().currentUser == nil {
+            let registrationController = RegistrationViewController()
+            let navVC = UINavigationController(rootViewController: registrationController)
+            navVC.modalPresentationStyle = .fullScreen
+            present(navVC, animated: true)
+        }
+    }
+    
     func setupFirestoreUserCards() {
         cardViewModels.forEach { cardViewModel in
             let cardView = CardView(frame: .zero)
@@ -89,7 +99,6 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Finding Users"
         hud.show(in: view)
-        /// paginate 2 users at a time
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
         query.getDocuments { snapshot, error in
             hud.dismiss()

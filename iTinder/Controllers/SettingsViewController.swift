@@ -119,6 +119,7 @@ class SettingsViewController: UITableViewController {
     }
     
     @objc fileprivate func didTapLogout() {
+        try? Auth.auth().signOut()
         dismiss(animated: true)
     }
     
