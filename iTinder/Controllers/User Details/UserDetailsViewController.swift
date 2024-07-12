@@ -4,9 +4,9 @@ class UserDetailsViewController: UIViewController {
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .systemGreen
         scrollView.alwaysBounceVertical = true
         scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.delegate = self
         return scrollView
     }()
     
@@ -44,5 +44,20 @@ class UserDetailsViewController: UIViewController {
     
     @objc fileprivate func didTapDismiss() {
         self.dismiss(animated: true)
+    }
+}
+
+//  MARK: - UIScrollViewDelegate
+extension UserDetailsViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let deltaY = -scrollView.contentOffset.y
+        var width = view.frame.width + deltaY * 2
+        width = max(view.frame.width, width)
+        imageView.frame = CGRect(
+            x: min(0, -deltaY),
+            y: -deltaY,
+            width: width,
+            height: width
+        )
     }
 }
