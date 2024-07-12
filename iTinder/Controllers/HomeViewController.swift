@@ -20,11 +20,11 @@ extension CurrentUserFetchable {
 }
 
 class HomeViewController: UIViewController, CurrentUserFetchable {
-
+    
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
     let bottomControls = HomeBottomControlsStackView()
-
+    
     var cardViewModels = [CardViewModel]()
     
     override func viewDidLoad() {
@@ -127,8 +127,9 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
 
 //  MARK: - CardViewDelegate
 extension HomeViewController: CardViewDelegate {
-    func didTapMoreInfo() {
+    func didTapMoreInfo(cardViewModel: CardViewModel) {
         let userDetailsViewController = UserDetailsViewController()
+        userDetailsViewController.cardViewModel = cardViewModel
         userDetailsViewController.modalPresentationStyle = .fullScreen
         present(userDetailsViewController, animated: true)
     }

@@ -2,6 +2,12 @@ import UIKit
 
 class UserDetailsViewController: UIViewController {
     
+    var cardViewModel: CardViewModel! {
+        didSet {
+            infoLabel.attributedText = cardViewModel.attributedString
+        }
+    }
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
@@ -53,11 +59,6 @@ extension UserDetailsViewController: UIScrollViewDelegate {
         let deltaY = -scrollView.contentOffset.y
         var width = view.frame.width + deltaY * 2
         width = max(view.frame.width, width)
-        imageView.frame = CGRect(
-            x: min(0, -deltaY),
-            y: -deltaY,
-            width: width,
-            height: width
-        )
+        imageView.frame = CGRect(x: min(0, -deltaY), y: -deltaY, width: width, height: width)
     }
 }
