@@ -108,8 +108,8 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
             snapshot?.documents.forEach({ documentSnapshot in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
-                self.cardViewModels.append(user.toCardViewModel())
-                self.lastFetchedUser = user
+//                self.cardViewModels.append(user.toCardViewModel())
+//                self.lastFetchedUser = user
                 self.setupCardFromUser(user: user)
             })
         }
@@ -117,10 +117,20 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     
     fileprivate func setupCardFromUser(user: User) {
         let cardView = CardView(frame: .zero)
+        cardView.delegate = self
         cardView.cardViewModel = user.toCardViewModel()
         cardsDeckView.addSubview(cardView)
         cardsDeckView.sendSubviewToBack(cardView)
         cardView.fillSuperView()
+    }
+}
+
+//  MARK: - CardViewDelegate
+extension HomeViewController: CardViewDelegate {
+    func didTapMoreInfo() {
+        let userDetailsViewController = UserDetailsViewController()
+        userDetailsViewController.modalPresentationStyle = .fullScreen
+        present(userDetailsViewController, animated: true)
     }
 }
 

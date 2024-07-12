@@ -1,7 +1,13 @@
 import UIKit
 import SDWebImage
 
+protocol CardViewDelegate: AnyObject {
+    func didTapMoreInfo()
+}
+
 class CardView: UIView {
+    
+    weak var delegate: CardViewDelegate?
     
     fileprivate let imageView = UIImageView(image: UIImage(named: "lady5c"))
     fileprivate let informationLabel = UILabel()
@@ -58,13 +64,14 @@ class CardView: UIView {
     }
     
     @objc fileprivate func didTapMoreInfo() {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) else { return }
-        let rootViewController = keyWindow.rootViewController
-        let userDetailsViewController = UIViewController()
-        userDetailsViewController.view.backgroundColor = .systemOrange
-        userDetailsViewController.modalPresentationStyle = .fullScreen
-        rootViewController?.present(userDetailsViewController, animated: true)
+        delegate?.didTapMoreInfo()
+//        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//              let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) else { return }
+//        let rootViewController = keyWindow.rootViewController
+//        let userDetailsViewController = UIViewController()
+//        userDetailsViewController.view.backgroundColor = .systemOrange
+//        userDetailsViewController.modalPresentationStyle = .fullScreen
+//        rootViewController?.present(userDetailsViewController, animated: true)
     }
     
     fileprivate func setupImageIndexObserver() {

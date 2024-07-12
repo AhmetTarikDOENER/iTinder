@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4521BFCF2C4173EE003B0725 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4521BFCE2C4173EE003B0725 /* UserDetailsViewController.swift */; };
 		45318FFC2C241D9600CC869B /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFB2C241D9600CC869B /* Advertiser.swift */; };
 		45318FFE2C24970000CC869B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFD2C24970000CC869B /* RegistrationViewController.swift */; };
 		453190002C249E8200CC869B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFF2C249E8200CC869B /* CustomTextField.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4521BFCE2C4173EE003B0725 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		45318FFB2C241D9600CC869B /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		45318FFD2C24970000CC869B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		45318FFF2C249E8200CC869B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -87,6 +89,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4521BFCD2C4173D8003B0725 /* User Details */ = {
+			isa = PBXGroup;
+			children = (
+				4521BFCE2C4173EE003B0725 /* UserDetailsViewController.swift */,
+			);
+			path = "User Details";
+			sourceTree = "<group>";
+		};
 		457875382C3C6E870004C300 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,10 +200,11 @@
 		45D0EE6A2C1B627F0031D0FF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				45A36D2B2C4077E1006F8169 /* Login */,
 				459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */,
+				45A36D2B2C4077E1006F8169 /* Login */,
 				45318FFD2C24970000CC869B /* RegistrationViewController.swift */,
 				45D1E22B2C3EC9C900CC5729 /* SettingsViewController.swift */,
+				4521BFCD2C4173D8003B0725 /* User Details */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -295,6 +306,7 @@
 				45A36D2A2C401F3D006F8169 /* AgeRangeTableViewCell.swift in Sources */,
 				4593FFD22C233726003114EE /* User.swift in Sources */,
 				45D0EE642C1B373C0031D0FF /* HomeBottomControlsStackView.swift in Sources */,
+				4521BFCF2C4173EE003B0725 /* UserDetailsViewController.swift in Sources */,
 				45D1E22C2C3EC9C900CC5729 /* SettingsViewController.swift in Sources */,
 				45CB50C62C25D81E003E94F6 /* Bindable.swift in Sources */,
 				45D1E22E2C3EFD7C00CC5729 /* SettingsTableViewCell.swift in Sources */,
