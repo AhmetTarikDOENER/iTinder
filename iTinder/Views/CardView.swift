@@ -10,6 +10,15 @@ class CardView: UIView {
     fileprivate let barsStackView = UIStackView()
     fileprivate let barDeselectedColor = UIColor(white: 0, alpha: 0.1)
     
+    fileprivate lazy var moreInfoButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "info_icon")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(didTapMoreInfo), for: .touchUpInside)
+        
+        return button
+    }()
+    
     var cardViewModel: CardViewModel! {
         didSet {
             let imageName = cardViewModel.imageNames.first ?? ""
@@ -48,6 +57,16 @@ class CardView: UIView {
         gradientLayer.frame = self.frame
     }
     
+    @objc fileprivate func didTapMoreInfo() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) else { return }
+        let rootViewController = keyWindow.rootViewController
+        let userDetailsViewController = UIViewController()
+        userDetailsViewController.view.backgroundColor = .systemOrange
+        userDetailsViewController.modalPresentationStyle = .fullScreen
+        rootViewController?.present(userDetailsViewController, animated: true)
+    }
+    
     fileprivate func setupImageIndexObserver() {
         cardViewModel.imageIndexObserver = { [weak self] index, imageURL in
             if let url = URL(string: imageURL ?? "") {
@@ -68,8 +87,30 @@ class CardView: UIView {
         imageView.fillSuperView()
         setupBarsStackView()
         setupGradientLayer()
+        setupInformationLabel()
+        setupMoreInfoButton()
+    }
+    
+    
+    fileprivate func setupMoreInfoButton() {
+        addSubview(moreInfoButton)
+        NSLayoutConstraint.activate([
+            moreInfoButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            moreInfoButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            moreInfoButton.widthAnchor.constraint(equalToConstant: 44),
+            moreInfoButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
+    }
+
+    fileprivate func setupInformationLabel() {
         addSubview(informationLabel)
-        informationLabel.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: -16))
+        informationLabel.anchor(
+            top: nil,
+            leading: leadingAnchor,
+            bottom: bottomAnchor,
+            trailing: trailingAnchor,
+            padding: .init(top: 0, left: 16, bottom: 0, right: -16)
+        )
         informationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
         informationLabel.textColor = .white
         informationLabel.numberOfLines = 0
