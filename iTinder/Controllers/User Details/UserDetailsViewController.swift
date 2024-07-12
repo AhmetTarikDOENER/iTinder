@@ -5,6 +5,9 @@ class UserDetailsViewController: UIViewController {
     var cardViewModel: CardViewModel! {
         didSet {
             infoLabel.attributedText = cardViewModel.attributedString
+            guard let firstImageURL = cardViewModel.imageURLs.first,
+                  let URL = URL(string: firstImageURL) else { return }
+            imageView.sd_setImage(with: URL)
         }
     }
     
@@ -26,7 +29,6 @@ class UserDetailsViewController: UIViewController {
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Username \n30Doctor\nsome bio"
         label.numberOfLines = 0
         return label
     }()

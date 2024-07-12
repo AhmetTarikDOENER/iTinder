@@ -27,14 +27,14 @@ class CardView: UIView {
     
     var cardViewModel: CardViewModel! {
         didSet {
-            let imageName = cardViewModel.imageNames.first ?? ""
+            let imageName = cardViewModel.imageURLs.first ?? ""
             if let url = URL(string: imageName) {
                 imageView.sd_setImage(with: url)
             }
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
-            (0..<cardViewModel.imageNames.count).forEach { _ in
+            (0..<cardViewModel.imageURLs.count).forEach { _ in
                 let barView = UIView()
                 barView.backgroundColor = UIColor(white: 0, alpha: 0.1)
                 barView.layer.borderColor = UIColor.systemBackground.cgColor
