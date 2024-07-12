@@ -41,14 +41,44 @@ class UserDetailsViewController: UIViewController {
         return button
     }()
     
+    lazy var dislikeButton = createButton(image: #imageLiteral(resourceName: "dismiss_circle").withRenderingMode(.alwaysOriginal), selector: #selector(didTapDislikeButton))
+    lazy var superlikeButton = createButton(image: #imageLiteral(resourceName: "super_like_circle").withRenderingMode(.alwaysOriginal), selector: #selector(didTapDislikeButton))
+    lazy var likeButton = createButton(image: #imageLiteral(resourceName: "like_circle").withRenderingMode(.alwaysOriginal), selector: #selector(didTapDislikeButton))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupLayout()
         setupBlurEffectView()
+        setupBottomControls()
     }
     
     //  MARK: - Fileprivate
+    fileprivate func setupBottomControls() {
+        let stackView = UIStackView(arrangedSubviews: [dislikeButton, superlikeButton, likeButton])
+        stackView.distribution = .fillEqually
+        stackView.spacing = -10
+        view.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60),
+            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
+    }
+    
+    fileprivate func createButton(image: UIImage, selector: Selector) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(image.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: selector, for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFill
+        return button
+    }
+    
+    @objc fileprivate func didTapDislikeButton() {
+        
+    }
+    
     fileprivate func setupLayout() {
         view.addSubview(scrollView)
         scrollView.fillSuperView()
