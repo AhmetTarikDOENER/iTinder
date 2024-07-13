@@ -9,8 +9,7 @@ class CardView: UIView {
     
     weak var delegate: CardViewDelegate?
     
-//    fileprivate let imageView = UIImageView(image: UIImage(named: "lady5c"))
-    fileprivate let swipingPhotosController = SwipingPhotosViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    fileprivate let swipingPhotosController = SwipingPhotosViewController(isCardViewMode: true)
     fileprivate let informationLabel = UILabel()
     fileprivate let threshold: CGFloat = 100
     fileprivate let gradientLayer = CAGradientLayer()
@@ -83,7 +82,6 @@ class CardView: UIView {
         let swipingPhotosView = swipingPhotosController.view!
         addSubview(swipingPhotosView)
         swipingPhotosView.fillSuperView()
-        setupBarsStackView()
         setupGradientLayer()
         setupInformationLabel()
         setupMoreInfoButton()

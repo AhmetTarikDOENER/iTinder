@@ -14,7 +14,18 @@ class SwipingPhotosViewController: UIPageViewController {
             setupBarViews()
         }
     }
-
+    
+    fileprivate let isCardViewMode: Bool
+    
+    init(isCardViewMode: Bool = false) {
+        self.isCardViewMode = isCardViewMode
+        super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -44,7 +55,10 @@ class SwipingPhotosViewController: UIPageViewController {
                 return statusBarManager.statusBarFrame.height
             } else { return 0 }
         }
-        let paddingTop = getStatusBarHeight() + 8
+        var paddingTop: CGFloat =  8
+        if !isCardViewMode {
+            paddingTop += getStatusBarHeight()
+        }
         NSLayoutConstraint.activate([
             barsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 4),
             barsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -4),
