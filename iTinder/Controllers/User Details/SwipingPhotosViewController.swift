@@ -38,7 +38,22 @@ class SwipingPhotosViewController: UIPageViewController {
     }
     
     @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
-        
+        let currentController = viewControllers!.first!
+        if let index = controllers.firstIndex(of: currentController) {
+            barsStackView.arrangedSubviews.forEach { $0.backgroundColor = deselectedColor }
+            if gesture.location(in: self.view).x > view.frame.width * 0.5 {
+                let nextIndex = min(index + 1, controllers.count - 1)
+                let nextController = controllers[nextIndex]
+                setViewControllers([nextController], direction: .forward, animated: false)
+                barsStackView.arrangedSubviews[nextIndex].backgroundColor = .white
+                
+            } else if gesture.location(in: self.view).x < view.frame.width * 0.5 {
+                let previousIndex = max(0, index - 1)
+                let previousController = controllers[previousIndex]
+                setViewControllers([previousController], direction: .reverse, animated: false)
+                barsStackView.arrangedSubviews[previousIndex].backgroundColor = .white
+            }
+        }
     }
     
     fileprivate func disableSwipingAbility() {
