@@ -9,7 +9,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         FirebaseApp.configure()
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = HomeViewController()
+        window.rootViewController = SwipingPhotosViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         window.makeKeyAndVisible()
         self.window = window
     }

@@ -11,6 +11,7 @@
 		45318FFC2C241D9600CC869B /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFB2C241D9600CC869B /* Advertiser.swift */; };
 		45318FFE2C24970000CC869B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFD2C24970000CC869B /* RegistrationViewController.swift */; };
 		453190002C249E8200CC869B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFF2C249E8200CC869B /* CustomTextField.swift */; };
+		4561191B2C42B0A1006E7A42 /* SwipingPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561191A2C42B0A1006E7A42 /* SwipingPhotosViewController.swift */; };
 		4578753A2C3C6E870004C300 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 457875392C3C6E870004C300 /* FirebaseFirestore */; };
 		4593FFD22C233726003114EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593FFD12C233726003114EE /* User.swift */; };
 		4593FFD62C23561B003114EE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593FFD52C23561B003114EE /* CardViewModel.swift */; };
@@ -46,6 +47,7 @@
 		45318FFB2C241D9600CC869B /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		45318FFD2C24970000CC869B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		45318FFF2C249E8200CC869B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		4561191A2C42B0A1006E7A42 /* SwipingPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosViewController.swift; sourceTree = "<group>"; };
 		4593FFD12C233726003114EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4593FFD52C23561B003114EE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		459CBA062C1B12DA00854A31 /* iTinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				4521BFCE2C4173EE003B0725 /* UserDetailsViewController.swift */,
+				4561191A2C42B0A1006E7A42 /* SwipingPhotosViewController.swift */,
 			);
 			path = "User Details";
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				4593FFD22C233726003114EE /* User.swift in Sources */,
 				45D0EE642C1B373C0031D0FF /* HomeBottomControlsStackView.swift in Sources */,
 				4521BFCF2C4173EE003B0725 /* UserDetailsViewController.swift in Sources */,
+				4561191B2C42B0A1006E7A42 /* SwipingPhotosViewController.swift in Sources */,
 				45D1E22C2C3EC9C900CC5729 /* SettingsViewController.swift in Sources */,
 				45CB50C62C25D81E003E94F6 /* Bindable.swift in Sources */,
 				45D1E22E2C3EFD7C00CC5729 /* SettingsTableViewCell.swift in Sources */,
