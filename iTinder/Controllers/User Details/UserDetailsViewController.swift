@@ -5,9 +5,9 @@ class UserDetailsViewController: UIViewController {
     var cardViewModel: CardViewModel! {
         didSet {
             infoLabel.attributedText = cardViewModel.attributedString
-            guard let firstImageURL = cardViewModel.imageURLs.first,
-                  let URL = URL(string: firstImageURL) else { return }
-            imageView.sd_setImage(with: URL)
+//            guard let firstImageURL = cardViewModel.imageURLs.first,
+//                  let URL = URL(string: firstImageURL) else { return }
+//            imageView.sd_setImage(with: URL)
         }
     }
     
@@ -19,12 +19,14 @@ class UserDetailsViewController: UIViewController {
         return scrollView
     }()
     
-    private lazy var imageView: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "kelly1"))
-        imageView.contentMode = .scaleToFill
-        imageView.clipsToBounds = true
-        return imageView
-    }()
+//    private lazy var imageView: UIImageView = {
+//        let imageView = UIImageView(image: #imageLiteral(resourceName: "kelly1"))
+//        imageView.contentMode = .scaleToFill
+//        imageView.clipsToBounds = true
+//        return imageView
+//    }()
+    
+    private lazy var swipingPhotoController = SwipingPhotosViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
     private lazy var infoLabel: UILabel = {
         let label = UILabel()
@@ -82,8 +84,8 @@ class UserDetailsViewController: UIViewController {
     fileprivate func setupLayout() {
         view.addSubview(scrollView)
         scrollView.fillSuperView()
+        let imageView = swipingPhotoController.view!
         scrollView.addSubview(imageView)
-        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width)
         scrollView.addSubview(infoLabel)
         let padding: CGFloat = 16
         NSLayoutConstraint.activate([
@@ -100,6 +102,12 @@ class UserDetailsViewController: UIViewController {
         ])
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let imageView = swipingPhotoController.view!
+        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width)
+    }
+
     fileprivate func setupBlurEffectView() {
         let blurEffect = UIBlurEffect(style: .regular)
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
@@ -124,6 +132,7 @@ extension UserDetailsViewController: UIScrollViewDelegate {
         let deltaY = -scrollView.contentOffset.y
         var width = view.frame.width + deltaY * 2
         width = max(view.frame.width, width)
+        let imageView = swipingPhotoController.view!
         imageView.frame = CGRect(x: min(0, -deltaY), y: -deltaY, width: width, height: width)
     }
 }
