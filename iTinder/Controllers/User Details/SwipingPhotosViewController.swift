@@ -2,18 +2,22 @@ import UIKit
 
 class SwipingPhotosViewController: UIPageViewController {
     
-    let controllers = [
-        PhotoViewController(image: #imageLiteral(resourceName: "lady4c")),
-        PhotoViewController(image: #imageLiteral(resourceName: "jane3")),
-        PhotoViewController(image: #imageLiteral(resourceName: "kelly2")),
-        PhotoViewController(image: #imageLiteral(resourceName: "jane2"))
-    ]
+    var controllers = [UIViewController]()
     
+    var cardViewModel: CardViewModel! {
+        didSet {
+            controllers = cardViewModel.imageURLs.map { imageURL -> UIViewController in
+                let photoViewController = PhotoViewController(imageURL: imageURL)
+                return photoViewController
+            }
+            setViewControllers([controllers.first!], direction:.forward, animated: false)
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         dataSource = self
-        setViewControllers([controllers.first!], direction:.forward, animated: false)
     }
 }
 
@@ -36,8 +40,10 @@ class PhotoViewController: UIViewController {
     
     let imageView = UIImageView(image: #imageLiteral(resourceName: "lady4c"))
     
-    init(image: UIImage) {
-        imageView.image = image
+    init(imageURL: String) {
+        if let url = URL(string: imageURL) {
+            imageView.sd_setImage(with: url)
+        }
         super.init(nibName: nil, bundle: nil)
     }
     

@@ -5,9 +5,7 @@ class UserDetailsViewController: UIViewController {
     var cardViewModel: CardViewModel! {
         didSet {
             infoLabel.attributedText = cardViewModel.attributedString
-//            guard let firstImageURL = cardViewModel.imageURLs.first,
-//                  let URL = URL(string: firstImageURL) else { return }
-//            imageView.sd_setImage(with: URL)
+            swipingPhotoController.cardViewModel = cardViewModel
         }
     }
     
@@ -18,14 +16,7 @@ class UserDetailsViewController: UIViewController {
         scrollView.delegate = self
         return scrollView
     }()
-    
-//    private lazy var imageView: UIImageView = {
-//        let imageView = UIImageView(image: #imageLiteral(resourceName: "kelly1"))
-//        imageView.contentMode = .scaleToFill
-//        imageView.clipsToBounds = true
-//        return imageView
-//    }()
-    
+
     private lazy var swipingPhotoController = SwipingPhotosViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     
     private lazy var infoLabel: UILabel = {
@@ -84,28 +75,30 @@ class UserDetailsViewController: UIViewController {
     fileprivate func setupLayout() {
         view.addSubview(scrollView)
         scrollView.fillSuperView()
-        let imageView = swipingPhotoController.view!
-        scrollView.addSubview(imageView)
+        let swipingView = swipingPhotoController.view!
+        scrollView.addSubview(swipingView)
         scrollView.addSubview(infoLabel)
         let padding: CGFloat = 16
         NSLayoutConstraint.activate([
-            infoLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: padding),
+            infoLabel.topAnchor.constraint(equalTo: swipingView.bottomAnchor, constant: padding),
             infoLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: padding),
             infoLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -padding),
         ])
         scrollView.addSubview(dismissButton)
         NSLayoutConstraint.activate([
             dismissButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            dismissButton.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
+            dismissButton.bottomAnchor.constraint(equalTo: swipingView.bottomAnchor, constant: 25),
             dismissButton.widthAnchor.constraint(equalToConstant: 50),
             dismissButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     
+    fileprivate let extraSwipingHeight: CGFloat = 80
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        let imageView = swipingPhotoController.view!
-        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width)
+        let swipingView = swipingPhotoController.view!
+        swipingView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width + extraSwipingHeight)
     }
 
     fileprivate func setupBlurEffectView() {
@@ -133,6 +126,6 @@ extension UserDetailsViewController: UIScrollViewDelegate {
         var width = view.frame.width + deltaY * 2
         width = max(view.frame.width, width)
         let imageView = swipingPhotoController.view!
-        imageView.frame = CGRect(x: min(0, -deltaY), y: -deltaY, width: width, height: width)
+        imageView.frame = CGRect(x: min(0, -deltaY), y: -deltaY, width: width, height: width + extraSwipingHeight)
     }
 }
