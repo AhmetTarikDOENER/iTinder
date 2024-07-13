@@ -10,6 +10,7 @@ class SwipingPhotosViewController: UIPageViewController {
                 let photoViewController = PhotoViewController(imageURL: imageURL ?? "")
                 return photoViewController
             }
+            setViewControllers([controllers.first!], direction: .forward, animated: false)
             setupBarViews()
         }
     }
@@ -83,8 +84,8 @@ class PhotoViewController: UIViewController {
     
     let imageView = UIImageView(image: #imageLiteral(resourceName: "lady4c"))
     
-    init(imageURL: String) {
-        if let url = URL(string: imageURL) {
+    init(imageURL: String?) {
+        if let url = URL(string: imageURL ?? "") {
             imageView.sd_setImage(with: url)
         }
         super.init(nibName: nil, bundle: nil)

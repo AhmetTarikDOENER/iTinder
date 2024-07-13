@@ -197,7 +197,7 @@ extension SettingsViewController {
     }
     
     static let defaultMinSeekingAge = 18
-    static let defaultMaxSeekingAge = 18
+    static let defaultMaxSeekingAge = 60
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 5 {
