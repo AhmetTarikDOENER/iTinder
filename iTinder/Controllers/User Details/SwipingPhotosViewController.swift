@@ -31,6 +31,22 @@ class SwipingPhotosViewController: UIPageViewController {
         view.backgroundColor = .white
         dataSource = self
         delegate = self
+        if isCardViewMode {
+            disableSwipingAbility()
+        }
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
+    }
+    
+    @objc fileprivate func handleTap(gesture: UITapGestureRecognizer) {
+        
+    }
+    
+    fileprivate func disableSwipingAbility() {
+        view.subviews.forEach { view in
+            if let view = view as? UIScrollView {
+                view.isScrollEnabled = false
+            }
+        }
     }
     
     fileprivate lazy var barsStackView = UIStackView(arrangedSubviews: [])
