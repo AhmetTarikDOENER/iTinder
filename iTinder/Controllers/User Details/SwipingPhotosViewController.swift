@@ -11,6 +11,7 @@ class SwipingPhotosViewController: UIPageViewController {
                 return photoViewController
             }
             setViewControllers([controllers.first!], direction:.forward, animated: false)
+            setupBarViews()
         }
     }
 
@@ -18,6 +19,38 @@ class SwipingPhotosViewController: UIPageViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         dataSource = self
+        delegate = self
+    }
+    
+    fileprivate lazy var barsStackView = UIStackView(arrangedSubviews: [])
+    fileprivate let deselectedColor = UIColor(white: 0, alpha: 0.1)
+    
+    fileprivate func setupBarViews() {
+        cardViewModel.imageURLs.forEach { _ in
+            let barView = UIView()
+            barView.backgroundColor = deselectedColor
+            barView.layer.cornerRadius = 2
+            barsStackView.addArrangedSubview(barView)
+        }
+        barsStackView.arrangedSubviews.first?.backgroundColor = .white
+        view.addSubview(barsStackView)
+        barsStackView.translatesAutoresizingMaskIntoConstraints = false
+        barsStackView.distribution = .fillEqually
+        barsStackView.spacing = 5
+        barsStackView.axis = .horizontal
+        func getStatusBarHeight() -> CGFloat {
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let statusBarManager = windowScene.statusBarManager {
+                return statusBarManager.statusBarFrame.height
+            } else { return 0 }
+        }
+        let paddingTop = getStatusBarHeight() + 8
+        NSLayoutConstraint.activate([
+            barsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 4),
+            barsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -4),
+            barsStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: paddingTop),
+            barsStackView.heightAnchor.constraint(equalToConstant: 4)
+        ])
     }
 }
 
@@ -35,6 +68,17 @@ extension SwipingPhotosViewController: UIPageViewControllerDataSource {
         return controllers[index - 1]
     }
 }
+//  MARK: - UIPageViewControllerDelegate
+extension SwipingPhotosViewController: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        let currentPhotoViewController = viewControllers?.first
+        if let index = controllers.firstIndex(where: { $0 == currentPhotoViewController }) {
+            barsStackView.arrangedSubviews.forEach { $0.backgroundColor = deselectedColor }
+            barsStackView.arrangedSubviews[index].backgroundColor = .white
+        }
+    }
+}
+
 //  MARK: - PhotoViewController
 class PhotoViewController: UIViewController {
     
