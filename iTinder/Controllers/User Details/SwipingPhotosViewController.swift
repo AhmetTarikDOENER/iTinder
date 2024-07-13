@@ -7,10 +7,9 @@ class SwipingPhotosViewController: UIPageViewController {
     var cardViewModel: CardViewModel! {
         didSet {
             controllers = cardViewModel.imageURLs.map { imageURL -> UIViewController in
-                let photoViewController = PhotoViewController(imageURL: imageURL)
+                let photoViewController = PhotoViewController(imageURL: imageURL ?? "")
                 return photoViewController
             }
-            setViewControllers([controllers.first!], direction:.forward, animated: false)
             setupBarViews()
         }
     }

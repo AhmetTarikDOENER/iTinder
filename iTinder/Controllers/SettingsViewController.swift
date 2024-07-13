@@ -133,8 +133,8 @@ class SettingsViewController: UITableViewController {
             "imageURL3": user?.imageURL3 ?? "",
             "age": user?.age ?? -1,
             "profession": user?.profession ?? "",
-            "minSeekingAge": user?.minSeekingAge ?? -1,
-            "maxSeekingAge": user?.maxSeekingAge ?? -1
+            "minSeekingAge": user?.minSeekingAge ?? 18,
+            "maxSeekingAge": user?.maxSeekingAge ?? 50
         ]
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Saving Profile"
@@ -196,15 +196,20 @@ extension SettingsViewController {
         return section == 0 ? 0 : 1
     }
     
+    static let defaultMinSeekingAge = 18
+    static let defaultMaxSeekingAge = 18
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 5 {
             let ageRangeCell = AgeRangeTableViewCell(style: .default, reuseIdentifier: nil)
             ageRangeCell.minSlider.addTarget(self, action: #selector(didTapMinSlider), for: .valueChanged)
             ageRangeCell.maxSlider.addTarget(self, action: #selector(didTapMaxSlider), for: .valueChanged)
-            ageRangeCell.minLabel.text = "Min: \(user?.minSeekingAge ?? -1)"
-            ageRangeCell.maxLabel.text = "Max: \(user?.maxSeekingAge ?? -1)"
-            ageRangeCell.minSlider.value = Float(user?.minSeekingAge ?? -1)
-            ageRangeCell.maxSlider.value = Float(user?.maxSeekingAge ?? -1)
+            let minAge = user?.minSeekingAge ?? SettingsViewController.defaultMinSeekingAge
+            let maxAge = user?.maxSeekingAge ?? SettingsViewController.defaultMaxSeekingAge
+            ageRangeCell.minLabel.text = "Min: \(minAge)"
+            ageRangeCell.maxLabel.text = "Max: \(maxAge)"
+            ageRangeCell.minSlider.value = Float(minAge)
+            ageRangeCell.maxSlider.value = Float(maxAge)
             return ageRangeCell
         }
         let cell = SettingsTableViewCell(style: .default, reuseIdentifier: nil)

@@ -97,7 +97,8 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     var lastFetchedUser: User?
     
     fileprivate func fetchUserFromFirestore() {
-        guard let minAge = user?.minSeekingAge, let maxAge = user?.maxSeekingAge else { return }
+        let minAge = user?.minSeekingAge ?? SettingsViewController.defaultMinSeekingAge
+        let maxAge = user?.maxSeekingAge ?? SettingsViewController.defaultMaxSeekingAge
         let hud = JGProgressHUD(style: .dark)
         hud.textLabel.text = "Finding Users"
         hud.show(in: view)

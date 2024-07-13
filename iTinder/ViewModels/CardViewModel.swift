@@ -5,7 +5,7 @@ protocol CardViewModelProduceable {
 }
 
 class CardViewModel {
-    let imageURLs: [String]
+    let imageURLs: [String?]
     let attributedString: NSAttributedString
     let textAlignment: NSTextAlignment
     
