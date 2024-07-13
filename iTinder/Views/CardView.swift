@@ -9,7 +9,8 @@ class CardView: UIView {
     
     weak var delegate: CardViewDelegate?
     
-    fileprivate let imageView = UIImageView(image: UIImage(named: "lady5c"))
+//    fileprivate let imageView = UIImageView(image: UIImage(named: "lady5c"))
+    fileprivate let swipingPhotosController = SwipingPhotosViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     fileprivate let informationLabel = UILabel()
     fileprivate let threshold: CGFloat = 100
     fileprivate let gradientLayer = CAGradientLayer()
@@ -27,10 +28,7 @@ class CardView: UIView {
     
     var cardViewModel: CardViewModel! {
         didSet {
-            let imageName = cardViewModel.imageURLs.first ?? ""
-            if let url = URL(string: imageName ?? "") {
-                imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "person"), options: .continueInBackground)
-            }
+            swipingPhotosController.cardViewModel = cardViewModel
             informationLabel.attributedText = cardViewModel.attributedString
             informationLabel.textAlignment = cardViewModel.textAlignment
             
@@ -69,9 +67,9 @@ class CardView: UIView {
     
     fileprivate func setupImageIndexObserver() {
         cardViewModel.imageIndexObserver = { [weak self] index, imageURL in
-            if let url = URL(string: imageURL ?? "") {
-                self?.imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "person"), options: .continueInBackground)
-            }
+//            if let url = URL(string: imageURL ?? "") {
+//                self?.imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "person"), options: .continueInBackground)
+//            }
             self?.barsStackView.arrangedSubviews.forEach { view in
                 view.backgroundColor = self?.barDeselectedColor
             }
@@ -82,9 +80,9 @@ class CardView: UIView {
     fileprivate func setupLayout() {
         clipsToBounds = true
         layer.cornerRadius = 10
-        addSubview(imageView)
-        imageView.contentMode = .scaleAspectFill
-        imageView.fillSuperView()
+        let swipingPhotosView = swipingPhotosController.view!
+        addSubview(swipingPhotosView)
+        swipingPhotosView.fillSuperView()
         setupBarsStackView()
         setupGradientLayer()
         setupInformationLabel()
