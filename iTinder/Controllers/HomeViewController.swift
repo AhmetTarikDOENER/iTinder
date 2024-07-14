@@ -108,11 +108,14 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
         query.getDocuments { snapshot, error in
             hud.dismiss()
             if let _ = error { return }
+            var previousCardView: CardView?
             snapshot?.documents.forEach({ documentSnapshot in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
                 if user.uid != Auth.auth().currentUser?.uid {
                     let cardView = self.setupCardFromUser(user: user)
+                    previousCardView?.nextCardView = cardView
+                    previousCardView = cardView
                     if self.topCardView == nil {
                         self.topCardView = cardView
                     }
@@ -124,8 +127,8 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     var topCardView: CardView?
     
     @objc fileprivate func didTapLike() {
-        print("Remove")
         topCardView?.removeFromSuperview()
+        topCardView = topCardView?.nextCardView
     }
     
     fileprivate func setupCardFromUser(user: User) -> CardView {
