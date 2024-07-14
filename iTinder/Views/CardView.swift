@@ -9,6 +9,8 @@ class CardView: UIView {
     
     weak var delegate: CardViewDelegate?
     
+    var nextCardView: CardView?
+    
     fileprivate let swipingPhotosController = SwipingPhotosViewController(isCardViewMode: true)
     fileprivate let informationLabel = UILabel()
     fileprivate let threshold: CGFloat = 100
@@ -66,9 +68,6 @@ class CardView: UIView {
     
     fileprivate func setupImageIndexObserver() {
         cardViewModel.imageIndexObserver = { [weak self] index, imageURL in
-//            if let url = URL(string: imageURL ?? "") {
-//                self?.imageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "person"), options: .continueInBackground)
-//            }
             self?.barsStackView.arrangedSubviews.forEach { view in
                 view.backgroundColor = self?.barDeselectedColor
             }

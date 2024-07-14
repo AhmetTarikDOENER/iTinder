@@ -31,6 +31,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
         super.viewDidLoad()
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         bottomControls.refreshButton.addTarget(self, action: #selector(didTapRefresh), for: .touchUpInside)
+        bottomControls.likeButton.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
         setupLayout()
         fetchCurrentUser()
     }
@@ -55,6 +56,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
         }
     }
     
+    //  MARK: - Fileprivate
     fileprivate var user: User?
     
     fileprivate func fetchCurrentUser() {
@@ -110,19 +112,30 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
                 if user.uid != Auth.auth().currentUser?.uid {
-                    self.setupCardFromUser(user: user)
+                    let cardView = self.setupCardFromUser(user: user)
+                    if self.topCardView == nil {
+                        self.topCardView = cardView
+                    }
                 }
             })
         }
     }
     
-    fileprivate func setupCardFromUser(user: User) {
+    var topCardView: CardView?
+    
+    @objc fileprivate func didTapLike() {
+        print("Remove")
+        topCardView?.removeFromSuperview()
+    }
+    
+    fileprivate func setupCardFromUser(user: User) -> CardView {
         let cardView = CardView(frame: .zero)
         cardView.delegate = self
         cardView.cardViewModel = user.toCardViewModel()
         cardsDeckView.addSubview(cardView)
         cardsDeckView.sendSubviewToBack(cardView)
         cardView.fillSuperView()
+        return cardView
     }
 }
 
