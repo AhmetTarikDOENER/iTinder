@@ -3,6 +3,7 @@ import FirebaseFirestore
 import FirebaseAuth
 import JGProgressHUD
 
+//  MARK: - CurrentUserFetchable
 protocol CurrentUserFetchable: AnyObject {
     func fetchCurrentUser(completion: @escaping (User) -> Void)
 }
@@ -106,6 +107,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
         hud.textLabel.text = "Finding Users"
         hud.show(in: view)
         let query = Firestore.firestore().collection("users").whereField("age", isGreaterThanOrEqualTo: minAge).whereField("age", isLessThanOrEqualTo: maxAge)
+        topCardView = nil
         query.getDocuments { snapshot, error in
             hud.dismiss()
             if let _ = error { return }
@@ -150,7 +152,27 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     }
     
     @objc fileprivate func didTapLike() {
+        saveSwipeToFirestore()
         performSwipeAnimation(translation: 700, angle: 15)
+    }
+    
+    fileprivate func saveSwipeToFirestore() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let cardUID = topCardView?.cardViewModel.uid else { return }
+        let docData = [cardUID: 1]
+        Firestore.firestore().collection("swipes").document(uid).getDocument { snapshot, error in
+            guard error == nil else { return }
+            
+            if snapshot?.exists == true {
+                Firestore.firestore().collection("swipes").document(uid).updateData(docData) { error in
+                    guard error == nil else { return }
+                }
+            } else {
+                Firestore.firestore().collection("swipes").document(uid).setData(docData) { error in
+                    guard error == nil else { return }
+                }
+            }
+        }
     }
     
     @objc fileprivate func didTapDislike() {
