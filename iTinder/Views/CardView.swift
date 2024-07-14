@@ -136,25 +136,18 @@ class CardView: UIView {
     fileprivate func handleEndedState(_ gesture: UIPanGestureRecognizer) {
         let translationDirection: CGFloat = gesture.translation(in: nil).x > 0 ? 1 : -1
         let shouldDismissCard = abs(gesture.translation(in: nil).x) > threshold
-        UIView.animate(
-            withDuration: 1,
-            delay: 0,
-            usingSpringWithDamping: 0.6,
-            initialSpringVelocity: 0.1,
-            options: .curveEaseInOut) {
-                if shouldDismissCard {
-                    self.frame = CGRect(x: 600 * translationDirection, y: 0, width: self.frame.width, height: self.frame.height)
-                    self.removeFromSuperview()
-                } else {
-                    self.transform = .identity
-                }
-            } completion: {  _ in
-                self.transform = .identity
-                if shouldDismissCard {
-                    self.removeFromSuperview()
-                    self.delegate?.didRemoveCard(cardView: self)
-                }
+        if shouldDismissCard {
+            guard let homeViewController = self.delegate as? HomeViewController else { return }
+            if translationDirection == 1 {
+                homeViewController.didTapLike()
+            } else {
+                homeViewController.didTapDislike()
             }
+        } else {
+            UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut) {
+                self.transform = .identity
+            }
+        }
     }
     
     @objc private func handleTap(gesture: UITapGestureRecognizer) {

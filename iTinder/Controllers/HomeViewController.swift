@@ -151,7 +151,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
         CATransaction.commit()
     }
     
-    @objc fileprivate func didTapLike() {
+    @objc func didTapLike() {
         saveSwipeToFirestore(didLike: 1)
         performSwipeAnimation(translation: 700, angle: 15)
     }
@@ -166,16 +166,33 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
             if snapshot?.exists == true {
                 Firestore.firestore().collection("swipes").document(uid).updateData(docData) { error in
                     guard error == nil else { return }
+                    self.checkIfMatchExist(cardUID: cardUID)
                 }
             } else {
                 Firestore.firestore().collection("swipes").document(uid).setData(docData) { error in
                     guard error == nil else { return }
+                    self.checkIfMatchExist(cardUID: cardUID)
                 }
             }
         }
     }
     
-    @objc fileprivate func didTapDislike() {
+    fileprivate func checkIfMatchExist(cardUID: String) {
+        Firestore.firestore().collection("swipes").document(cardUID).getDocument { snapshot, error in
+            guard error == nil else { return }
+            guard let data = snapshot?.data() else { return }
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+            let hasMatched = data[uid] as? Int == 1
+            if hasMatched {
+                let hud = JGProgressHUD(style: .dark)
+                hud.textLabel.text = "Found a Match"
+                hud.show(in: self.view)
+                hud.dismiss(afterDelay: 1.5)
+            }
+        }
+    }
+    
+    @objc func didTapDislike() {
         saveSwipeToFirestore(didLike: 0)
         performSwipeAnimation(translation: -700, angle: -15)
     }
