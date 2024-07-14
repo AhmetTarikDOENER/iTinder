@@ -108,6 +108,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
         query.getDocuments { snapshot, error in
             hud.dismiss()
             if let _ = error { return }
+            /// Linked List
             var previousCardView: CardView?
             snapshot?.documents.forEach({ documentSnapshot in
                 let userDictionary = documentSnapshot.data()
@@ -127,8 +128,19 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     var topCardView: CardView?
     
     @objc fileprivate func didTapLike() {
-        topCardView?.removeFromSuperview()
-        topCardView = topCardView?.nextCardView
+        UIView.animate(
+            withDuration: 1.2,
+            delay: 0,
+            usingSpringWithDamping: 0.6,
+            initialSpringVelocity: 0.1,
+            options: .curveEaseOut) {
+                self.topCardView?.frame = CGRect(x: 600, y: 0, width: self.topCardView!.frame.width, height: self.topCardView!.frame.height)
+                let angle = 15 * CGFloat.pi / 180
+                self.topCardView?.transform = CGAffineTransform(rotationAngle: angle)
+            } completion: { _ in
+                self.topCardView?.removeFromSuperview()
+                self.topCardView = self.topCardView?.nextCardView
+            }
     }
     
     fileprivate func setupCardFromUser(user: User) -> CardView {
