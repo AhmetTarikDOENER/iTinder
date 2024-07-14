@@ -64,6 +64,18 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     fileprivate func fetchCurrentUser() {
         fetchCurrentUser { user in
             self.user = user
+            self.fetchSwipes()
+        }
+    }
+    
+    var swipes = [String: Int]()
+    
+    fileprivate func fetchSwipes() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("swipes").document(uid).getDocument { snapshot, error in
+            guard error == nil else { return }
+            guard let data = snapshot?.data() as? [String: Int] else { return }
+            self.swipes = data
             self.fetchUserFromFirestore()
         }
     }
@@ -116,7 +128,9 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
             snapshot?.documents.forEach({ documentSnapshot in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
-                if user.uid != Auth.auth().currentUser?.uid {
+                let isNotCurrentUser = user.uid != Auth.auth().currentUser?.uid
+                let hasNotSwipedBefore = self.swipes[user.uid!] == nil
+                if isNotCurrentUser && hasNotSwipedBefore {
                     let cardView = self.setupCardFromUser(user: user)
                     previousCardView?.nextCardView = cardView
                     previousCardView = cardView
