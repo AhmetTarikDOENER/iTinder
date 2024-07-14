@@ -128,19 +128,17 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     var topCardView: CardView?
     
     @objc fileprivate func didTapLike() {
-        UIView.animate(
-            withDuration: 1.2,
-            delay: 0,
-            usingSpringWithDamping: 0.6,
-            initialSpringVelocity: 0.1,
-            options: .curveEaseOut) {
-                self.topCardView?.frame = CGRect(x: 600, y: 0, width: self.topCardView!.frame.width, height: self.topCardView!.frame.height)
-                let angle = 15 * CGFloat.pi / 180
-                self.topCardView?.transform = CGAffineTransform(rotationAngle: angle)
-            } completion: { _ in
-                self.topCardView?.removeFromSuperview()
-                self.topCardView = self.topCardView?.nextCardView
-            }
+        let translationAnimation = CABasicAnimation(keyPath: "position.x")
+        translationAnimation.toValue = 700
+        translationAnimation.duration = 0.49
+        translationAnimation.fillMode = .forwards
+        translationAnimation.isRemovedOnCompletion = false
+        CATransaction.setCompletionBlock {
+            self.topCardView?.removeFromSuperview()
+            self.topCardView = self.topCardView?.nextCardView
+        }
+        topCardView?.layer.add(translationAnimation, forKey: "translation")
+        CATransaction.commit()
     }
     
     fileprivate func setupCardFromUser(user: User) -> CardView {
