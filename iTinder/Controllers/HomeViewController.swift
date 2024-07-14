@@ -162,6 +162,11 @@ extension HomeViewController: CardViewDelegate {
         userDetailsViewController.modalPresentationStyle = .fullScreen
         present(userDetailsViewController, animated: true)
     }
+    
+    func didRemoveCard(cardView: CardView) {
+        self.topCardView?.removeFromSuperview()
+        self.topCardView = self.topCardView?.nextCardView
+    }
 }
 
 //  MARK: - SettingsControllerDelegate
