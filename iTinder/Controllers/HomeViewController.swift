@@ -152,14 +152,14 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     }
     
     @objc fileprivate func didTapLike() {
-        saveSwipeToFirestore()
+        saveSwipeToFirestore(didLike: 1)
         performSwipeAnimation(translation: 700, angle: 15)
     }
     
-    fileprivate func saveSwipeToFirestore() {
+    fileprivate func saveSwipeToFirestore(didLike: Int) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let cardUID = topCardView?.cardViewModel.uid else { return }
-        let docData = [cardUID: 1]
+        let docData = [cardUID: didLike]
         Firestore.firestore().collection("swipes").document(uid).getDocument { snapshot, error in
             guard error == nil else { return }
             
@@ -176,6 +176,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     }
     
     @objc fileprivate func didTapDislike() {
+        saveSwipeToFirestore(didLike: 0)
         performSwipeAnimation(translation: -700, angle: -15)
     }
     
