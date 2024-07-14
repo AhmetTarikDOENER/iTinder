@@ -32,6 +32,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
         topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
         bottomControls.refreshButton.addTarget(self, action: #selector(didTapRefresh), for: .touchUpInside)
         bottomControls.likeButton.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
+        bottomControls.dislikeButton.addTarget(self, action: #selector(didTapDislike), for: .touchUpInside)
         setupLayout()
         fetchCurrentUser()
     }
@@ -127,17 +128,17 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     
     var topCardView: CardView?
     
-    @objc fileprivate func didTapLike() {
+    fileprivate func performSwipeAnimation(translation: CGFloat, angle: CGFloat) {
         let duration = 0.49
         let translationAnimation = CABasicAnimation(keyPath: "position.x")
-        translationAnimation.toValue = 700
+        translationAnimation.toValue = translation
         translationAnimation.duration = duration
         translationAnimation.fillMode = .forwards
         translationAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         translationAnimation.isRemovedOnCompletion = false
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotationAnimation.duration = duration
-        rotationAnimation.toValue = 15 * CGFloat.pi / 180
+        rotationAnimation.toValue = angle * CGFloat.pi / 180
         let cardView = topCardView
         topCardView = cardView?.nextCardView
         CATransaction.setCompletionBlock {
@@ -146,6 +147,14 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
         cardView?.layer.add(translationAnimation, forKey: "translation")
         cardView?.layer.add(rotationAnimation, forKey: "rotation")
         CATransaction.commit()
+    }
+    
+    @objc fileprivate func didTapLike() {
+        performSwipeAnimation(translation: 700, angle: 15)
+    }
+    
+    @objc fileprivate func didTapDislike() {
+        performSwipeAnimation(translation: -700, angle: -15)
     }
     
     fileprivate func setupCardFromUser(user: User) -> CardView {
