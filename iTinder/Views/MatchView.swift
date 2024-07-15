@@ -42,6 +42,15 @@ class MatchView: UIView {
         return imageView
     }()
     
+    fileprivate lazy var sendMessageButton: SendMessageButton = {
+        let button = SendMessageButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("SEND MESSAGE", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .yellow
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupBlurredView()
@@ -76,6 +85,7 @@ class MatchView: UIView {
         addSubview(descriptionLabel)
         addSubview(currentUserImageView)
         addSubview(cardUserImageView)
+        addSubview(sendMessageButton)
         let size: CGFloat = 140
         NSLayoutConstraint.activate([
             itsAMatchImageView.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -24),
@@ -93,7 +103,12 @@ class MatchView: UIView {
             cardUserImageView.widthAnchor.constraint(equalToConstant: size),
             cardUserImageView.heightAnchor.constraint(equalToConstant: size),
             cardUserImageView.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 16),
-            cardUserImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
+            cardUserImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            sendMessageButton.topAnchor.constraint(equalTo: currentUserImageView.bottomAnchor, constant: 32),
+            sendMessageButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 48),
+            sendMessageButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -48),
+            sendMessageButton.heightAnchor.constraint(equalToConstant: 50),
+            
         ])
     }
     
