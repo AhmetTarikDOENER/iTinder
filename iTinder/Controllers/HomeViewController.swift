@@ -175,9 +175,6 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     fileprivate func saveSwipeToFirestore(didLike: Int) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let cardUID = topCardView?.cardViewModel.uid else { return }
-        if didLike == 1 {
-            checkIfMatchExist(cardUID: cardUID)
-        }
         let docData = [cardUID: didLike]
         Firestore.firestore().collection("swipes").document(uid).getDocument { snapshot, error in
             guard error == nil else { return }
@@ -185,10 +182,16 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
             if snapshot?.exists == true {
                 Firestore.firestore().collection("swipes").document(uid).updateData(docData) { error in
                     guard error == nil else { return }
+                    if didLike == 1 {
+                        self.checkIfMatchExist(cardUID: cardUID)
+                    }
                 }
             } else {
                 Firestore.firestore().collection("swipes").document(uid).setData(docData) { error in
                     guard error == nil else { return }
+                    if didLike == 1 {
+                        self.checkIfMatchExist(cardUID: cardUID)
+                    }
                 }
             }
         }
