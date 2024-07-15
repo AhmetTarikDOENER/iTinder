@@ -77,9 +77,11 @@ class MatchView: UIView {
         let angle = 40 * CGFloat.pi / 180
         currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: 200, y: 0))
         cardUserImageView.transform = CGAffineTransform(rotationAngle: angle).concatenating(CGAffineTransform(translationX: -200, y: 0))
+        sendMessageButton.transform = CGAffineTransform(translationX: -500, y: 0)
+        keepSwipingButton.transform = CGAffineTransform(translationX: 500, y: 0)
         /// keyframe animations for segmented animation
         UIView.animateKeyframes(
-            withDuration: 1.2,
+            withDuration: 1.3,
             delay: 0,
             options: .calculationModeCubic
         ) {
@@ -96,6 +98,18 @@ class MatchView: UIView {
         } completion: { _ in
             
         }
+        UIView.animate(
+            withDuration: 0.75,
+            delay: 0.6 * 1.3,
+            usingSpringWithDamping: 0.5,
+            initialSpringVelocity: 0.1,
+            options: .curveEaseOut) {
+                self.sendMessageButton.transform = .identity
+                self.keepSwipingButton.transform = .identity
+            } completion: { _ in
+                
+            }
+
     }
     
     fileprivate func setupBlurredView() {
