@@ -89,6 +89,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     }
     
     @objc fileprivate func didTapRefresh() {
+        cardsDeckView.subviews.forEach { $0.removeFromSuperview() }
         fetchUserFromFirestore()
     }
     
@@ -129,7 +130,8 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
                 let isNotCurrentUser = user.uid != Auth.auth().currentUser?.uid
-                let hasNotSwipedBefore = self.swipes[user.uid!] == nil
+//                let hasNotSwipedBefore = self.swipes[user.uid!] == nil
+                let hasNotSwipedBefore = true
                 if isNotCurrentUser && hasNotSwipedBefore {
                     let cardView = self.setupCardFromUser(user: user)
                     previousCardView?.nextCardView = cardView
@@ -173,6 +175,9 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     fileprivate func saveSwipeToFirestore(didLike: Int) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         guard let cardUID = topCardView?.cardViewModel.uid else { return }
+        if didLike == 1 {
+            checkIfMatchExist(cardUID: cardUID)
+        }
         let docData = [cardUID: didLike]
         Firestore.firestore().collection("swipes").document(uid).getDocument { snapshot, error in
             guard error == nil else { return }
@@ -180,12 +185,10 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
             if snapshot?.exists == true {
                 Firestore.firestore().collection("swipes").document(uid).updateData(docData) { error in
                     guard error == nil else { return }
-                    self.checkIfMatchExist(cardUID: cardUID)
                 }
             } else {
                 Firestore.firestore().collection("swipes").document(uid).setData(docData) { error in
                     guard error == nil else { return }
-                    self.checkIfMatchExist(cardUID: cardUID)
                 }
             }
         }
@@ -198,12 +201,16 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
             guard let uid = Auth.auth().currentUser?.uid else { return }
             let hasMatched = data[uid] as? Int == 1
             if hasMatched {
-                let hud = JGProgressHUD(style: .dark)
-                hud.textLabel.text = "Found a Match"
-                hud.show(in: self.view)
-                hud.dismiss(afterDelay: 1.5)
+                self.presentMatchView(cardUID: cardUID)
             }
         }
+    }
+    
+    fileprivate func presentMatchView(cardUID: String) {
+        let redView = UIView()
+        redView.backgroundColor = .red
+        view.addSubview(redView)
+        redView.fillSuperView()
     }
     
     @objc func didTapDislike() {
