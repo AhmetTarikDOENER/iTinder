@@ -207,10 +207,9 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     }
     
     fileprivate func presentMatchView(cardUID: String) {
-        let redView = UIView()
-        redView.backgroundColor = .red
-        view.addSubview(redView)
-        redView.fillSuperView()
+        let matchView = MatchView()
+        view.addSubview(matchView)
+        matchView.fillSuperView()
     }
     
     @objc func didTapDislike() {
