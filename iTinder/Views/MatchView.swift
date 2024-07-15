@@ -1,6 +1,29 @@
 import UIKit
+import FirebaseFirestore
 
 class MatchView: UIView {
+    
+    var currentUser: User! {
+        didSet {
+            
+        }
+    }
+    
+    var cardUID: String! {
+        didSet {
+            Firestore.firestore().collection("users").document(cardUID).getDocument { snapshot, error in
+                guard error == nil else { return }
+                guard let dictionary = snapshot?.data() else { return }
+                let user = User(dictionary: dictionary)
+                guard let url = URL(string: user.imageURL1 ?? "") else { return }
+                self.cardUserImageView.sd_setImage(with: url)
+                guard let currentUserImageURL = URL(string: self.currentUser.imageURL1 ?? "") else { return }
+                self.currentUserImageView.sd_setImage(with: currentUserImageURL) { _, _, _, _ in
+                    self.setupAnimations()
+                }
+            }
+        }
+    }
     
     fileprivate lazy var itsAMatchImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "itsamatch"))
@@ -39,6 +62,7 @@ class MatchView: UIView {
         imageView.layer.cornerRadius = 70
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.borderWidth = 1.0
+        imageView.alpha = 0
         return imageView
     }()
     
@@ -64,7 +88,6 @@ class MatchView: UIView {
         super.init(frame: frame)
         setupBlurredView()
         configureHierarchy()
-        setupAnimations()
     }
     
     required init?(coder: NSCoder) {
@@ -74,6 +97,7 @@ class MatchView: UIView {
     fileprivate let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
     fileprivate func setupAnimations() {
+        views.forEach { $0.alpha = 1 }
         let angle = 40 * CGFloat.pi / 180
         currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: 200, y: 0))
         cardUserImageView.transform = CGAffineTransform(rotationAngle: angle).concatenating(CGAffineTransform(translationX: -200, y: 0))
@@ -129,13 +153,21 @@ class MatchView: UIView {
             }
     }
     
+    lazy var views = [
+        itsAMatchImageView,
+        descriptionLabel,
+        currentUserImageView,
+        cardUserImageView,
+        sendMessageButton,
+        keepSwipingButton
+    ]
+    
     fileprivate func configureHierarchy() {
-        addSubview(itsAMatchImageView)
-        addSubview(descriptionLabel)
-        addSubview(currentUserImageView)
-        addSubview(cardUserImageView)
-        addSubview(sendMessageButton)
-        addSubview(keepSwipingButton)
+        views.forEach { view in
+            addSubview(view)
+            view.alpha = 0
+        }
+
         let size: CGFloat = 140
         NSLayoutConstraint.activate([
             itsAMatchImageView.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -24),
