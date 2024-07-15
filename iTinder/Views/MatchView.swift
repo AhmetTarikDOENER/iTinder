@@ -11,7 +11,7 @@ class MatchView: UIView {
     
     fileprivate lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "You and him have liked \neach other."
+        label.text = "You and MR.Person have liked \neach other."
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -64,6 +64,7 @@ class MatchView: UIView {
         super.init(frame: frame)
         setupBlurredView()
         configureHierarchy()
+        setupAnimations()
     }
     
     required init?(coder: NSCoder) {
@@ -71,6 +72,18 @@ class MatchView: UIView {
     }
     
     fileprivate let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+    
+    fileprivate func setupAnimations() {
+        let angle = -40 * CGFloat.pi / 180
+        currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: 200, y: 0))
+        cardUserImageView.transform = CGAffineTransform(rotationAngle: angle).concatenating(CGAffineTransform(translationX: -200, y: 0))
+        UIView.animate(withDuration: 0.7) {
+            self.currentUserImageView.transform = .identity
+            self.cardUserImageView.transform = .identity
+        } completion: { _ in
+            
+        }
+    }
     
     fileprivate func setupBlurredView() {
         visualEffectView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapDismiss)))
