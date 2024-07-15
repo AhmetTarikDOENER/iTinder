@@ -74,12 +74,25 @@ class MatchView: UIView {
     fileprivate let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     
     fileprivate func setupAnimations() {
-        let angle = -40 * CGFloat.pi / 180
+        let angle = 40 * CGFloat.pi / 180
         currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: 200, y: 0))
         cardUserImageView.transform = CGAffineTransform(rotationAngle: angle).concatenating(CGAffineTransform(translationX: -200, y: 0))
-        UIView.animate(withDuration: 0.7) {
-            self.currentUserImageView.transform = .identity
-            self.cardUserImageView.transform = .identity
+        /// keyframe animations for segmented animation
+        UIView.animateKeyframes(
+            withDuration: 1.2,
+            delay: 0,
+            options: .calculationModeCubic
+        ) {
+            /// Animation 1 -> Translation back to the original position
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.45) {
+                self.currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle)
+                self.cardUserImageView.transform = CGAffineTransform(rotationAngle: angle)
+            }
+            /// Animation 2 -> Rotation
+            UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.4) {
+                self.currentUserImageView.transform = .identity
+                self.cardUserImageView.transform = .identity
+            }
         } completion: { _ in
             
         }
