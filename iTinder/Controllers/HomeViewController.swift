@@ -178,7 +178,6 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
         let docData = [cardUID: didLike]
         Firestore.firestore().collection("swipes").document(uid).getDocument { snapshot, error in
             guard error == nil else { return }
-            
             if snapshot?.exists == true {
                 Firestore.firestore().collection("swipes").document(uid).updateData(docData) { error in
                     guard error == nil else { return }

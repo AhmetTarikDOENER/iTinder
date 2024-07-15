@@ -2,6 +2,24 @@ import UIKit
 
 class MatchView: UIView {
     
+    fileprivate lazy var itsAMatchImageView: UIImageView = {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "itsamatch"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    
+    fileprivate lazy var descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "You and him have liked \neach other."
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 18)
+        return label
+    }()
+    
     fileprivate lazy var currentUserImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "jane2"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -51,14 +69,23 @@ class MatchView: UIView {
             } completion: { _ in
                 
             }
-
     }
     
     fileprivate func configureHierarchy() {
+        addSubview(itsAMatchImageView)
+        addSubview(descriptionLabel)
         addSubview(currentUserImageView)
         addSubview(cardUserImageView)
         let size: CGFloat = 140
         NSLayoutConstraint.activate([
+            itsAMatchImageView.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -24),
+            itsAMatchImageView.widthAnchor.constraint(equalToConstant: 300),
+            itsAMatchImageView.heightAnchor.constraint(equalToConstant: 50),
+            itsAMatchImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            descriptionLabel.bottomAnchor.constraint(equalTo: currentUserImageView.topAnchor, constant: -32),
+            descriptionLabel.heightAnchor.constraint(equalToConstant: 50),
             currentUserImageView.widthAnchor.constraint(equalToConstant: size),
             currentUserImageView.heightAnchor.constraint(equalToConstant: size),
             currentUserImageView.trailingAnchor.constraint(equalTo: centerXAnchor, constant: -16),
