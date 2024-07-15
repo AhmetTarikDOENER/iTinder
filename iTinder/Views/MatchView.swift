@@ -51,6 +51,15 @@ class MatchView: UIView {
         return button
     }()
     
+    fileprivate lazy var keepSwipingButton: UIButton = {
+        let button = KeepSwipingButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Keep Swiping", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 25
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupBlurredView()
@@ -86,11 +95,12 @@ class MatchView: UIView {
         addSubview(currentUserImageView)
         addSubview(cardUserImageView)
         addSubview(sendMessageButton)
+        addSubview(keepSwipingButton)
         let size: CGFloat = 140
         NSLayoutConstraint.activate([
             itsAMatchImageView.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -24),
             itsAMatchImageView.widthAnchor.constraint(equalToConstant: 300),
-            itsAMatchImageView.heightAnchor.constraint(equalToConstant: 50),
+            itsAMatchImageView.heightAnchor.constraint(equalToConstant: 80),
             itsAMatchImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -108,7 +118,10 @@ class MatchView: UIView {
             sendMessageButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 48),
             sendMessageButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -48),
             sendMessageButton.heightAnchor.constraint(equalToConstant: 50),
-            
+            keepSwipingButton.topAnchor.constraint(equalTo: sendMessageButton.bottomAnchor, constant: 16),
+            keepSwipingButton.leadingAnchor.constraint(equalTo: sendMessageButton.leadingAnchor),
+            keepSwipingButton.trailingAnchor.constraint(equalTo: sendMessageButton.trailingAnchor),
+            keepSwipingButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     

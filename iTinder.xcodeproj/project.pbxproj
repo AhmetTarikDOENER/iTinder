@@ -14,6 +14,7 @@
 		4561191B2C42B0A1006E7A42 /* SwipingPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561191A2C42B0A1006E7A42 /* SwipingPhotosViewController.swift */; };
 		456A65A92C4543DD0067EA01 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A65A82C4543DD0067EA01 /* MatchView.swift */; };
 		456A65AB2C459F1A0067EA01 /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A65AA2C459F1A0067EA01 /* SendMessageButton.swift */; };
+		456A65AD2C45A5A00067EA01 /* KeepSwipingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */; };
 		4578753A2C3C6E870004C300 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 457875392C3C6E870004C300 /* FirebaseFirestore */; };
 		4593FFD22C233726003114EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593FFD12C233726003114EE /* User.swift */; };
 		4593FFD62C23561B003114EE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593FFD52C23561B003114EE /* CardViewModel.swift */; };
@@ -52,6 +53,7 @@
 		4561191A2C42B0A1006E7A42 /* SwipingPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosViewController.swift; sourceTree = "<group>"; };
 		456A65A82C4543DD0067EA01 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		456A65AA2C459F1A0067EA01 /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
+		456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepSwipingButton.swift; sourceTree = "<group>"; };
 		4593FFD12C233726003114EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4593FFD52C23561B003114EE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		459CBA062C1B12DA00854A31 /* iTinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -189,6 +191,7 @@
 				45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */,
 				456A65A82C4543DD0067EA01 /* MatchView.swift */,
 				456A65AA2C459F1A0067EA01 /* SendMessageButton.swift */,
+				456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				453190002C249E8200CC869B /* CustomTextField.swift in Sources */,
 				45CB50AE2C25AA50003E94F6 /* RegistrationViewModel.swift in Sources */,
 				45D0EE612C1B225F0031D0FF /* UIView+Extension.swift in Sources */,
+				456A65AD2C45A5A00067EA01 /* KeepSwipingButton.swift in Sources */,
 				459CBA0C2C1B12DA00854A31 /* SceneDelegate.swift in Sources */,
 				45A36D2F2C407807006F8169 /* LoginViewModel.swift in Sources */,
 				4593FFD62C23561B003114EE /* CardViewModel.swift in Sources */,
