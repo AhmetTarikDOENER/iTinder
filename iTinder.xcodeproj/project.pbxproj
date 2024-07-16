@@ -29,6 +29,7 @@
 		45A36D2A2C401F3D006F8169 /* AgeRangeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A36D292C401F3D006F8169 /* AgeRangeTableViewCell.swift */; };
 		45A36D2D2C4077FE006F8169 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A36D2C2C4077FE006F8169 /* LoginViewController.swift */; };
 		45A36D2F2C407807006F8169 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A36D2E2C407807006F8169 /* LoginViewModel.swift */; };
+		45B30DA02C46D80F00E23A5C /* CustomMatchesNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B30D9F2C46D80F00E23A5C /* CustomMatchesNavigationBarView.swift */; };
 		45CB50AE2C25AA50003E94F6 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CB50AD2C25AA50003E94F6 /* RegistrationViewModel.swift */; };
 		45CB50B12C25B623003E94F6 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 45CB50B02C25B623003E94F6 /* JGProgressHUD */; };
 		45CB50B42C25B6A0003E94F6 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 45CB50B32C25B6A0003E94F6 /* SDWebImage */; };
@@ -70,6 +71,7 @@
 		45A36D292C401F3D006F8169 /* AgeRangeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgeRangeTableViewCell.swift; sourceTree = "<group>"; };
 		45A36D2C2C4077FE006F8169 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		45A36D2E2C407807006F8169 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		45B30D9F2C46D80F00E23A5C /* CustomMatchesNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMatchesNavigationBarView.swift; sourceTree = "<group>"; };
 		45CB50AD2C25AA50003E94F6 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		45CB50C22C25B919003E94F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45CB50C52C25D81E003E94F6 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
@@ -187,13 +189,14 @@
 			children = (
 				45A36D292C401F3D006F8169 /* AgeRangeTableViewCell.swift */,
 				45D0EE672C1B56AC0031D0FF /* CardView.swift */,
+				45B30D9F2C46D80F00E23A5C /* CustomMatchesNavigationBarView.swift */,
 				45318FFF2C249E8200CC869B /* CustomTextField.swift */,
 				45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */,
-				45D1E22D2C3EFD7C00CC5729 /* SettingsTableViewCell.swift */,
-				45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */,
+				456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */,
 				456A65A82C4543DD0067EA01 /* MatchView.swift */,
 				456A65AA2C459F1A0067EA01 /* SendMessageButton.swift */,
-				456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */,
+				45D1E22D2C3EFD7C00CC5729 /* SettingsTableViewCell.swift */,
+				45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				45A36D2D2C4077FE006F8169 /* LoginViewController.swift in Sources */,
 				45318FFC2C241D9600CC869B /* Advertiser.swift in Sources */,
 				45D0EE682C1B56AC0031D0FF /* CardView.swift in Sources */,
+				45B30DA02C46D80F00E23A5C /* CustomMatchesNavigationBarView.swift in Sources */,
 				45D0EE662C1B3FD50031D0FF /* TopNavigationStackView.swift in Sources */,
 				45318FFE2C24970000CC869B /* RegistrationViewController.swift in Sources */,
 				459CBA0E2C1B12DA00854A31 /* HomeViewController.swift in Sources */,
