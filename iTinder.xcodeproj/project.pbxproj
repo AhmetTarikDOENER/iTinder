@@ -18,6 +18,8 @@
 		4578753A2C3C6E870004C300 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 457875392C3C6E870004C300 /* FirebaseFirestore */; };
 		4593FFD22C233726003114EE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593FFD12C233726003114EE /* User.swift */; };
 		4593FFD62C23561B003114EE /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4593FFD52C23561B003114EE /* CardViewModel.swift */; };
+		4598B9172C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4598B9162C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift */; };
+		4598B9192C46BCA000AC679C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4598B9182C46BCA000AC679C /* UIView+Extension.swift */; };
 		459CBA0A2C1B12DA00854A31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBA092C1B12DA00854A31 /* AppDelegate.swift */; };
 		459CBA0C2C1B12DA00854A31 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBA0B2C1B12DA00854A31 /* SceneDelegate.swift */; };
 		459CBA0E2C1B12DA00854A31 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */; };
@@ -37,7 +39,6 @@
 		45CB50C12C25B783003E94F6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 45CB50C02C25B783003E94F6 /* FirebaseStorage */; };
 		45CB50C32C25B919003E94F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45CB50C22C25B919003E94F6 /* GoogleService-Info.plist */; };
 		45CB50C62C25D81E003E94F6 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CB50C52C25D81E003E94F6 /* Bindable.swift */; };
-		45D0EE612C1B225F0031D0FF /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE602C1B225E0031D0FF /* UIView+Extension.swift */; };
 		45D0EE642C1B373C0031D0FF /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */; };
 		45D0EE662C1B3FD50031D0FF /* TopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */; };
 		45D0EE682C1B56AC0031D0FF /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D0EE672C1B56AC0031D0FF /* CardView.swift */; };
@@ -56,6 +57,8 @@
 		456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepSwipingButton.swift; sourceTree = "<group>"; };
 		4593FFD12C233726003114EE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4593FFD52C23561B003114EE /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		4598B9162C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesMessagesCollectionViewController.swift; sourceTree = "<group>"; };
+		4598B9182C46BCA000AC679C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		459CBA062C1B12DA00854A31 /* iTinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		459CBA092C1B12DA00854A31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		459CBA0B2C1B12DA00854A31 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +73,6 @@
 		45CB50AD2C25AA50003E94F6 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		45CB50C22C25B919003E94F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45CB50C52C25D81E003E94F6 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
-		45D0EE602C1B225E0031D0FF /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
 		45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNavigationStackView.swift; sourceTree = "<group>"; };
 		45D0EE672C1B56AC0031D0FF /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -106,13 +108,6 @@
 			path = "User Details";
 			sourceTree = "<group>";
 		};
-		457875382C3C6E870004C300 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		4593FFD02C233719003114EE /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,12 +126,19 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		4598B9152C46B9A200AC679C /* Matches and Messages */ = {
+			isa = PBXGroup;
+			children = (
+				4598B9162C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift */,
+			);
+			path = "Matches and Messages";
+			sourceTree = "<group>";
+		};
 		459CB9FD2C1B12DA00854A31 = {
 			isa = PBXGroup;
 			children = (
 				459CBA082C1B12DA00854A31 /* iTinder */,
 				459CBA072C1B12DA00854A31 /* Products */,
-				457875382C3C6E870004C300 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -175,7 +177,7 @@
 		45D0EE5F2C1B22260031D0FF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				45D0EE602C1B225E0031D0FF /* UIView+Extension.swift */,
+				4598B9182C46BCA000AC679C /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -214,6 +216,7 @@
 			children = (
 				459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */,
 				45A36D2B2C4077E1006F8169 /* Login */,
+				4598B9152C46B9A200AC679C /* Matches and Messages */,
 				45318FFD2C24970000CC869B /* RegistrationViewController.swift */,
 				45D1E22B2C3EC9C900CC5729 /* SettingsViewController.swift */,
 				4521BFCD2C4173D8003B0725 /* User Details */,
@@ -320,6 +323,7 @@
 				45D0EE642C1B373C0031D0FF /* HomeBottomControlsStackView.swift in Sources */,
 				456A65A92C4543DD0067EA01 /* MatchView.swift in Sources */,
 				4521BFCF2C4173EE003B0725 /* UserDetailsViewController.swift in Sources */,
+				4598B9172C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift in Sources */,
 				4561191B2C42B0A1006E7A42 /* SwipingPhotosViewController.swift in Sources */,
 				45D1E22C2C3EC9C900CC5729 /* SettingsViewController.swift in Sources */,
 				456A65AB2C459F1A0067EA01 /* SendMessageButton.swift in Sources */,
@@ -327,10 +331,10 @@
 				45D1E22E2C3EFD7C00CC5729 /* SettingsTableViewCell.swift in Sources */,
 				453190002C249E8200CC869B /* CustomTextField.swift in Sources */,
 				45CB50AE2C25AA50003E94F6 /* RegistrationViewModel.swift in Sources */,
-				45D0EE612C1B225F0031D0FF /* UIView+Extension.swift in Sources */,
 				456A65AD2C45A5A00067EA01 /* KeepSwipingButton.swift in Sources */,
 				459CBA0C2C1B12DA00854A31 /* SceneDelegate.swift in Sources */,
 				45A36D2F2C407807006F8169 /* LoginViewModel.swift in Sources */,
+				4598B9192C46BCA000AC679C /* UIView+Extension.swift in Sources */,
 				4593FFD62C23561B003114EE /* CardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +488,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2G2NDDG29;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iTinder/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -515,6 +520,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2G2NDDG29;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iTinder/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

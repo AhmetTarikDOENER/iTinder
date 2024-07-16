@@ -20,7 +20,7 @@ extension CurrentUserFetchable {
     }
 }
 
-class HomeViewController: UIViewController, CurrentUserFetchable {
+class HomeViewController: UIViewController, CurrentUserFetchable, UIGestureRecognizerDelegate {
     
     let topStackView = TopNavigationStackView()
     let cardsDeckView = UIView()
@@ -30,7 +30,10 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        topStackView.settingsButton.addTarget(self, action: #selector(handleSettings), for: .touchUpInside)
+        navigationController?.navigationBar.isHidden = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        topStackView.settingsButton.addTarget(self, action: #selector(didTapSettings), for: .touchUpInside)
+        topStackView.messageButton.addTarget(self, action: #selector(didTapMessages), for: .touchUpInside)
         bottomControls.refreshButton.addTarget(self, action: #selector(didTapRefresh), for: .touchUpInside)
         bottomControls.likeButton.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
         bottomControls.dislikeButton.addTarget(self, action: #selector(didTapDislike), for: .touchUpInside)
@@ -79,8 +82,13 @@ class HomeViewController: UIViewController, CurrentUserFetchable {
             self.fetchUserFromFirestore()
         }
     }
+    
+    @objc fileprivate func didTapMessages() {
+        let vc = MatchesMessagesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(vc, animated: true)
+    }
  
-    @objc fileprivate func handleSettings() {
+    @objc fileprivate func didTapSettings() {
         let settingsController = SettingsViewController()
         settingsController.delegate = self
         let navVC = UINavigationController(rootViewController: settingsController)

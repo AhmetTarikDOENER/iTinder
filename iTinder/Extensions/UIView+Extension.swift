@@ -4,6 +4,7 @@ struct AnchoredConstraints {
     var top, leading, trailing, bottom, width, height: NSLayoutConstraint?
 }
 
+//  MARK: - Laying Out
 extension UIView {
     
     @discardableResult
@@ -89,3 +90,14 @@ extension UIView {
         }
     }
 }
+
+//  MARK: - Setup Shadow
+extension UIView {
+    func setupShadow(opacity: Float = 0, radius: CGFloat = 0, offset: CGSize = .zero, color: UIColor = .black) {
+        layer.shadowOpacity = opacity
+        layer.shadowRadius = radius
+        layer.shadowOffset = offset
+        layer.shadowColor = color.withAlphaComponent(0.3).cgColor
+    }
+}
+
