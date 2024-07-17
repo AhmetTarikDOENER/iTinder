@@ -1,20 +1,32 @@
 import UIKit
 import LBTATools
+import FirebaseFirestore
+import FirebaseAuth
 
-final class MatchCell: LBTAListCell<UIColor> {
+struct MatchModel {
+    let username, profileImageURL: String
+    
+    init(dictionary: [String: Any]) {
+        self.username = dictionary["username"] as? String ?? ""
+        self.profileImageURL = dictionary["profileImageURL"] as? String ?? ""
+    }
+}
+
+final class MatchCell: LBTAListCell<MatchModel> {
     
     fileprivate lazy var profileImageView = UIImageView(image: #imageLiteral(resourceName: "jane3"), contentMode: .scaleAspectFill)
     fileprivate lazy var usernameLabel = UILabel(
         text: "Username",
-        font: .systemFont(ofSize: 12, weight: .semibold),
+        font: .systemFont(ofSize: 14, weight: .semibold),
         textColor: #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1),
         textAlignment: .center,
         numberOfLines: 2
     )
     
-    override var item: UIColor! {
+    override var item: MatchModel! {
         didSet {
-            backgroundColor = item
+            usernameLabel.text = item.username
+            profileImageView.sd_setImage(with: URL(string: item.profileImageURL))
         }
     }
     
@@ -28,17 +40,30 @@ final class MatchCell: LBTAListCell<UIColor> {
     }
 }
 
-final class MatchesMessagesCollectionViewController: LBTAListController<MatchCell, UIColor> {
+final class MatchesMessagesCollectionViewController: LBTAListController<MatchCell, MatchModel> {
     
     fileprivate lazy var customMatchesNavigationBarView = CustomMatchesNavigationBarView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        items = [
-            .red, .blue, .green, .black, .brown, .magenta
-        ]
+        fetchMatches()
         customMatchesNavigationBarView.fireIconButton.addTarget(self, action: #selector(didTapFire), for: .touchUpInside)
         configureHierarchy()
+    }
+    
+    fileprivate func fetchMatches() {
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("matches_messages").document(currentUserID).collection("matches").getDocuments { 
+            snapshot, error in
+            guard error == nil else { return }
+            var matches = [MatchModel]()
+            snapshot?.documents.forEach { docSnapshot in
+                let dictionary = docSnapshot.data()
+                matches.append(.init(dictionary: dictionary))
+            }
+            self.items = matches
+            self.collectionView.reloadData()
+        }
     }
     
     fileprivate func configureHierarchy() {
@@ -62,5 +87,9 @@ final class MatchesMessagesCollectionViewController: LBTAListController<MatchCel
 extension MatchesMessagesCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         .init(width: 100, height: 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        .init(top: 16, left: 0, bottom: 16, right: 0)
     }
 }
