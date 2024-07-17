@@ -75,7 +75,11 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
 //  MARK: - UICollectionViewDelegateFlowLayout:
 extension ChatListController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: view.frame.width, height: 100)
+        let estimatedSizeCell = MessageCell(frame: .init(x: 0, y: 0, width: view.frame.width, height: 1000))
+        estimatedSizeCell.item = items[indexPath.item]
+        estimatedSizeCell.layoutIfNeeded()
+        let estimatedSize = estimatedSizeCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 1000))
+        return .init(width: view.frame.width, height: estimatedSize.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
