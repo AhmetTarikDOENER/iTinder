@@ -6,10 +6,27 @@ struct Message {
 }
 
 class MessageCell: LBTAListCell<Message> {
+    
+    fileprivate let textView: UITextView = {
+        let textView = UITextView()
+        textView.backgroundColor = .clear
+        textView.font = .systemFont(ofSize: 18)
+        textView.isScrollEnabled = false
+        textView.isEditable = false
+        return textView
+    }()
+    
     override var item: Message! {
         didSet {
             backgroundColor = .red
+            textView.text = item.text
         }
+    }
+    
+    override func setupViews() {
+        super.setupViews()
+        addSubview(textView)
+        textView.fillSuperview()
     }
 }
 
@@ -32,9 +49,9 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
         configureHierarchy()
         items = [
             .init(text: "jasdaklsjdalkjsdnlkajsdlaknsdlkjansdlka"),
+            .init(text: "ajsdlaknsdlkjansdlka"),
             .init(text: "jasdaklsjdalkjsdnlkajsdlaknsdlkjansdlka"),
-            .init(text: "jasdaklsjdalkjsdnlkajsdlaknsdlkjansdlka"),
-            .init(text: "jasdaklsjdalkjsdnlkajsdlaknsdlkjansdlka")
+            .init(text: "asdasdmnasdjvuwefpweiw weoiuhniazsdauzsdfabjasdaklsjdalkjsdnlkajsdlaknsdlkjansdlka")
         ]
         customNavBarView.backButton.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
     }
