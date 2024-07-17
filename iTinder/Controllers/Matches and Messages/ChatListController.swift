@@ -3,6 +3,7 @@ import LBTATools
 
 struct Message {
     let text: String
+    let isOwnerCurrentUser: Bool
 }
 
 class MessageCell: LBTAListCell<Message> {
@@ -21,8 +22,19 @@ class MessageCell: LBTAListCell<Message> {
     override var item: Message! {
         didSet {
             textView.text = item.text
+            if item.isOwnerCurrentUser {
+                bubbleContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+                bubbleContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = false
+                bubbleContainer.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
+                textView.textColor = .white
+            } else {
+                bubbleContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = false
+                bubbleContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
+            }
         }
     }
+    
+    var anchoredConstraints: AnchoredConstraints!
     
     override func setupViews() {
         super.setupViews()
@@ -35,20 +47,9 @@ class MessageCell: LBTAListCell<Message> {
         bubbleContainer.addSubview(textView)
         bubbleContainer.layer.cornerRadius = 12
         textView.fillSuperview(padding: .init(top: 5, left: 10, bottom: 5, right: 10))
-        
         bubbleContainer.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        bubbleContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = false
         bubbleContainer.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        bubbleContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
         bubbleContainer.widthAnchor.constraint(lessThanOrEqualToConstant: 260).isActive = true
-//
-//        NSLayoutConstraint.activate([
-//            bubbleContainer.topAnchor.constraint(equalTo: topAnchor),
-//            bubbleContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
-//            bubbleContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
-//            bubbleContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
-//            bubbleContainer.widthAnchor.constraint(lessThanOrEqualToConstant: 260)
-//        ])
     }
 }
 
@@ -68,12 +69,14 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.alwaysBounceVertical = true
         configureHierarchy()
         items = [
-            .init(text: "jasdaklsjdalkjsdnlkajsdlaknsdlkjansdlka"),
-            .init(text: "ajsdlaknsdlkjansdlka"),
-            .init(text: "jasdaklsjdalkjsdnlkajsdlaknsdlkjansdlka"),
-            .init(text: "asdasdmnasdjvuwefpweiw weoiuhniazsdauzsdfabjasdaklsjdalkjsdnlkajsdlaknsdlkjansdlka")
+            .init(text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry", isOwnerCurrentUser: true),
+            .init(text: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout", isOwnerCurrentUser: false),
+            .init(text: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. ", isOwnerCurrentUser: false),
+            .init(text: "There is nothing to do.", isOwnerCurrentUser: true),
+            .init(text: "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero,", isOwnerCurrentUser: false)
         ]
         customNavBarView.backButton.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
     }
