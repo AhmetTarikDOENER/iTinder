@@ -16,17 +16,39 @@ class MessageCell: LBTAListCell<Message> {
         return textView
     }()
     
+    let bubbleContainer = UIView(backgroundColor: #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1))
+    
     override var item: Message! {
         didSet {
-            backgroundColor = .red
             textView.text = item.text
         }
     }
     
     override func setupViews() {
         super.setupViews()
-        addSubview(textView)
-        textView.fillSuperview()
+        configureHierarchy()
+    }
+    
+    fileprivate func configureHierarchy() {
+        addSubview(bubbleContainer)
+        bubbleContainer.translatesAutoresizingMaskIntoConstraints = false
+        bubbleContainer.addSubview(textView)
+        bubbleContainer.layer.cornerRadius = 12
+        textView.fillSuperview(padding: .init(top: 5, left: 10, bottom: 5, right: 10))
+        
+        bubbleContainer.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        bubbleContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = false
+        bubbleContainer.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        bubbleContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
+        bubbleContainer.widthAnchor.constraint(lessThanOrEqualToConstant: 260).isActive = true
+//
+//        NSLayoutConstraint.activate([
+//            bubbleContainer.topAnchor.constraint(equalTo: topAnchor),
+//            bubbleContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+//            bubbleContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
+//            bubbleContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            bubbleContainer.widthAnchor.constraint(lessThanOrEqualToConstant: 260)
+//        ])
     }
 }
 
