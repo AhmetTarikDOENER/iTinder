@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4505D1122C47D097008DEA04 /* LBTATools in Frameworks */ = {isa = PBXBuildFile; productRef = 4505D1112C47D097008DEA04 /* LBTATools */; };
+		4505D1142C4831A8008DEA04 /* ChatListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505D1132C4831A8008DEA04 /* ChatListController.swift */; };
+		4505D1172C483AF7008DEA04 /* CustomMessagesNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4505D1162C483AF7008DEA04 /* CustomMessagesNavigationBarView.swift */; };
 		4521BFCF2C4173EE003B0725 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4521BFCE2C4173EE003B0725 /* UserDetailsViewController.swift */; };
 		45318FFC2C241D9600CC869B /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFB2C241D9600CC869B /* Advertiser.swift */; };
 		45318FFE2C24970000CC869B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFD2C24970000CC869B /* RegistrationViewController.swift */; };
@@ -49,6 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4505D1132C4831A8008DEA04 /* ChatListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListController.swift; sourceTree = "<group>"; };
+		4505D1162C483AF7008DEA04 /* CustomMessagesNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMessagesNavigationBarView.swift; sourceTree = "<group>"; };
 		4521BFCE2C4173EE003B0725 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		45318FFB2C241D9600CC869B /* Advertiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Advertiser.swift; sourceTree = "<group>"; };
 		45318FFD2C24970000CC869B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +107,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4505D1152C483AD6008DEA04 /* Matches a. Messages */ = {
+			isa = PBXGroup;
+			children = (
+				4505D1162C483AF7008DEA04 /* CustomMessagesNavigationBarView.swift */,
+			);
+			path = "Matches a. Messages";
+			sourceTree = "<group>";
+		};
 		4521BFCD2C4173D8003B0725 /* User Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				4598B9162C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift */,
+				4505D1132C4831A8008DEA04 /* ChatListController.swift */,
 			);
 			path = "Matches and Messages";
 			sourceTree = "<group>";
@@ -189,6 +202,7 @@
 		45D0EE622C1B370F0031D0FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4505D1152C483AD6008DEA04 /* Matches a. Messages */,
 				45A36D292C401F3D006F8169 /* AgeRangeTableViewCell.swift */,
 				45D0EE672C1B56AC0031D0FF /* CardView.swift */,
 				45B30D9F2C46D80F00E23A5C /* CustomMatchesNavigationBarView.swift */,
@@ -337,12 +351,14 @@
 				456A65AB2C459F1A0067EA01 /* SendMessageButton.swift in Sources */,
 				45CB50C62C25D81E003E94F6 /* Bindable.swift in Sources */,
 				45D1E22E2C3EFD7C00CC5729 /* SettingsTableViewCell.swift in Sources */,
+				4505D1172C483AF7008DEA04 /* CustomMessagesNavigationBarView.swift in Sources */,
 				453190002C249E8200CC869B /* CustomTextField.swift in Sources */,
 				45CB50AE2C25AA50003E94F6 /* RegistrationViewModel.swift in Sources */,
 				456A65AD2C45A5A00067EA01 /* KeepSwipingButton.swift in Sources */,
 				459CBA0C2C1B12DA00854A31 /* SceneDelegate.swift in Sources */,
 				45A36D2F2C407807006F8169 /* LoginViewModel.swift in Sources */,
 				4598B9192C46BCA000AC679C /* UIView+Extension.swift in Sources */,
+				4505D1142C4831A8008DEA04 /* ChatListController.swift in Sources */,
 				4593FFD62C23561B003114EE /* CardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

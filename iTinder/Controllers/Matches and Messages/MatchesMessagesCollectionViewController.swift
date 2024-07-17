@@ -82,11 +82,16 @@ final class MatchesMessagesCollectionViewController: LBTAListController<MatchCel
     @objc fileprivate func didTapFire() {
         navigationController?.popViewController(animated: true)
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let chatController = ChatListController()
+        navigationController?.pushViewController(chatController, animated: true)
+    }
 }
 //  MARK: - UICollectionViewDelegateFlowLayout:
 extension MatchesMessagesCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        .init(width: 100, height: 100)
+        .init(width: 120, height: 120)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
