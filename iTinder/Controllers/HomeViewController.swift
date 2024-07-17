@@ -121,6 +121,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable, UIGestureRecog
     }
     
     var lastFetchedUser: User?
+    var users = [String: User]()
     
     fileprivate func fetchUserFromFirestore() {
         let minAge = user?.minSeekingAge ?? SettingsViewController.defaultMinSeekingAge
@@ -138,6 +139,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable, UIGestureRecog
             snapshot?.documents.forEach({ documentSnapshot in
                 let userDictionary = documentSnapshot.data()
                 let user = User(dictionary: userDictionary)
+                self.users[user.uid ?? ""] = user
                 let isNotCurrentUser = user.uid != Auth.auth().currentUser?.uid
 //                let hasNotSwipedBefore = self.swipes[user.uid!] == nil
                 let hasNotSwipedBefore = true
@@ -213,6 +215,12 @@ class HomeViewController: UIViewController, CurrentUserFetchable, UIGestureRecog
             let hasMatched = data[uid] as? Int == 1
             if hasMatched {
                 self.presentMatchView(cardUID: cardUID)
+                guard let cardUser = self.users[cardUID] else { return }
+                let docData = ["username": cardUser.name ?? "", "profileImageURL": cardUser.imageURL1 ?? "", "uid": cardUID]
+                Firestore.firestore().collection("matches_messages").document(uid).collection("matches").document(cardUID).setData(docData) {
+                    error in
+                    guard error == nil else { return }
+                }
             }
         }
     }
