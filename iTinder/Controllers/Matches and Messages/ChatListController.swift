@@ -34,8 +34,6 @@ class MessageCell: LBTAListCell<Message> {
         }
     }
     
-    var anchoredConstraints: AnchoredConstraints!
-    
     override func setupViews() {
         super.setupViews()
         configureHierarchy()
@@ -89,11 +87,18 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
         collectionView.contentInset.top = view.frame.size.height * 0.1
         view.addSubview(customNavBarView)
         customNavBarView.translatesAutoresizingMaskIntoConstraints = false
+        let customNavBarCover = UIView(backgroundColor: .white)
+        customNavBarCover.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(customNavBarCover)
         NSLayoutConstraint.activate([
             customNavBarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             customNavBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             customNavBarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            customNavBarView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.10)
+            customNavBarView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.10),
+            customNavBarCover.topAnchor.constraint(equalTo: view.topAnchor),
+            customNavBarCover.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            customNavBarCover.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            customNavBarCover.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
     }
 }
