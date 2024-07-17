@@ -15,7 +15,17 @@ class MessageCell: LBTAListCell<Message> {
 
 final class ChatListController: LBTAListController<MessageCell, Message> {
     
-    fileprivate lazy var customNavBarView = CustomMessagesNavigationBarView()
+    fileprivate lazy var customNavBarView = CustomMessagesNavigationBarView(match: self.match)
+    fileprivate let match: MatchModel
+    
+    init(match: MatchModel) {
+        self.match = match
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +36,11 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
             .init(text: "jasdaklsjdalkjsdnlkajsdlaknsdlkjansdlka"),
             .init(text: "jasdaklsjdalkjsdnlkajsdlaknsdlkjansdlka")
         ]
+        customNavBarView.backButton.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
+    }
+    
+    @objc fileprivate func didTapBack() {
+        navigationController?.popViewController(animated: true)
     }
     
     fileprivate func configureHierarchy() {

@@ -84,7 +84,8 @@ final class MatchesMessagesCollectionViewController: LBTAListController<MatchCel
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let chatController = ChatListController()
+        let match = items[indexPath.item]
+        let chatController = ChatListController(match: match)
         navigationController?.pushViewController(chatController, animated: true)
     }
 }
