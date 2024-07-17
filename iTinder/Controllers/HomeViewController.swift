@@ -84,7 +84,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable, UIGestureRecog
     }
     
     @objc fileprivate func didTapMessages() {
-        let vc = MatchesMessagesCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+        let vc = MatchesMessagesCollectionViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
  
