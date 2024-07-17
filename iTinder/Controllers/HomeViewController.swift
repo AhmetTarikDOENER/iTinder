@@ -216,13 +216,13 @@ class HomeViewController: UIViewController, CurrentUserFetchable, UIGestureRecog
             if hasMatched {
                 self.presentMatchView(cardUID: cardUID)
                 guard let cardUser = self.users[cardUID] else { return }
-                let docData = ["username": cardUser.name ?? "", "profileImageURL": cardUser.imageURL1 ?? "", "uid": cardUID]
+                let docData = ["username": cardUser.name ?? "", "profileImageURL": cardUser.imageURL1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
                 Firestore.firestore().collection("matches_messages").document(uid).collection("matches").document(cardUID).setData(docData) {
                     error in
                     guard error == nil else { return }
                 }
                 guard let currentUser = self.user else { return }
-                let currentUsersDocData = ["username": currentUser.name ?? "", "profileImageURL": currentUser.imageURL1 ?? "", "uid": cardUID]
+                let currentUsersDocData = ["username": currentUser.name ?? "", "profileImageURL": currentUser.imageURL1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
                 Firestore.firestore().collection("matches_messages").document(cardUID).collection("matches").document(uid).setData(currentUsersDocData) {
                     error in
                     guard error == nil else { return }
