@@ -108,12 +108,13 @@ class HomeViewController: UIViewController, CurrentUserFetchable, UIGestureRecog
         let overallStackView = UIStackView(arrangedSubviews: [topStackView, cardsDeckView, bottomControls])
         overallStackView.axis = .vertical
         view.addSubview(overallStackView)
-        overallStackView.anchor(
-            top: view.safeAreaLayoutGuide.topAnchor,
-            leading: view.leadingAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            trailing: view.trailingAnchor
-        )
+        overallStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            overallStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            overallStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            overallStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            overallStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
         overallStackView.isLayoutMarginsRelativeArrangement = true
         overallStackView.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
         overallStackView.bringSubviewToFront(cardsDeckView)

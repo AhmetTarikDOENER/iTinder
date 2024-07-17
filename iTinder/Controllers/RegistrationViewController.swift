@@ -223,16 +223,14 @@ final class RegistrationViewController: UIViewController {
     fileprivate func setupLayout() {
         navigationController?.isNavigationBarHidden = true
         view.addSubview(overallStackView)
+        overallStackView.translatesAutoresizingMaskIntoConstraints = false
         overallStackView.axis = .vertical
         overallStackView.spacing = 8
-        overallStackView.anchor(
-            top: nil,
-            leading: view.leadingAnchor,
-            bottom: nil,
-            trailing: view.trailingAnchor,
-            padding: .init(top: 0, left: 50, bottom: 0, right: 50)
-        )
-        overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            overallStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
+            overallStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
+            overallStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
         view.addSubview(goToLoginButton)
         NSLayoutConstraint.activate([
             goToLoginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),

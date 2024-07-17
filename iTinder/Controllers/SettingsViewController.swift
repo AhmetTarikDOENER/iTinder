@@ -54,25 +54,28 @@ class SettingsViewController: UITableViewController {
         let header = UIView()
         header.clipsToBounds = true
         header.addSubview(image1Button)
-        
+        image1Button.translatesAutoresizingMaskIntoConstraints = false
+        image1Button.clipsToBounds = true
         let padding: CGFloat = 16
-        image1Button.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: nil, padding: .init(top: padding, left: padding, bottom: 0, right: 0))
-        image1Button.widthAnchor.constraint(equalTo: header.widthAnchor, multiplier: 0.45).isActive = true
-        image1Button.heightAnchor.constraint(equalTo: header.heightAnchor, constant: -2*padding).isActive = true
-        
+        NSLayoutConstraint.activate([
+            image1Button.topAnchor.constraint(equalTo: header.topAnchor, constant: padding),
+            image1Button.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: padding),
+            image1Button.bottomAnchor.constraint(equalTo: header.bottomAnchor, constant: -padding),
+            image1Button.widthAnchor.constraint(equalTo: header.widthAnchor, multiplier: 0.45),
+            image1Button.heightAnchor.constraint(equalTo: header.heightAnchor, constant: -2*padding)
+        ])
         let stackView = UIStackView(arrangedSubviews: [image2Button, image3Button])
         stackView.axis = .vertical
         stackView.distribution = .fillEqually
         stackView.spacing = padding
         header.addSubview(stackView)
-        stackView.anchor(
-            top: header.topAnchor,
-            leading: image1Button.trailingAnchor,
-            bottom: header.bottomAnchor,
-            trailing: header.trailingAnchor,
-            padding: .init(top: 16, left: 16, bottom: 16, right: 16)
-        )
-        stackView.heightAnchor.constraint(equalTo: header.heightAnchor, multiplier: 1, constant: -2*padding).isActive = true
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: header.topAnchor, constant: padding),
+            stackView.leadingAnchor.constraint(equalTo: image1Button.trailingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: header.trailingAnchor, constant: -padding),
+            stackView.heightAnchor.constraint(equalTo: header.heightAnchor, multiplier: 1, constant: -2 * padding)
+        ])
         return header
     }()
     

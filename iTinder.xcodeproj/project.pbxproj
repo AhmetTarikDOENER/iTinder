@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4505D1122C47D097008DEA04 /* LBTATools in Frameworks */ = {isa = PBXBuildFile; productRef = 4505D1112C47D097008DEA04 /* LBTATools */; };
 		4521BFCF2C4173EE003B0725 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4521BFCE2C4173EE003B0725 /* UserDetailsViewController.swift */; };
 		45318FFC2C241D9600CC869B /* Advertiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFB2C241D9600CC869B /* Advertiser.swift */; };
 		45318FFE2C24970000CC869B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFD2C24970000CC869B /* RegistrationViewController.swift */; };
@@ -94,6 +95,7 @@
 				45CB50B72C25B783003E94F6 /* FirebaseAnalytics in Frameworks */,
 				4578753A2C3C6E870004C300 /* FirebaseFirestore in Frameworks */,
 				45CB50C12C25B783003E94F6 /* FirebaseStorage in Frameworks */,
+				4505D1122C47D097008DEA04 /* LBTATools in Frameworks */,
 				45CB50B92C25B783003E94F6 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,6 +254,7 @@
 				45CB50BC2C25B783003E94F6 /* FirebaseDatabase */,
 				45CB50C02C25B783003E94F6 /* FirebaseStorage */,
 				457875392C3C6E870004C300 /* FirebaseFirestore */,
+				4505D1112C47D097008DEA04 /* LBTATools */,
 			);
 			productName = iTinder;
 			productReference = 459CBA062C1B12DA00854A31 /* iTinder.app */;
@@ -285,6 +288,7 @@
 				45CB50AF2C25B623003E94F6 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 				45CB50B22C25B6A0003E94F6 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				45CB50B52C25B783003E94F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4505D1102C47D097008DEA04 /* XCRemoteSwiftPackageReference "LBTATools" */,
 			);
 			productRefGroup = 459CBA072C1B12DA00854A31 /* Products */;
 			projectDirPath = "";
@@ -492,7 +496,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2G2NDDG29;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iTinder/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -524,7 +528,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = N2G2NDDG29;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iTinder/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -572,6 +576,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4505D1102C47D097008DEA04 /* XCRemoteSwiftPackageReference "LBTATools" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bhlvoong/LBTATools";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.17;
+			};
+		};
 		45CB50AF2C25B623003E94F6 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
@@ -599,6 +611,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4505D1112C47D097008DEA04 /* LBTATools */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4505D1102C47D097008DEA04 /* XCRemoteSwiftPackageReference "LBTATools" */;
+			productName = LBTATools;
+		};
 		457875392C3C6E870004C300 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 45CB50B52C25B783003E94F6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

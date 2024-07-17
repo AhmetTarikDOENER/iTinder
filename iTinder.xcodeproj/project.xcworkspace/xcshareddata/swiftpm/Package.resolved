@@ -91,6 +91,15 @@
       }
     },
     {
+      "identity" : "lbtatools",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bhlvoong/LBTATools",
+      "state" : {
+        "revision" : "dce147bfbdc0417a4b430ec220c088629e9dc81d",
+        "version" : "1.0.17"
+      }
+    },
+    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",

@@ -100,4 +100,3 @@ extension UIView {
         layer.shadowColor = color.withAlphaComponent(0.3).cgColor
     }
 }
-

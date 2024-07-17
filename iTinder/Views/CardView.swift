@@ -100,23 +100,27 @@ class CardView: UIView {
 
     fileprivate func setupInformationLabel() {
         addSubview(informationLabel)
-        informationLabel.anchor(
-            top: nil,
-            leading: leadingAnchor,
-            bottom: bottomAnchor,
-            trailing: trailingAnchor,
-            padding: .init(top: 0, left: 16, bottom: 0, right: -16)
-        )
-        informationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
+        informationLabel.translatesAutoresizingMaskIntoConstraints = false
         informationLabel.textColor = .white
         informationLabel.numberOfLines = 0
+        NSLayoutConstraint.activate([
+            informationLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            informationLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            informationLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+        ])
     }
     
     fileprivate func setupBarsStackView() {
         addSubview(barsStackView)
-        barsStackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 8, left: 8, bottom: 0, right: -8), size: .init(width: 0, height: 4))
+        barsStackView.translatesAutoresizingMaskIntoConstraints = false
         barsStackView.spacing = 4
         barsStackView.distribution = .fillEqually
+        NSLayoutConstraint.activate([
+            barsStackView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            barsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+            barsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            barsStackView.heightAnchor.constraint(equalToConstant: 4)
+        ])
     }
     
     fileprivate func setupGradientLayer() {
