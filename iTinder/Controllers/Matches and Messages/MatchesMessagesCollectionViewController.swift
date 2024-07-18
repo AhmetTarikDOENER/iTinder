@@ -64,7 +64,9 @@ final class MatchesMessagesCollectionViewController: LBTAListController<MatchCel
                 matches.append(.init(dictionary: dictionary))
             }
             self.items = matches
-            self.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     
