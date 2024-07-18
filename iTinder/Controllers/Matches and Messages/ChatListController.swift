@@ -56,6 +56,7 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
             }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                self.collectionView.scrollToItem(at: [0, self.items.count - 1], at: .bottom, animated: true)
             }
         }
     }
@@ -77,6 +78,11 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
             "timestamp": Timestamp(date: Date())
         ]
         Firestore.firestore().collection("matches_messages").document(currentUserID).collection(match.uid).addDocument(data: docData) { error in
+            guard error == nil else { return }
+            self.customizedInputAccessoryView.textView.text = nil
+            self.customizedInputAccessoryView.placeHolderLabel.isHidden = false
+        }
+        Firestore.firestore().collection("matches_messages").document(match.uid).collection(currentUserID).addDocument(data: docData) { error in
             guard error == nil else { return }
             self.customizedInputAccessoryView.textView.text = nil
             self.customizedInputAccessoryView.placeHolderLabel.isHidden = false
