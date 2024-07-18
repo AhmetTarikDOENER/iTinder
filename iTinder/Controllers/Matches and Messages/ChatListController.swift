@@ -1,5 +1,7 @@
 import UIKit
 import LBTATools
+import FirebaseFirestore
+import FirebaseAuth
 
 //  MARK: - ChatListController
 final class ChatListController: LBTAListController<MessageCell, Message> {
@@ -16,13 +18,15 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
         fatalError("init(coder:) has not been implemented")
     }
     
-    fileprivate lazy var redView: UIView = {
-        return CustomInputAccessoryView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50))
+    fileprivate lazy var customizedInputAccessoryView: CustomInputAccessoryView = {
+        let customInputView = CustomInputAccessoryView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50))
+        customInputView.sendButton.addTarget(self, action: #selector(didTapSend), for: .touchUpInside)
+        return customInputView
     }()
     
     override var inputAccessoryView: UIView? {
         get {
-            redView
+            customizedInputAccessoryView
         }
     }
     
@@ -47,6 +51,21 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
     
     @objc fileprivate func didTapBack() {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc fileprivate func didTapSend() {
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        let docData: [String: Any] = [
+            "text": customizedInputAccessoryView.textView.text ?? "",
+            "senderID": currentUserID,
+            "receiverID": match.uid,
+            "timestamp": Timestamp(date: Date())
+        ]
+        Firestore.firestore().collection("matches_messages").document(currentUserID).collection(match.uid).addDocument(data: docData) { error in
+            guard error == nil else { return }
+            self.customizedInputAccessoryView.textView.text = nil
+            self.customizedInputAccessoryView.placeHolderLabel.isHidden = false
+        }
     }
 }
 
