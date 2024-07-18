@@ -1,56 +1,7 @@
 import UIKit
 import LBTATools
 
-struct Message {
-    let text: String
-    let isOwnerCurrentUser: Bool
-}
-
-class MessageCell: LBTAListCell<Message> {
-    
-    fileprivate let textView: UITextView = {
-        let textView = UITextView()
-        textView.backgroundColor = .clear
-        textView.font = .systemFont(ofSize: 18)
-        textView.isScrollEnabled = false
-        textView.isEditable = false
-        return textView
-    }()
-    
-    let bubbleContainer = UIView(backgroundColor: #colorLiteral(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1))
-    
-    override var item: Message! {
-        didSet {
-            textView.text = item.text
-            if item.isOwnerCurrentUser {
-                bubbleContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = true
-                bubbleContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = false
-                bubbleContainer.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
-                textView.textColor = .white
-            } else {
-                bubbleContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15).isActive = false
-                bubbleContainer.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15).isActive = true
-            }
-        }
-    }
-    
-    override func setupViews() {
-        super.setupViews()
-        configureHierarchy()
-    }
-    
-    fileprivate func configureHierarchy() {
-        addSubview(bubbleContainer)
-        bubbleContainer.translatesAutoresizingMaskIntoConstraints = false
-        bubbleContainer.addSubview(textView)
-        bubbleContainer.layer.cornerRadius = 12
-        textView.fillSuperview(padding: .init(top: 5, left: 10, bottom: 5, right: 10))
-        bubbleContainer.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        bubbleContainer.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        bubbleContainer.widthAnchor.constraint(lessThanOrEqualToConstant: 260).isActive = true
-    }
-}
-
+//  MARK: - ChatListController
 final class ChatListController: LBTAListController<MessageCell, Message> {
     
     fileprivate lazy var customNavBarView = CustomMessagesNavigationBarView(match: self.match)
@@ -65,9 +16,24 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
         fatalError("init(coder:) has not been implemented")
     }
     
+    fileprivate lazy var redView: UIView = {
+        return CustomInputAccessoryView(frame: .init(x: 0, y: 0, width: view.frame.width, height: 50))
+    }()
+    
+    override var inputAccessoryView: UIView? {
+        get {
+            redView
+        }
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.alwaysBounceVertical = true
+        collectionView.keyboardDismissMode = .interactive
         configureHierarchy()
         items = [
             .init(text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry", isOwnerCurrentUser: true),
@@ -82,9 +48,13 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
     @objc fileprivate func didTapBack() {
         navigationController?.popViewController(animated: true)
     }
-    
+}
+
+extension ChatListController {
     fileprivate func configureHierarchy() {
-        collectionView.contentInset.top = view.frame.size.height * 0.1
+        let customNavBarViewHeight: CGFloat = view.frame.size.height * 0.1
+        collectionView.contentInset.top = customNavBarViewHeight
+        collectionView.verticalScrollIndicatorInsets.top = customNavBarViewHeight
         view.addSubview(customNavBarView)
         customNavBarView.translatesAutoresizingMaskIntoConstraints = false
         let customNavBarCover = UIView(backgroundColor: .white)

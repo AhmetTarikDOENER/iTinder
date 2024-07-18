@@ -15,6 +15,9 @@
 		45318FFE2C24970000CC869B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFD2C24970000CC869B /* RegistrationViewController.swift */; };
 		453190002C249E8200CC869B /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45318FFF2C249E8200CC869B /* CustomTextField.swift */; };
 		4561191B2C42B0A1006E7A42 /* SwipingPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561191A2C42B0A1006E7A42 /* SwipingPhotosViewController.swift */; };
+		4566A6B42C49285000AE6359 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566A6B32C49285000AE6359 /* Message.swift */; };
+		4566A6B62C49289000AE6359 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566A6B52C49289000AE6359 /* MessageCell.swift */; };
+		4566A6B82C493A4200AE6359 /* CustomInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566A6B72C493A4200AE6359 /* CustomInputAccessoryView.swift */; };
 		456A65A92C4543DD0067EA01 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A65A82C4543DD0067EA01 /* MatchView.swift */; };
 		456A65AB2C459F1A0067EA01 /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A65AA2C459F1A0067EA01 /* SendMessageButton.swift */; };
 		456A65AD2C45A5A00067EA01 /* KeepSwipingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */; };
@@ -58,6 +61,9 @@
 		45318FFD2C24970000CC869B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		45318FFF2C249E8200CC869B /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		4561191A2C42B0A1006E7A42 /* SwipingPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipingPhotosViewController.swift; sourceTree = "<group>"; };
+		4566A6B32C49285000AE6359 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		4566A6B52C49289000AE6359 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		4566A6B72C493A4200AE6359 /* CustomInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputAccessoryView.swift; sourceTree = "<group>"; };
 		456A65A82C4543DD0067EA01 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		456A65AA2C459F1A0067EA01 /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
 		456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepSwipingButton.swift; sourceTree = "<group>"; };
@@ -111,6 +117,8 @@
 			isa = PBXGroup;
 			children = (
 				4505D1162C483AF7008DEA04 /* CustomMessagesNavigationBarView.swift */,
+				4566A6B52C49289000AE6359 /* MessageCell.swift */,
+				4566A6B72C493A4200AE6359 /* CustomInputAccessoryView.swift */,
 			);
 			path = "Matches a. Messages";
 			sourceTree = "<group>";
@@ -129,6 +137,7 @@
 			children = (
 				45318FFB2C241D9600CC869B /* Advertiser.swift */,
 				4593FFD12C233726003114EE /* User.swift */,
+				4566A6B32C49285000AE6359 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -145,8 +154,8 @@
 		4598B9152C46B9A200AC679C /* Matches and Messages */ = {
 			isa = PBXGroup;
 			children = (
-				4598B9162C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift */,
 				4505D1132C4831A8008DEA04 /* ChatListController.swift */,
+				4598B9162C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift */,
 			);
 			path = "Matches and Messages";
 			sourceTree = "<group>";
@@ -202,13 +211,13 @@
 		45D0EE622C1B370F0031D0FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				4505D1152C483AD6008DEA04 /* Matches a. Messages */,
 				45A36D292C401F3D006F8169 /* AgeRangeTableViewCell.swift */,
 				45D0EE672C1B56AC0031D0FF /* CardView.swift */,
 				45B30D9F2C46D80F00E23A5C /* CustomMatchesNavigationBarView.swift */,
 				45318FFF2C249E8200CC869B /* CustomTextField.swift */,
 				45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */,
 				456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */,
+				4505D1152C483AD6008DEA04 /* Matches a. Messages */,
 				456A65A82C4543DD0067EA01 /* MatchView.swift */,
 				456A65AA2C459F1A0067EA01 /* SendMessageButton.swift */,
 				45D1E22D2C3EFD7C00CC5729 /* SettingsTableViewCell.swift */,
@@ -336,14 +345,17 @@
 				45318FFC2C241D9600CC869B /* Advertiser.swift in Sources */,
 				45D0EE682C1B56AC0031D0FF /* CardView.swift in Sources */,
 				45B30DA02C46D80F00E23A5C /* CustomMatchesNavigationBarView.swift in Sources */,
+				4566A6B42C49285000AE6359 /* Message.swift in Sources */,
 				45D0EE662C1B3FD50031D0FF /* TopNavigationStackView.swift in Sources */,
 				45318FFE2C24970000CC869B /* RegistrationViewController.swift in Sources */,
 				459CBA0E2C1B12DA00854A31 /* HomeViewController.swift in Sources */,
 				459CBA0A2C1B12DA00854A31 /* AppDelegate.swift in Sources */,
 				45A36D2A2C401F3D006F8169 /* AgeRangeTableViewCell.swift in Sources */,
 				4593FFD22C233726003114EE /* User.swift in Sources */,
+				4566A6B62C49289000AE6359 /* MessageCell.swift in Sources */,
 				45D0EE642C1B373C0031D0FF /* HomeBottomControlsStackView.swift in Sources */,
 				456A65A92C4543DD0067EA01 /* MatchView.swift in Sources */,
+				4566A6B82C493A4200AE6359 /* CustomInputAccessoryView.swift in Sources */,
 				4521BFCF2C4173EE003B0725 /* UserDetailsViewController.swift in Sources */,
 				4598B9172C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift in Sources */,
 				4561191B2C42B0A1006E7A42 /* SwipingPhotosViewController.swift in Sources */,
