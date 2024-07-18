@@ -10,7 +10,7 @@ final class MatchesHeaderReusableView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         stack(stack(newMatchesLabel).padLeft(20), midHorizontalViewController.view, stack(messagesLabel).padLeft(20), spacing: 16)
-            .withMargins(.init(top: 16, left: 0, bottom: 16, right: 0))
+            .withMargins(.init(top: 16, left: 0, bottom: 8, right: 0))
     }
     
     required init?(coder: NSCoder) {
