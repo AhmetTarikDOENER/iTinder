@@ -222,7 +222,7 @@ class HomeViewController: UIViewController, CurrentUserFetchable, UIGestureRecog
                     guard error == nil else { return }
                 }
                 guard let currentUser = self.user else { return }
-                let currentUsersDocData = ["username": currentUser.name ?? "", "profileImageURL": currentUser.imageURL1 ?? "", "uid": cardUID, "timestamp": Timestamp(date: Date())]
+                let currentUsersDocData = ["username": currentUser.name ?? "", "profileImageURL": currentUser.imageURL1 ?? "", "uid": currentUser.uid ?? "", "timestamp": Timestamp(date: Date())]
                 Firestore.firestore().collection("matches_messages").document(cardUID).collection("matches").document(uid).setData(currentUsersDocData) {
                     error in
                     guard error == nil else { return }
