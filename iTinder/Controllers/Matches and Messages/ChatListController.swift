@@ -45,6 +45,20 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
     
     fileprivate func fetchMessages() {
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("matches_messages").document(currentUserID).collection(match.uid).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
+            guard error == nil else { return }
+            querySnapshot?.documentChanges.forEach { docChange in
+                if docChange.type == .added {
+                    let dictionary = docChange.document.data()
+                    self.items.append(.init(dictionary: dictionary))
+                }
+            }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+        
         Firestore.firestore().collection("matches_messages").document(currentUserID).collection(match.uid).order(by: "timestamp").getDocuments { snapshot, error in
             guard error == nil else { return }
             snapshot?.documents.forEach { documentSnapshot in
