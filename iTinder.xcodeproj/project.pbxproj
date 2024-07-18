@@ -18,6 +18,10 @@
 		4566A6B42C49285000AE6359 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566A6B32C49285000AE6359 /* Message.swift */; };
 		4566A6B62C49289000AE6359 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566A6B52C49289000AE6359 /* MessageCell.swift */; };
 		4566A6B82C493A4200AE6359 /* CustomInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566A6B72C493A4200AE6359 /* CustomInputAccessoryView.swift */; };
+		4566A6BA2C497BC700AE6359 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566A6B92C497BC700AE6359 /* Match.swift */; };
+		4566A6BC2C497CB200AE6359 /* MatchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566A6BB2C497CB200AE6359 /* MatchCell.swift */; };
+		4566A6C52C499BBA00AE6359 /* MatchHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566A6C42C499BBA00AE6359 /* MatchHeaderReusableView.swift */; };
+		4566A6C92C499C5A00AE6359 /* MatchesHorizontalListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4566A6C82C499C5A00AE6359 /* MatchesHorizontalListController.swift */; };
 		456A65A92C4543DD0067EA01 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A65A82C4543DD0067EA01 /* MatchView.swift */; };
 		456A65AB2C459F1A0067EA01 /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A65AA2C459F1A0067EA01 /* SendMessageButton.swift */; };
 		456A65AD2C45A5A00067EA01 /* KeepSwipingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */; };
@@ -64,6 +68,10 @@
 		4566A6B32C49285000AE6359 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4566A6B52C49289000AE6359 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		4566A6B72C493A4200AE6359 /* CustomInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputAccessoryView.swift; sourceTree = "<group>"; };
+		4566A6B92C497BC700AE6359 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		4566A6BB2C497CB200AE6359 /* MatchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCell.swift; sourceTree = "<group>"; };
+		4566A6C42C499BBA00AE6359 /* MatchHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchHeaderReusableView.swift; sourceTree = "<group>"; };
+		4566A6C82C499C5A00AE6359 /* MatchesHorizontalListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesHorizontalListController.swift; sourceTree = "<group>"; };
 		456A65A82C4543DD0067EA01 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		456A65AA2C459F1A0067EA01 /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
 		456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepSwipingButton.swift; sourceTree = "<group>"; };
@@ -116,9 +124,9 @@
 		4505D1152C483AD6008DEA04 /* Matches a. Messages */ = {
 			isa = PBXGroup;
 			children = (
-				4505D1162C483AF7008DEA04 /* CustomMessagesNavigationBarView.swift */,
-				4566A6B52C49289000AE6359 /* MessageCell.swift */,
-				4566A6B72C493A4200AE6359 /* CustomInputAccessoryView.swift */,
+				45B30D9F2C46D80F00E23A5C /* CustomMatchesNavigationBarView.swift */,
+				4566A6C72C499BF400AE6359 /* Matches */,
+				4566A6C62C499BEC00AE6359 /* Messages */,
 			);
 			path = "Matches a. Messages";
 			sourceTree = "<group>";
@@ -132,14 +140,112 @@
 			path = "User Details";
 			sourceTree = "<group>";
 		};
-		4593FFD02C233719003114EE /* Model */ = {
+		4566A6BD2C497D1000AE6359 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		4566A6BE2C497D1C00AE6359 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				45318FFD2C24970000CC869B /* RegistrationViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
+		4566A6BF2C497D2800AE6359 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				45D1E22B2C3EC9C900CC5729 /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		4566A6C02C497D4200AE6359 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				45CB50C52C25D81E003E94F6 /* Bindable.swift */,
+				45D0EE5F2C1B22260031D0FF /* Extensions */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		4566A6C12C497D7300AE6359 /* Custom Stack Views */ = {
+			isa = PBXGroup;
+			children = (
+				45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */,
+				45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */,
+			);
+			path = "Custom Stack Views";
+			sourceTree = "<group>";
+		};
+		4566A6C22C497D9300AE6359 /* Custom Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */,
+				456A65AA2C459F1A0067EA01 /* SendMessageButton.swift */,
+			);
+			path = "Custom Buttons";
+			sourceTree = "<group>";
+		};
+		4566A6C32C497E0500AE6359 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				45D1E22D2C3EFD7C00CC5729 /* SettingsTableViewCell.swift */,
+				45A36D292C401F3D006F8169 /* AgeRangeTableViewCell.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		4566A6C62C499BEC00AE6359 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				4505D1162C483AF7008DEA04 /* CustomMessagesNavigationBarView.swift */,
+				4566A6B52C49289000AE6359 /* MessageCell.swift */,
+				4566A6B72C493A4200AE6359 /* CustomInputAccessoryView.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		4566A6C72C499BF400AE6359 /* Matches */ = {
+			isa = PBXGroup;
+			children = (
+				4566A6BB2C497CB200AE6359 /* MatchCell.swift */,
+				4566A6C42C499BBA00AE6359 /* MatchHeaderReusableView.swift */,
+				456A65A82C4543DD0067EA01 /* MatchView.swift */,
+			);
+			path = Matches;
+			sourceTree = "<group>";
+		};
+		4566A6CA2C499D0500AE6359 /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				4505D1132C4831A8008DEA04 /* ChatListController.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
+		4566A6CB2C499D1800AE6359 /* Matches */ = {
+			isa = PBXGroup;
+			children = (
+				4566A6C82C499C5A00AE6359 /* MatchesHorizontalListController.swift */,
+				4598B9162C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift */,
+			);
+			path = Matches;
+			sourceTree = "<group>";
+		};
+		4593FFD02C233719003114EE /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				45318FFB2C241D9600CC869B /* Advertiser.swift */,
 				4593FFD12C233726003114EE /* User.swift */,
 				4566A6B32C49285000AE6359 /* Message.swift */,
+				4566A6B92C497BC700AE6359 /* Match.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		4593FFD42C23560A003114EE /* ViewModels */ = {
@@ -154,8 +260,8 @@
 		4598B9152C46B9A200AC679C /* Matches and Messages */ = {
 			isa = PBXGroup;
 			children = (
-				4505D1132C4831A8008DEA04 /* ChatListController.swift */,
-				4598B9162C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift */,
+				4566A6CB2C499D1800AE6359 /* Matches */,
+				4566A6CA2C499D0500AE6359 /* Messages */,
 			);
 			path = "Matches and Messages";
 			sourceTree = "<group>";
@@ -179,11 +285,10 @@
 		459CBA082C1B12DA00854A31 /* iTinder */ = {
 			isa = PBXGroup;
 			children = (
-				45CB50C52C25D81E003E94F6 /* Bindable.swift */,
 				45D0EE6A2C1B627F0031D0FF /* Controllers */,
-				45D0EE5F2C1B22260031D0FF /* Extensions */,
+				4566A6C02C497D4200AE6359 /* Helpers */,
 				459CBA172C1B12DB00854A31 /* Info.plist */,
-				4593FFD02C233719003114EE /* Model */,
+				4593FFD02C233719003114EE /* Models */,
 				45D0EE692C1B624D0031D0FF /* Resources */,
 				4593FFD42C23560A003114EE /* ViewModels */,
 				45D0EE622C1B370F0031D0FF /* Views */,
@@ -211,17 +316,12 @@
 		45D0EE622C1B370F0031D0FF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				45A36D292C401F3D006F8169 /* AgeRangeTableViewCell.swift */,
 				45D0EE672C1B56AC0031D0FF /* CardView.swift */,
-				45B30D9F2C46D80F00E23A5C /* CustomMatchesNavigationBarView.swift */,
+				4566A6C22C497D9300AE6359 /* Custom Buttons */,
+				4566A6C12C497D7300AE6359 /* Custom Stack Views */,
 				45318FFF2C249E8200CC869B /* CustomTextField.swift */,
-				45D0EE632C1B373C0031D0FF /* HomeBottomControlsStackView.swift */,
-				456A65AC2C45A5A00067EA01 /* KeepSwipingButton.swift */,
 				4505D1152C483AD6008DEA04 /* Matches a. Messages */,
-				456A65A82C4543DD0067EA01 /* MatchView.swift */,
-				456A65AA2C459F1A0067EA01 /* SendMessageButton.swift */,
-				45D1E22D2C3EFD7C00CC5729 /* SettingsTableViewCell.swift */,
-				45D0EE652C1B3FD50031D0FF /* TopNavigationStackView.swift */,
+				4566A6C32C497E0500AE6359 /* Settings */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,11 +342,11 @@
 		45D0EE6A2C1B627F0031D0FF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				459CBA0D2C1B12DA00854A31 /* HomeViewController.swift */,
+				4566A6BD2C497D1000AE6359 /* Home */,
 				45A36D2B2C4077E1006F8169 /* Login */,
 				4598B9152C46B9A200AC679C /* Matches and Messages */,
-				45318FFD2C24970000CC869B /* RegistrationViewController.swift */,
-				45D1E22B2C3EC9C900CC5729 /* SettingsViewController.swift */,
+				4566A6BE2C497D1C00AE6359 /* Registration */,
+				4566A6BF2C497D2800AE6359 /* Settings */,
 				4521BFCD2C4173D8003B0725 /* User Details */,
 			);
 			path = Controllers;
@@ -347,6 +447,7 @@
 				45B30DA02C46D80F00E23A5C /* CustomMatchesNavigationBarView.swift in Sources */,
 				4566A6B42C49285000AE6359 /* Message.swift in Sources */,
 				45D0EE662C1B3FD50031D0FF /* TopNavigationStackView.swift in Sources */,
+				4566A6C52C499BBA00AE6359 /* MatchHeaderReusableView.swift in Sources */,
 				45318FFE2C24970000CC869B /* RegistrationViewController.swift in Sources */,
 				459CBA0E2C1B12DA00854A31 /* HomeViewController.swift in Sources */,
 				459CBA0A2C1B12DA00854A31 /* AppDelegate.swift in Sources */,
@@ -360,6 +461,8 @@
 				4598B9172C46B9CF00AC679C /* MatchesMessagesCollectionViewController.swift in Sources */,
 				4561191B2C42B0A1006E7A42 /* SwipingPhotosViewController.swift in Sources */,
 				45D1E22C2C3EC9C900CC5729 /* SettingsViewController.swift in Sources */,
+				4566A6BA2C497BC700AE6359 /* Match.swift in Sources */,
+				4566A6C92C499C5A00AE6359 /* MatchesHorizontalListController.swift in Sources */,
 				456A65AB2C459F1A0067EA01 /* SendMessageButton.swift in Sources */,
 				45CB50C62C25D81E003E94F6 /* Bindable.swift in Sources */,
 				45D1E22E2C3EFD7C00CC5729 /* SettingsTableViewCell.swift in Sources */,
@@ -370,6 +473,7 @@
 				459CBA0C2C1B12DA00854A31 /* SceneDelegate.swift in Sources */,
 				45A36D2F2C407807006F8169 /* LoginViewModel.swift in Sources */,
 				4598B9192C46BCA000AC679C /* UIView+Extension.swift in Sources */,
+				4566A6BC2C497CB200AE6359 /* MatchCell.swift in Sources */,
 				4505D1142C4831A8008DEA04 /* ChatListController.swift in Sources */,
 				4593FFD62C23561B003114EE /* CardViewModel.swift in Sources */,
 			);
