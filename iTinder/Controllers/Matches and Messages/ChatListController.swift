@@ -38,6 +38,7 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
         super.viewDidLoad()
         collectionView.alwaysBounceVertical = true
         collectionView.keyboardDismissMode = .interactive
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         configureHierarchy()
         fetchMessages()
         customNavBarView.backButton.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
@@ -45,7 +46,6 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
     
     fileprivate func fetchMessages() {
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
-        
         Firestore.firestore().collection("matches_messages").document(currentUserID).collection(match.uid).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
             guard error == nil else { return }
             querySnapshot?.documentChanges.forEach { docChange in
@@ -58,17 +58,10 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
                 self.collectionView.reloadData()
             }
         }
-        
-        Firestore.firestore().collection("matches_messages").document(currentUserID).collection(match.uid).order(by: "timestamp").getDocuments { snapshot, error in
-            guard error == nil else { return }
-            snapshot?.documents.forEach { documentSnapshot in
-                let dictionary = documentSnapshot.data()
-                self.items.append(.init(dictionary: dictionary))
-            }
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
+    }
+    
+    @objc fileprivate func handleKeyboardShow() {
+        self.collectionView.scrollToItem(at: [0, items.count - 1], at: .bottom, animated: true)
     }
     
     @objc fileprivate func didTapBack() {
