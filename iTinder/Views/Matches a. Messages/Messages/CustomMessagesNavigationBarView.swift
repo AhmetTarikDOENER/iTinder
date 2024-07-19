@@ -7,9 +7,9 @@ final class CustomMessagesNavigationBarView: UIView {
     fileprivate lazy var usernameLabel = UILabel(text: "Username", font: .systemFont(ofSize: 14, weight: .regular), textAlignment: .center)
     lazy var backButton = UIButton(image: #imageLiteral(resourceName: "back"), tintColor: #colorLiteral(red: 0.9704898391, green: 0.009552962224, blue: 0.3605019813, alpha: 1))
     fileprivate lazy var flagButton = UIButton(image: #imageLiteral(resourceName: "flag"), tintColor: #colorLiteral(red: 0.9704898391, green: 0.009552962224, blue: 0.3605019813, alpha: 1))
-    fileprivate let match: MatchModel
+    fileprivate let match: Match
     
-    init(match: MatchModel) {
+    init(match: Match) {
         self.match = match
         super.init(frame: .zero)
         usernameLabel.text = match.username

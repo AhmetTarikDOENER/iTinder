@@ -1,6 +1,6 @@
 import Foundation
 
-struct MatchModel {
+struct Match {
     let username, profileImageURL: String
     let uid: String
     

@@ -3,26 +3,23 @@ import LBTATools
 import FirebaseFirestore
 import FirebaseAuth
 
-final class MatchesMessagesCollectionViewController: LBTAListHeaderController<RecentMessagesCell, UIColor, MatchesHeaderReusableView> {
+final class MatchesMessagesCollectionViewController: LBTAListHeaderController<RecentMessagesCell, RecentMessages, MatchesHeaderReusableView> {
     
     fileprivate lazy var customMatchesNavigationBarView = CustomMatchesNavigationBarView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchRecentMessages()
         collectionView.register(
             UICollectionReusableView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
             withReuseIdentifier: "header_reuse_identifier"
         )
-        
-        items = [
-            .red, .yellow, .black, .blue, .brown, .cyan, .systemPink
-        ]
-        
         customMatchesNavigationBarView.fireIconButton.addTarget(self, action: #selector(didTapFire), for: .touchUpInside)
         configureHierarchy()
     }
     
+    //  MARK: - Fileprivate:
     fileprivate func configureHierarchy() {
         collectionView.backgroundColor = .white
         collectionView.contentInset.top = view.frame.size.height * 0.12
@@ -43,6 +40,20 @@ final class MatchesMessagesCollectionViewController: LBTAListHeaderController<Re
         ])
     }
     
+    fileprivate func fetchRecentMessages() {
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("matches_messages").document(currentUserID).collection("recent_messages").addSnapshotListener { querySnapshot, error in
+            guard error == nil else { return }
+            querySnapshot?.documentChanges.forEach { documentChanged in
+                if documentChanged.type == .added {
+                    let dictionary = documentChanged.document.data()
+                    self.items.append(.init(dictionary: dictionary))
+                }
+            }
+            self.collectionView.reloadData()
+        }
+    }
+    
     @objc fileprivate func didTapFire() {
         navigationController?.popViewController(animated: true)
     }
@@ -51,7 +62,7 @@ final class MatchesMessagesCollectionViewController: LBTAListHeaderController<Re
         header.midHorizontalViewController.rootController = self
     }
     
-    func didSelectMatchFromHeader(match: MatchModel) {
+    func didSelectMatchFromHeader(match: Match) {
         let chatViewController = ChatListController(match: match)
         navigationController?.pushViewController(chatViewController, animated: true)
     }
@@ -61,7 +72,7 @@ extension MatchesMessagesCollectionViewController: UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         .init(width: view.frame.width, height: 100)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         .init(top: 0, left: 0, bottom: 16, right: 0)
     }

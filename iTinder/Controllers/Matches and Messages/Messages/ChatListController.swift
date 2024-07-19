@@ -7,9 +7,9 @@ import FirebaseAuth
 final class ChatListController: LBTAListController<MessageCell, Message> {
     
     fileprivate lazy var customNavBarView = CustomMessagesNavigationBarView(match: self.match)
-    fileprivate let match: MatchModel
+    fileprivate let match: Match
     
-    init(match: MatchModel) {
+    init(match: Match) {
         self.match = match
         super.init()
     }
@@ -54,10 +54,8 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
                     self.items.append(.init(dictionary: dictionary))
                 }
             }
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItem(at: [0, self.items.count - 1], at: .bottom, animated: true)
-            }
+            self.collectionView.reloadData()
+            self.collectionView.scrollToItem(at: [0, self.items.count - 1], at: .bottom, animated: true)
         }
     }
     

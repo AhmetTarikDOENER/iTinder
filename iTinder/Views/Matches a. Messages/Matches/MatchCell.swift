@@ -1,7 +1,7 @@
 import UIKit
 import LBTATools
 
-final class MatchCell: LBTAListCell<MatchModel> {
+final class MatchCell: LBTAListCell<Match> {
     
     fileprivate lazy var profileImageView = UIImageView(image: #imageLiteral(resourceName: "jane3"), contentMode: .scaleAspectFill)
     fileprivate lazy var usernameLabel = UILabel(
@@ -12,7 +12,7 @@ final class MatchCell: LBTAListCell<MatchModel> {
         numberOfLines: 2
     )
     
-    override var item: MatchModel! {
+    override var item: Match! {
         didSet {
             usernameLabel.text = item.username
             profileImageView.sd_setImage(with: URL(string: item.profileImageURL))

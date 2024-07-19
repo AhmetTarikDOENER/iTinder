@@ -1,7 +1,8 @@
 import UIKit
 import LBTATools
+import FirebaseFirestore
 
-final class RecentMessagesCell: LBTAListCell<UIColor> {
+final class RecentMessagesCell: LBTAListCell<RecentMessages> {
     
     let userProfileImageView = UIImageView(image: #imageLiteral(resourceName: "kelly1"), contentMode: .scaleAspectFill)
     let usernameLabel = UILabel(text: "Username", font: .boldSystemFont(ofSize: 16))
@@ -12,9 +13,11 @@ final class RecentMessagesCell: LBTAListCell<UIColor> {
         numberOfLines: 3
     )
     
-    override var item: UIColor! {
+    override var item: RecentMessages! {
         didSet {
-            
+            usernameLabel.text = item.username
+            messageLabel.text = item.text
+            userProfileImageView.sd_setImage(with: URL(string: item.profileImageURL))
         }
     }
     

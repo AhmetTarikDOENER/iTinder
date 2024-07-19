@@ -3,7 +3,7 @@ import LBTATools
 import FirebaseAuth
 import FirebaseFirestore
 
-final class MatchesHorizontalListController: LBTAListController<MatchCell, MatchModel> {
+final class MatchesHorizontalListController: LBTAListController<MatchCell, Match> {
     
     weak var rootController: MatchesMessagesCollectionViewController?
     
@@ -20,15 +20,13 @@ final class MatchesHorizontalListController: LBTAListController<MatchCell, Match
         Firestore.firestore().collection("matches_messages").document(currentUserID).collection("matches").getDocuments {
             snapshot, error in
             guard error == nil else { return }
-            var matches = [MatchModel]()
+            var matches = [Match]()
             snapshot?.documents.forEach { docSnapshot in
                 let dictionary = docSnapshot.data()
                 matches.append(.init(dictionary: dictionary))
             }
             self.items = matches
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            self.collectionView.reloadData()
         }
     }
 }
