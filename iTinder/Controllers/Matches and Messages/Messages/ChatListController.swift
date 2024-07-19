@@ -34,14 +34,26 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
         true
     }
     
+    var currentUser: User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.alwaysBounceVertical = true
         collectionView.keyboardDismissMode = .interactive
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        fetchCurrentUser()
         configureHierarchy()
         fetchMessages()
         customNavBarView.backButton.addTarget(self, action: #selector(didTapBack), for: .touchUpInside)
+    }
+    
+    fileprivate func fetchCurrentUser() {
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(currentUserID).getDocument { snapshot, error in
+            guard error == nil else { return }
+            let data = snapshot?.data() ?? [:]
+            self.currentUser = User(dictionary: data)
+        }
     }
     
     fileprivate func fetchMessages() {
@@ -68,6 +80,35 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
     }
     
     @objc fileprivate func didTapSend() {
+        saveBothUsersMessages()
+        saveBothUsersRecentMessages()
+    }
+    
+    fileprivate func saveBothUsersRecentMessages() {
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        let docData: [String: Any] = [
+            "text": customizedInputAccessoryView.textView.text ?? "",
+            "username": match.username,
+            "profileImageURL": match.profileImageURL,
+            "timestamp": Timestamp(date: Date())
+        ]
+        Firestore.firestore().collection("matches_messages").document(currentUserID).collection("recent_messages").document(match.uid).setData(docData) { error in
+            guard error == nil else { return }
+        }
+        guard let currentUser else { return }
+        let toData: [String: Any] = [
+            "text": customizedInputAccessoryView.textView.text ?? "",
+            "username": currentUser.name ?? "",
+            "uid": currentUser.uid ?? "",
+            "profileImageURL": currentUser.imageURL1 ?? "",
+            "timestamp": Timestamp(date: Date())
+        ]
+        Firestore.firestore().collection("matches_messages").document(match.uid).collection("recent_messages").document(currentUserID).setData(toData) { error in
+            guard error == nil else { return }
+        }
+    }
+    
+    fileprivate func saveBothUsersMessages() {
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
         let docData: [String: Any] = [
             "text": customizedInputAccessoryView.textView.text ?? "",

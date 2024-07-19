@@ -89,6 +89,18 @@ extension MatchesMessagesCollectionViewController: UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         0
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let recentMessage = self.items[indexPath.item]
+        let dictionary = [
+            "username": recentMessage.username,
+            "profileImageURL": recentMessage.profileImageURL,
+            "uid": recentMessage.uid
+        ]
+        let match = Match(dictionary: dictionary)
+        let controller = ChatListController(match: match)
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
 //  MARK: - MatchesHeaderReusableView:
 extension MatchesMessagesCollectionViewController {
