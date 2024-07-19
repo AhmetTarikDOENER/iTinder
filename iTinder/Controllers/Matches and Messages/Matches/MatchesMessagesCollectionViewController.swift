@@ -40,18 +40,27 @@ final class MatchesMessagesCollectionViewController: LBTAListHeaderController<Re
         ])
     }
     
+    fileprivate var recentMessagesDictionary = [String: RecentMessages]()
+    
     fileprivate func fetchRecentMessages() {
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("matches_messages").document(currentUserID).collection("recent_messages").addSnapshotListener { querySnapshot, error in
             guard error == nil else { return }
             querySnapshot?.documentChanges.forEach { documentChanged in
-                if documentChanged.type == .added {
+                if documentChanged.type == .added || documentChanged.type == .modified {
                     let dictionary = documentChanged.document.data()
-                    self.items.append(.init(dictionary: dictionary))
+                    let recentMessage = RecentMessages(dictionary: dictionary)
+                    self.recentMessagesDictionary[recentMessage.uid] = recentMessage
                 }
             }
-            self.collectionView.reloadData()
+            self.resetItems()
         }
+    }
+    
+    fileprivate func resetItems() {
+        var values = Array(recentMessagesDictionary.values)
+        items = values
+        collectionView.reloadData()
     }
     
     @objc fileprivate func didTapFire() {
