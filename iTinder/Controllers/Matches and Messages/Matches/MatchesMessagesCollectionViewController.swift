@@ -59,7 +59,7 @@ final class MatchesMessagesCollectionViewController: LBTAListHeaderController<Re
     
     fileprivate func resetItems() {
         var values = Array(recentMessagesDictionary.values)
-        items = values
+        items = values.sorted { $0.timestamp.compare($1.timestamp) == .orderedDescending }
         collectionView.reloadData()
     }
     

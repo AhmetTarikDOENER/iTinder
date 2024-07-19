@@ -168,14 +168,10 @@ extension SettingsViewController: UIImagePickerControllerDelegate, UINavigationC
         guard let uploadData = selectedImage?.jpegData(compressionQuality: 0.75) else { return }
         reference.putData(uploadData) { _, error in
             hud.dismiss()
-            guard error == nil else {
-                print("Failed to upload image to storage")
-                return
-            }
+            guard error == nil else { return }
             reference.downloadURL { url, error in
                 hud.dismiss()
                 guard error == nil else { return }
-                print("Downloaded url:", url?.absoluteString ?? "")
                 if imageButton == self.image1Button {
                     self.user?.imageURL1 = url?.absoluteString
                 } else if imageButton == self.image2Button {
