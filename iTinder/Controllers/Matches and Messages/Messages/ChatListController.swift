@@ -56,9 +56,11 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
         }
     }
     
+    var listener: ListenerRegistration?
+    
     fileprivate func fetchMessages() {
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("matches_messages").document(currentUserID).collection(match.uid).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
+        listener =  Firestore.firestore().collection("matches_messages").document(currentUserID).collection(match.uid).order(by: "timestamp").addSnapshotListener { querySnapshot, error in
             guard error == nil else { return }
             querySnapshot?.documentChanges.forEach { docChange in
                 if docChange.type == .added {
@@ -68,6 +70,13 @@ final class ChatListController: LBTAListController<MessageCell, Message> {
             }
             self.collectionView.reloadData()
             self.collectionView.scrollToItem(at: [0, self.items.count - 1], at: .bottom, animated: true)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isMovingToParent {
+            listener?.remove()
         }
     }
     

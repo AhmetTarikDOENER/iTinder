@@ -42,9 +42,11 @@ final class MatchesMessagesCollectionViewController: LBTAListHeaderController<Re
     
     fileprivate var recentMessagesDictionary = [String: RecentMessages]()
     
+    fileprivate var snapshotListener: ListenerRegistration?
+    
     fileprivate func fetchRecentMessages() {
         guard let currentUserID = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("matches_messages").document(currentUserID).collection("recent_messages").addSnapshotListener { querySnapshot, error in
+        snapshotListener =  Firestore.firestore().collection("matches_messages").document(currentUserID).collection("recent_messages").addSnapshotListener { querySnapshot, error in
             guard error == nil else { return }
             querySnapshot?.documentChanges.forEach { documentChanged in
                 if documentChanged.type == .added || documentChanged.type == .modified {
@@ -54,6 +56,13 @@ final class MatchesMessagesCollectionViewController: LBTAListHeaderController<Re
                 }
             }
             self.resetItems()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isMovingFromParent {
+            snapshotListener?.remove()
         }
     }
     
